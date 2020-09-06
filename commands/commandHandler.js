@@ -5,6 +5,7 @@ const audioController = require('./audio/audioController');
 const miscController = require('./misc/miscController');
 const utilityController = require('./utility/utilityController');
 const memeController = require('./meme/memeController');
+const pornController = require('./porn/pornController');
 
 /**
  * @description Function that handle commands send through messages
@@ -40,6 +41,14 @@ async function commandHandler (message, prefix) {
 		audioController.urss(message);
 	} else if (command.startsWith('magik')) {
 		memeController.magik(message);
+	} else if (command.startsWith('rule34')) {
+		pornController.rule34(message);
+	} else if (command.startsWith('idol')) {
+		pornController.idol(message);
+	} else if (command.startsWith('chan')) {
+		pornController.chan(message);
+	} else if (command.startsWith('anime')) {
+		miscController.anime(message);
 	} else if (command.startsWith('dolar')) {
 		miscController.dolar(message);
 	} else if (command.startsWith('euro')) {
@@ -50,20 +59,12 @@ async function commandHandler (message, prefix) {
 		miscController.number_functions(message);
 	} else if (command.startsWith('d')) {
 		miscController.roll_number(message);
-	} else if (command.startsWith('rule34')) {
-		commands.rule34(message);
-	} else if (command.startsWith('reverse')) {
-		miscController.reverse(message);
-	} else if (command.startsWith('idol')) {
-		commands.idol(message);
-	} else if (command.startsWith('chan')) {
-		commands.chan(message);
-	} else if (command.startsWith('anime')) {
-		miscController.anime(message);
-	} else if (command.startsWith('help')) {
-		utilityController.help(message, prefix);
 	} else if (command.startsWith('corona')) {
 		miscController.corona(message);
+	} else if (command.startsWith('reverse')) {
+		miscController.reverse(message);
+	} else if (command.startsWith('help')) {
+		utilityController.help(message, prefix);
 	} else {
 		message.reply("VAI TOMA NO CU ANALFABETO NA0 S4B3 D1G1T4R MEU");
 	}
