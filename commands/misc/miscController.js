@@ -1,6 +1,5 @@
 //Vars
 const JSDocTypes = require('../../JSDocTypes');
-const DiscordMessageType = JSDocTypes.DiscordMessageType;
 const axios = require('axios').default;
 const utilFunctions = require('../../utilFunctions');
 
