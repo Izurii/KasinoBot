@@ -4,6 +4,7 @@ const JSDocTypes = require('../JSDocTypes');
 const audioController = require('./audio/audioController');
 const miscController = require('./misc/miscController');
 const utilityController = require('./utility/utilityController');
+const memeController = require('./meme/memeController');
 
 /**
  * @description Function that handle commands send through messages
@@ -38,7 +39,7 @@ async function commandHandler (message, prefix) {
 	} else if (command.startsWith('urss')) {
 		audioController.urss(message);
 	} else if (command.startsWith('magik')) {
-		commands.magik(message);
+		memeController.magik(message);
 	} else if (command.startsWith('dolar')) {
 		miscController.dolar(message);
 	} else if (command.startsWith('euro')) {
