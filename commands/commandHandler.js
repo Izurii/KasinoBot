@@ -2,11 +2,12 @@ const JSDocTypes = require('../JSDocTypes');
 
 //Importing commands controllers
 const audioController = require('./audio/audioController');
+const miscController = require('./misc/miscController');
 
 /**
  * @description Function that handle commands send through messages
- * @param  { JSDocTypes.DiscordMessageType } message
- * @param  { string } prefix
+ * @param  { JSDocTypes.DiscordMessageType } message - Message that user sended to bot
+ * @param  { string } prefix - Server bot prefix
  */
 async function commandHandler (message, prefix) {
 
@@ -38,29 +39,29 @@ async function commandHandler (message, prefix) {
 	} else if (command.startsWith('magik')) {
 		commands.magik(message);
 	} else if (command.startsWith('dolar')) {
-		commands.dolar(message);
+		miscController.dolar(message);
 	} else if (command.startsWith('euro')) {
-		commands.euro(message);
+		miscController.euro(message);
 	} else if (command.startsWith('libra')) {
-		commands.libra(message);
+		miscController.libra(message);
 	} else if (command.match('[0-9]')) {
-		commands.number_functions(message);
+		miscController.number_functions(message);
 	} else if (command.startsWith('d')) {
-		commands.roll_number(message);
+		miscController.roll_number(message);
 	} else if (command.startsWith('rule34')) {
 		commands.rule34(message);
 	} else if (command.startsWith('reverse')) {
-		commands.reverse(message);
+		miscController.reverse(message);
 	} else if (command.startsWith('idol')) {
 		commands.idol(message);
 	} else if (command.startsWith('chan')) {
 		commands.chan(message);
 	} else if (command.startsWith('anime')) {
-		commands.anime(message);
+		miscController.anime(message);
 	} else if (command.startsWith('help')) {
 		commands.help(message);
 	} else if (command.startsWith('corona')) {
-		commands.corona(message);
+		miscController.corona(message);
 	} else {
 		message.reply("VAI TOMA NO CU ANALFABETO NA0 S4B3 D1G1T4R MEU");
 	}
