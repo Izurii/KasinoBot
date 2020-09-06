@@ -1,5 +1,6 @@
 const JSDocTypes = require('../JSDocTypes');
 const DiscordChannelType = JSDocTypes.DiscordChannelType;
+const xml2js = require('xml2js');
 
 /**
  * @description Function that returns a random int given the minimum and maximum passed to the function
@@ -73,4 +74,13 @@ exports.deleteMessage = async (channel, message_id) => {
 exports.editMessage = async (channel, message_id, new_message) => {
 	let message = await channel.messages.fetch(message_id);
 	message.edit(new_message);
+}
+
+/**
+ * @description Function that returns a parsed xml string, promise based
+ * @param { string } data 
+ */
+exports.readXmlString = async (data) => {
+	var parser = new xml2js.Parser();
+	return parser.parseStringPromise(data);
 }
