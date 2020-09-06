@@ -4,7 +4,8 @@ const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
 exports.urss = urss;
 
 /**
- * @param  { DiscordMessageType } message
+ * @description Well, MOTHERLAND!!!
+ * @param  { DiscordMessageType } message - Message that user sended to bot
  */
 async function urss (message) {
 	Controller.stopAllPlayUnique(message, urss_music);

@@ -3,9 +3,9 @@ const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
 exports.repeat = repeat;
 
 /**
- * @description Function that repeats the last video played
- * @param { DiscordMessageType } message
- * @param { string } serverPrefix
+ * @description Function that repeats the last video played on discord guild
+ * @param { DiscordMessageType } message - Message that user sended to bot
+ * @param { string } serverPrefix - Server bot prefix
  */
 async function repeat(message, serverPrefix) {
 	const modified_message = message;

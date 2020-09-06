@@ -4,7 +4,8 @@ const DiscordMessageType = JSDocTypes.DiscordMessageType;
 exports.stop = stop;
 
 /**
- * @param  { DiscordMessageType } message
+ * @description Function that stops video stream and clear the queue on the discord guild
+ * @param  { DiscordMessageType } message - Message that user sended to bot
  */
 async function stop(message) {
 	let serverQueue = Controller.serverQueue.get(message.guild.id);

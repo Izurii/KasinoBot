@@ -3,7 +3,8 @@ const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
 exports.pause = pause;
 
 /**
- * @param  { DiscordMessageType } message
+ * @description Function that pauses the video strem on discord guild
+ * @param  { DiscordMessageType } message - Message that user sended to bot
  */
 async function pause(message) {
 	let serverQueue = Controller.serverQueue.get(message.guild.id);

@@ -1,6 +1,15 @@
 const Controller = require('./audioController');
+const DiscordGuildType = Controller.JSDocTypes.DiscordGuildType;
 
 exports.play = play;
+/**
+ * @description Function that process the guild's request to play a YT video
+ * @param { DiscordGuildType } guild  - Discord guild that executed a play like function
+ * @param  { Object } song - Object that carry the title and link of YouTube Video and loop state of that song
+ * @param  { string } song.title - Video title
+ * @param  { string } song.url - Video url
+ * @param  { boolean } song.loop - Loop state of that specific song
+ */
 async function play(guild, song) {
 
 	const serverQueue = Controller.serverQueue.get(guild.id);
