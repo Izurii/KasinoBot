@@ -3,6 +3,7 @@ const JSDocTypes = require('../JSDocTypes');
 //Importing commands controllers
 const audioController = require('./audio/audioController');
 const miscController = require('./misc/miscController');
+const utilityController = require('./utility/utilityController');
 
 /**
  * @description Function that handle commands send through messages
@@ -59,7 +60,7 @@ async function commandHandler (message, prefix) {
 	} else if (command.startsWith('anime')) {
 		miscController.anime(message);
 	} else if (command.startsWith('help')) {
-		commands.help(message);
+		utilityController.help(message, prefix);
 	} else if (command.startsWith('corona')) {
 		miscController.corona(message);
 	} else {
