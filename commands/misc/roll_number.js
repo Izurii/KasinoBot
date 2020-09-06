@@ -5,15 +5,17 @@ exports.roll_number = roll_number;
 /**
  * @description Function that returns a discord message that contains n random values
  * @param  { DiscordMessageType } message - Message that user sended to bot
- * @param  { Number } number=1 - N number of dices to roll
+ * @param  { Number } number - N number of dices to roll
  * @returns { DiscordMessageType } - Reply message to user that requested a dice roll
  */
-async function roll_number (message, number=1) {
+async function roll_number (message, number) {
 
 	if(number>10)
 		return message.channel.send("N40 p0d3 p4ss4r de 10 caralho");
-	else if(number==0)
+	else if(number===0)
 		return message.channel.send("Z3r0 n40 d4 pô");
+	else if(number==="")
+		number=1;
 
 	let numero_sorteado;
 	if(message.content.includes("dm"))
@@ -34,7 +36,7 @@ async function roll_number (message, number=1) {
 	
 	let numeros = [];
 	for(let i = 0; i < number; i++) {
-		let dado_rolado = Controller.utilFunctions.randomInt(1, numero_sorteado+1);
+		let dado_rolado = await Controller.utilFunctions.randomInt(1, numero_sorteado+1);
 		numeros.push(dado_rolado);
 		return_message += (':game_die: ``'+dado_rolado+'``   ');
 	}
