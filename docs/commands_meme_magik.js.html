@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/audio/play.js</title>
+    <title>JSDoc: Source: commands/meme/magik.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/audio/play.js</h1>
+    <h1 class="page-title">Source: commands/meme/magik.js</h1>
 
     
 
@@ -26,60 +26,100 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Controller = require('./audioController');
-const DiscordGuildType = Controller.JSDocTypes.DiscordGuildType;
+            <pre class="prettyprint source linenums"><code>const Controller = require('./memeController');
+const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
 
-exports.play = play;
+exports.magik = magik;
 /**
- * @description Function that process the guild's request to play a YT video
- * @param { DiscordGuildType } guild  - Discord guild that executed a play like function
- * @param  { Object } song - Object that carry the title and link of YouTube Video and loop state of that song
- * @param  { string } song.title - Video title
- * @param  { string } song.url - Video url
- * @param  { boolean } song.loop - Loop state of that specific song
+ * @description Function that executes a python script named 'magik' that is on scripts folder, the script distort images or gifs 
+ * @param  { DiscordMessageType } message
  */
-async function play(guild, song) {
+async function magik(message) {
 
-	const serverQueue = Controller.serverQueue.get(guild.id);
-	if (!song) {
-		Controller.serverQueue.delete(guild.id);
-		Controller.timeout_player[guild.id] = setTimeout(() => {
-			Controller.timeout_player[guild.id] = null;
-			serverQueue.voiceChannel.leave();
-		}, 60000);
+	const args = message.content.split(" ");
+	var scale = parseInt(args[1]);
+	let image = [];
+
+	if(!Number.isInteger(scale))
+		scale = 1;
+
+	if (scale > 10)
+		return message.channel.send("O máximo é 10 carai, vai com calma.");
+
+	let lastMessages = await Controller.utilFunctions.fetchMessages(message.channel, 20);
+	lastMessages.forEach(function (item, index) {
+		if (item[1].embeds.length > 0 || item[1].attachments.size > 0) {
+			if (item[1].embeds.length > 0)
+				image = item[1].embeds;
+			else
+				image = item[1].attachments;
+			return true;
+		}
+	});
+
+	let imageUrl;
+	if (image.length == 1) {
+		imageUrl = image[0].thumbnail.url;
+	} else if (image.size > 0) {
+		let array = Array.from(image);
+		array = Array.from(array[0]);
+		imageUrl = array[1].url;
+	} else {
+		return message.channel.send("N40 4ch4m05 1m4g3m5.");
+	}
+
+	let processMessage = await message.channel.send("Pr0c3554nd0 0 m0n5tr0...");
+	let processMessageID = processMessage.id;
+
+	var options = {
+		mode: 'text',
+		pythonOptions: ['-u'],
+		args: [scale, imageUrl, message.guild.id]
+	};
+
+	let fileName = Controller.pythonShell.run(Controller.pathToMagikScript, options, function (err, result) {
+		if (err) { console.log(err); return false; };
+
+		if(result[0].startsWith('error_request')) {
+			return processMessage.edit(errorMessage+'0');
+		} else if(result[0].startsWith('gmagik')) {
+			return processMessage.edit(errorMessage+'1');
+		} else if(result[0].startsWith('error_wand')) {
+			return processMessage.edit(errorMessage+'2');
+		} else if(result[0].startsWith('ffmpeg_error')) {
+			return processMessage.edit(errorMessage+'3');
+		} else if(result[0].startsWith('extension')) {
+			return processMessage.edit("3553 f0rm4t0 n40 3 p3rm1t1d0");
+		} else {
+			sendImage(('%j', result));
+		}
+	});
+
+	let errorMessage = "Ihhh br0h foi mal mas deu pau na máquina.";
+
+	if (!fileName) {
+		Controller.utilFunctions.editMessage(
+			message.channel,
+			processMessageID,
+			errorMessage
+		);
 		return;
 	}
 
-	let message_eterna = `Qu3 c0m3c3 4 f35t4 et3rn4: **${song.title}**`;
-	let message = `Qu3 c0m3c3 4 f35t4: **${song.title}**`;
+	async function sendImage(result) {
 
-	if (!serverQueue.loop&amp;&amp;song.loop) {
-		serverQueue.textChannel.send(message_eterna);
-	} else if(!serverQueue.loop&amp;&amp;!song.loop) {
-		serverQueue.textChannel.send(message);
+		let path = "./images/" + message.guild.id + "/" + result;
+		if (Controller.fs.existsSync(path)) {
+			Controller.utilFunctions.deleteMessage(message.channel, processMessageID);
+			message.channel.send("``Scale: " + scale + "``", { files: [path] }).then(Controller.fs.remove(path));
+		} else {
+			Controller.utilFunctions.editMessage(
+				message.channel,
+				processMessageID,
+				errorMessage
+			);
+		}
 	}
-
-	if (song.loop)
-		serverQueue.loop = true;
-
-	if(Controller.timeout_player[guild.id])
-		clearTimeout(Controller.timeout_player[guild.id]);
-
-	Controller.last_play[guild.id] = song.url;
-	const dispatcher = serverQueue.connection
-		.play( await Controller.ytdl(song.url), { type: 'opus' } )
-		.on("finish", () => {
-			if (!serverQueue.loop) {
-				serverQueue.songs.shift();
-				play(guild, serverQueue.songs[0]);
-			} else {
-				play(guild, serverQueue.songs[0]);
-			}
-		})
-		.on("error", error => console.error(error));
-
-	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-	
 }</code></pre>
         </article>
     </section>

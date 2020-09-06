@@ -26,7 +26,11 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
+            <pre class="prettyprint source linenums"><code>const JSDocTypes = require('../JSDocTypes');
+const DiscordChannelType = JSDocTypes.DiscordChannelType;
+const xml2js = require('xml2js');
+
+/**
  * @description Function that returns a random int given the minimum and maximum passed to the function
  * @param  { Number } min - Minimum value
  * @param  { Number } max - Maximum value
@@ -62,6 +66,51 @@ exports.formatTextLimitCharacters = async (text, length=1024) => {
 	last = text.lastIndexOf(" ");
 	text = text.substring(0, last);
 	return text + "...";
+}
+
+/**
+ * @description Function that fetch n number of messages on a specific channel
+ * @param { DiscordChannelType } channel - Discord channel object
+ * @param { Number } n_messages - Number of messages to fetch
+ * @param { string } [order=DESC] - Order that array is going to return (ASC||DESC)
+ * @returns { Array } Returns an array that contains in the given order (ASC or DESC) the N number of messages.
+ */
+exports.fetchMessages = async (channel, n_messages, order = "DESC") => {
+	let messages = await channel.messages.fetch({ limit: n_messages });
+	if (order == "DESC")
+		return Array.from(messages).reverse();
+	else if (order == "ASC")
+		return Array.from(messages);
+}
+
+/**
+ * @description Function that deletes a message from a specific channel by her id
+ * @param  { DiscordChannelType } channel - Discord channel object
+ * @param  { Number } message_id - Message's ID
+ */
+exports.deleteMessage = async (channel, message_id) => {
+	let message = await channel.messages.fetch(message_id);
+	message.delete();
+}
+
+/**
+ * @description Function that edits a message by their id
+ * @param  { DiscordChannelType } channel - Discord channel object
+ * @param  { Number } message_id - Message's ID
+ * @param  { string } new_message - Message to be placed
+ */
+exports.editMessage = async (channel, message_id, new_message) => {
+	let message = await channel.messages.fetch(message_id);
+	message.edit(new_message);
+}
+
+/**
+ * @description Function that returns a parsed xml string, promise based
+ * @param { string } data 
+ */
+exports.readXmlString = async (data) => {
+	var parser = new xml2js.Parser();
+	return parser.parseStringPromise(data);
 }</code></pre>
         </article>
     </section>
@@ -72,13 +121,13 @@ exports.formatTextLimitCharacters = async (text, length=1024) => {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#urss">urss</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#chan">chan</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#deleteMessage">deleteMessage</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#editMessage">editMessage</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#fetchMessages">fetchMessages</a></li><li><a href="global.html#formatTagsForBooru">formatTagsForBooru</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#help_with_args">help_with_args</a></li><li><a href="global.html#help_without_args">help_without_args</a></li><li><a href="global.html#idol">idol</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#magik">magik</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#readXmlString">readXmlString</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#rule34">rule34</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#urss">urss</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Sun Sep 06 2020 13:19:19 GMT-0300 (GMT-03:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Sun Sep 06 2020 17:34:57 GMT-0300 (GMT-03:00)
 </footer>
 
 <script> prettyPrint(); </script>

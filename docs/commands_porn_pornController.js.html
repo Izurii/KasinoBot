@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/audio/play.js</title>
+    <title>JSDoc: Source: commands/porn/pornController.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/audio/play.js</h1>
+    <h1 class="page-title">Source: commands/porn/pornController.js</h1>
 
     
 
@@ -26,60 +26,42 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Controller = require('./audioController');
-const DiscordGuildType = Controller.JSDocTypes.DiscordGuildType;
+            <pre class="prettyprint source linenums"><code>//Vars
+const JSDocTypes = require('../../JSDocTypes');
+const axios = require('axios').default;
+const utilFunctions = require('../../utilFunctions');
+const { PythonShell } = require('python-shell');
+const pathToIdolScript = __dirname+'../../../scripts/idol.py';
+const pathToChanScript = __dirname+'../../../scripts/chan.py';
 
-exports.play = play;
+//Exports needs
+exports.pythonShell = PythonShell;
+exports.utilFunctions = utilFunctions;
+exports.JSDocTypes = JSDocTypes;
+exports.axios = axios;
+exports.pathToIdolScript = pathToIdolScript;
+exports.pathToChanScript = pathToChanScript;
+exports.formatTagsForBooru = formatTagsForBooru;
+exports.fs = require('fs-extra');
+
+//Exports functions
+exports.rule34 = require('./rule34').rule34;
+exports.idol = require('./idol').idol;
+exports.chan = require('./chan').chan;
+
 /**
- * @description Function that process the guild's request to play a YT video
- * @param { DiscordGuildType } guild  - Discord guild that executed a play like function
- * @param  { Object } song - Object that carry the title and link of YouTube Video and loop state of that song
- * @param  { string } song.title - Video title
- * @param  { string } song.url - Video url
- * @param  { boolean } song.loop - Loop state of that specific song
+ * @description Function that formats string to a specific tag format that boorus accept.
+ * @param  { string } text
+ * @returns { string } Returns the formatted string 
  */
-async function play(guild, song) {
-
-	const serverQueue = Controller.serverQueue.get(guild.id);
-	if (!song) {
-		Controller.serverQueue.delete(guild.id);
-		Controller.timeout_player[guild.id] = setTimeout(() => {
-			Controller.timeout_player[guild.id] = null;
-			serverQueue.voiceChannel.leave();
-		}, 60000);
-		return;
-	}
-
-	let message_eterna = `Qu3 c0m3c3 4 f35t4 et3rn4: **${song.title}**`;
-	let message = `Qu3 c0m3c3 4 f35t4: **${song.title}**`;
-
-	if (!serverQueue.loop&amp;&amp;song.loop) {
-		serverQueue.textChannel.send(message_eterna);
-	} else if(!serverQueue.loop&amp;&amp;!song.loop) {
-		serverQueue.textChannel.send(message);
-	}
-
-	if (song.loop)
-		serverQueue.loop = true;
-
-	if(Controller.timeout_player[guild.id])
-		clearTimeout(Controller.timeout_player[guild.id]);
-
-	Controller.last_play[guild.id] = song.url;
-	const dispatcher = serverQueue.connection
-		.play( await Controller.ytdl(song.url), { type: 'opus' } )
-		.on("finish", () => {
-			if (!serverQueue.loop) {
-				serverQueue.songs.shift();
-				play(guild, serverQueue.songs[0]);
-			} else {
-				play(guild, serverQueue.songs[0]);
-			}
-		})
-		.on("error", error => console.error(error));
-
-	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+async function formatTagsForBooru(text) {
+	let tags = text;
+	tags = tags.substr(tags.indexOf(' ')+1).replace(' ', '+');
 	
+	if(tags.startsWith('-'))
+		tags = "";
+
+	return tags;
 }</code></pre>
         </article>
     </section>
