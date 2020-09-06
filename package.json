@@ -18,7 +18,14 @@
   },
   "homepage": "https://github.com/Izurii/KasinoBot#readme",
   "dependencies": {
-    "discord.js": "12.2.0",
-    "dotenv": "8.2.0"
+    "@discordjs/opus": "0.3.2",
+    "@types/mysql": "2.15.15",
+    "discord.js": "12.3.1",
+    "dotenv": "8.2.0",
+    "mysql": "2.18.1",
+    "shuffle-array": "1.0.1",
+    "ytdl-core-discord": "1.2.1",
+    "ytpl": "0.3.0",
+    "ytsr": "0.1.21"
   }
 }
