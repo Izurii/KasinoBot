@@ -4,7 +4,8 @@ const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
 exports.boss = boss;
 
 /**
- * @param  { DiscordMessageType } message
+ * @description You better be prepared for that!
+ * @param  { DiscordMessageType } message - Message that user sended to bot
  */
 async function boss (message) {
 	Controller.stopAllPlayUnique(message, boss_music);
