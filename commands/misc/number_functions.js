@@ -4,7 +4,7 @@ exports.number_functions = number_functions;
 
 /**
  * @description Function that handle commands that start off with numbers
- * @param  { DiscordMessageType } message - Message that user sended to bot
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  */
 async function number_functions (message) {
 

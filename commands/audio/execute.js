@@ -4,7 +4,7 @@ exports.execute = execute;
 
 /**
  * @description Function that process the 'play', 'loop' command
- * @param { DiscordMessageType } message - Message that user sended to bot
+ * @param { DiscordMessageType } message - Message that user sent to bot
  * @param { string } serverPrefix - Server bot prefix
  */
 async function execute (message, serverPrefix) {

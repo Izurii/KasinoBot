@@ -4,7 +4,7 @@ exports.resume = resume;
 
 /**
  * @description Function that resumes the video stream on discord guild
- * @param  { DiscordMessageType } message - Message that user sended to bot
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  */
 async function resume(message) {
 	let serverQueue = Controller.serverQueue.get(message.guild.id);

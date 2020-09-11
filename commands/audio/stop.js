@@ -5,7 +5,7 @@ exports.stop = stop;
 
 /**
  * @description Function that stops video stream and clear the queue on the discord guild
- * @param  { DiscordMessageType } message - Message that user sended to bot
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  */
 async function stop(message) {
 	let serverQueue = Controller.serverQueue.get(message.guild.id);

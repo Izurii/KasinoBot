@@ -4,7 +4,7 @@ exports.idol = idol;
 
 /**
  * @description Function that executes a python script that get images from the SakuraComplex booru IDOL
- * @param  { DiscordMessageType } message
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  */
 async function idol(message) {
 

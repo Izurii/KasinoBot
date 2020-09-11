@@ -4,7 +4,7 @@ const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
 exports.corona = corona;
 /**
  * @description Function that process the call of 'corona' command, if has any arguments he tries to get the country's data, if not he shows a list of countries.
- * @param  { DiscordMessageType } message - Message that user sended to bot
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  */
 async function corona (message) {
 
@@ -19,7 +19,7 @@ async function corona (message) {
 
 /**
  * @description Function that return a pagination embed like message with all possible countries to use with 'corona' command
- * @param { DiscordMessageType } message 
+ * @param { DiscordMessageType } message - Message that user sent to bot
  */
 async function get_countries (message) {
 	
@@ -69,7 +69,7 @@ async function get_countries (message) {
 
 /**
  * @description Function that gets country data for corona disease and send a message to discord with that.
- * @param { DiscordMessageType } message 
+ * @param { DiscordMessageType } message - Message that user sent to bot
  */
 async function get_data_country(message) {
 

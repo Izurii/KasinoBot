@@ -4,7 +4,7 @@ exports.chan = chan;
 
 /**
  * @description Function that executes a python script that get images from the SakuraComplex booru CHAN
- * @param  { DiscordMessageType } message
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  */
 async function chan(message) {
 

@@ -4,7 +4,7 @@ const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
 exports.help = help;
 /**
  * @description Function that process the call of 'help' command
- * @param { DiscordMessageType } message - Message that user sended to bot
+ * @param { DiscordMessageType } message - Message that user sent to bot
  * @param { string } serverPrefix - Server bot prefix
  */
 async function help (message, serverPrefix) {
@@ -17,7 +17,7 @@ async function help (message, serverPrefix) {
 
 /**
  * @description Function that returns a message with all commands available on Kasino
- * @param { DiscordMessageType } message - Message that user sended to bot
+ * @param { DiscordMessageType } message - Message that user sent to bot
  */
 async function help_without_args (message) {
 
@@ -77,7 +77,7 @@ async function help_without_args (message) {
 
 /**
  * @description Function that returns a message with details about a specific command that is passed as an argument on command
- * @param { DiscordMessageType } message - Message that user sended to bot
+ * @param { DiscordMessageType } message - Message that user sent to bot
  * @param { string } serverPrefix - Server bot prefix
  */
 async function help_with_args (message, serverPrefix) {

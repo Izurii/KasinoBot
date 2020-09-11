@@ -4,7 +4,7 @@ const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
 exports.reverse = reverse;
 /**
  * @description Function that returns a message that contains a mirrored version of what the user put as arguments on command call
- * @param { DiscordMessageType } message 
+ * @param { DiscordMessageType } message - Message that user sent to bot
  */
 async function reverse (message) {
 	let string = message.content.substr(8);

@@ -9,7 +9,7 @@ const pornController = require('./porn/pornController');
 
 /**
  * @description Function that handle commands send through messages
- * @param  { JSDocTypes.DiscordMessageType } message - Message that user sended to bot
+ * @param  { JSDocTypes.DiscordMessageType } message - Message that user sent to bot
  * @param  { string } prefix - Server bot prefix
  */
 async function commandHandler (message, prefix) {
@@ -65,6 +65,8 @@ async function commandHandler (message, prefix) {
 		miscController.reverse(message);
 	} else if (command.startsWith('help')) {
 		utilityController.help(message, prefix);
+	} else if (command.startsWith('changeprefix')) {
+		
 	} else {
 		message.reply("VAI TOMA NO CU ANALFABETO NA0 S4B3 D1G1T4R MEU");
 	}
