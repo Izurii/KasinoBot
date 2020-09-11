@@ -4,7 +4,7 @@ exports.dolar = dolar;
 
 /**
  * @description Function that returns the actual value of USD to BRL
- * @param  { DiscordMessageType } message - Message that user sended to bot
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  */
 async function dolar (message) { 
 	await Controller.axios.get('https://economia.awesomeapi.com.br/all/USD-BRL')

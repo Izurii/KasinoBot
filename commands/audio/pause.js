@@ -4,7 +4,7 @@ exports.pause = pause;
 
 /**
  * @description Function that pauses the video strem on discord guild
- * @param  { DiscordMessageType } message - Message that user sended to bot
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  */
 async function pause(message) {
 	let serverQueue = Controller.serverQueue.get(message.guild.id);

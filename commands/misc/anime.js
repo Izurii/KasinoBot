@@ -9,7 +9,7 @@ exports.anime = anime;
 
 /**
  * @description Function that returns a random anime from MAL using Jikan API
- * @param  { DiscordMessageType } message - Message that user sended to bot
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  */
 async function anime (message) {
 

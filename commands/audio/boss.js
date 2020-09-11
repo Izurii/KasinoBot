@@ -5,7 +5,7 @@ exports.boss = boss;
 
 /**
  * @description You better be prepared for that!
- * @param  { DiscordMessageType } message - Message that user sended to bot
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  */
 async function boss (message) {
 	Controller.stopAllPlayUnique(message, boss_music);

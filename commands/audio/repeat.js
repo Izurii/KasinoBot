@@ -4,7 +4,7 @@ exports.repeat = repeat;
 
 /**
  * @description Function that repeats the last video played on discord guild
- * @param { DiscordMessageType } message - Message that user sended to bot
+ * @param { DiscordMessageType } message - Message that user sent to bot
  * @param { string } serverPrefix - Server bot prefix
  */
 async function repeat(message, serverPrefix) {

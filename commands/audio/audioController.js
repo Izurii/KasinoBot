@@ -36,7 +36,7 @@ exports.timeout_player = timeout_player;
 
 exports.stopAllPlayUnique = stopAllPlayUnique;
 /**
- * @param  { DiscordMessageType } message - Message that user sended to bot
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  * @param  { Object } music - Object that carry the title and link of YouTube Video
  * @param  { string } music.title - Video title
  * @param  { string } music.url - Video url

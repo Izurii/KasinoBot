@@ -5,7 +5,7 @@ exports.skip = skip;
 
 /**
  * @description Function that skips a song if the guild has more than one song on queue.
- * @param  { DiscordMessageType } message - Message that user sended to bot
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  */
 async function skip(message) {
 	let serverQueue = Controller.serverQueue.get(message.guild.id);
