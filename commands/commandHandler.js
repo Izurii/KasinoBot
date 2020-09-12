@@ -16,8 +16,10 @@ async function commandHandler (message, prefix) {
 
 	let command = message.content.substring(1).split(" ");
 	command = command[0];
-
-	if (command.startsWith('play') || command.startsWith('loop')) {
+	
+	if (command.startsWith('changeprefix')) {
+		utilityController.changePrefix(message, prefix);
+	} else if (command.startsWith('play') || command.startsWith('loop')) {
 		audioController.execute(message, prefix);
 	} else if (command.startsWith('skip')) {
 		audioController.skip(message);
@@ -65,8 +67,6 @@ async function commandHandler (message, prefix) {
 		miscController.reverse(message);
 	} else if (command.startsWith('help')) {
 		utilityController.help(message, prefix);
-	} else if (command.startsWith('changeprefix')) {
-		
 	} else {
 		message.reply("VAI TOMA NO CU ANALFABETO NA0 S4B3 D1G1T4R MEU");
 	}
