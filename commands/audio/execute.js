@@ -174,9 +174,12 @@ async function execute (message, serverPrefix) {
 					.setFooter('Tem 15 segundos pra escolher ou cancele '+serverPrefix+ 'cancel');
 					message.channel.send(embed);
 					
-					const filter = m => m.content >= 1 && m.content <= 5;
+					const filter = m => (m.content >= 1 && m.content <= 5) || m.content == serverPrefix+'cancel';
 					await message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ["time"] })
 					.then((collected) => {
+
+						if(collected.first().content==serverPrefix+'cancel')
+							return collected.first().reply("C4nc3la memo p41 :'(");
 		
 						let index = parseInt(collected.first().content, 10);
 						let track = tracks[index-1];
