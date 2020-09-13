@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/porn/idol.js</title>
+    <title>JSDoc: Source: commands/audio/volume.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/porn/idol.js</h1>
+    <h1 class="page-title">Source: commands/audio/volume.js</h1>
 
     
 
@@ -26,60 +26,28 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Controller = require('./pornController');
+            <pre class="prettyprint source linenums"><code>const Controller = require('./audioController');
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
-exports.idol = idol;
 
+exports.volume = volume;
 /**
- * @description Function that executes a python script that get images from the SakuraComplex booru IDOL
+ * @description Function that changes the stream volume
  * @param  { DiscordMessageType } message - Message that user sent to bot
  */
-async function idol(message) {
-
-	let tags = await Controller.formatTagsForBooru(message.content);
-	if(tags.length==0)
-		tags = '';
-
-	var options = {
-		args: [tags, message.guild.id]
-	};
-
-	let processMessage = await message.channel.send("Pr0c3554nd0...");
-	let processMessageID = processMessage.id;
-	Controller.pythonShell.run(Controller.pathToIdolScript, options, function (err, results) {
-		if (err) { console.log(err); return processMessage.edit("Ihhh d3u p4u no 515t3m4."); };
-		sendImage(results);
-	});
-
-	async function sendImage(results) {
-
-		let processedResult = results[0].split(" ");
-
-		if(processedResult[0].startsWith('Skipping')) {
-			console.log(processedResult)
-			return processMessage.edit("Ihhh d3u p4u no 515t3m4.");
-		} else if(processedResult[0].startsWith('nothing')) {
-			return processMessage.edit("N4o 4ch4m0s n4d4 c0l3g4.");
-		} else if(processedResult[0].startsWith('tempts')) {
-			return processMessage.edit("Vishhh já foram tr35 tentativas");
-		}
-
-		filename = processedResult[0];
-		let path = "./images/" + message.guild.id + "/" + filename;
-		if (Controller.fs.existsSync(path)) {
-
-			Controller.utilFunctions.deleteMessage(message.channel, processMessageID);
-			message.channel.send(
-				"``IDOL-SankakuComplex``\n``Score: " + processedResult[1] + "``",
-				{ files: [path] }
-			).then(Controller.fs.remove(path));
-
-		} else {
-			processMessage.edit("Ihhh br0h foi mal mas deu pau na máquina.");
-		}
-		
-	}
+async function volume (message) {
 	
+	let serverQueue = Controller.serverQueue.get(message.guild.id);
+	let volume = message.content.split(" ");
+	volume = volume[1];
+
+	if(!volume.match('[0-9]')||volume > 5||volume==0)
+		return message.reply("Verifique se você digitou certo o volume cacete de cacuete. Pode ser de 1 a 10.");
+	try {
+		serverQueue.connection.dispatcher.setVolume(volume);
+	} catch (error) {
+		console.log(error);
+		message.reply("HUSAMFW JPO ERRO CARLHO, chaM3 o ADM");
+	}
 }</code></pre>
         </article>
     </section>
