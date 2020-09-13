@@ -17,3 +17,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g jsdoc
     - run: npm run doc
+    - run: |
+          git config --local user.email "heitor_massarente@msn.com"
+          git config --local user.name "Izurii"
+          git add .
+          git commit -m "Documentation update."
