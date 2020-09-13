@@ -149,7 +149,8 @@ async function execute (message, serverPrefix) {
 
 	} else {
 
-		let searchTerm = message.content.slice(serverPrefix.length+4);
+		let searchTerm = message.content.slice(serverPrefix.length+5);
+		console.log(searchTerm);
 		Controller.ytsr.getFilters(searchTerm, (err, filters) => {
 			
 			if(err) throw err;
