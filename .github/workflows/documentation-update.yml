@@ -1,24 +1,10 @@
 name: Documentation Update
 on:
-  push:
+  pull_request:
     branches:
-      - '*'
+      - master
 jobs:
-  nightly-merge:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Updating documentation code
-      uses: actions/checkout@v1
-    - name: Merge master into documentation
-      uses: robotology/gh-action-nightly-merge@v1.2.0
-      with:
-        stable_branch: 'master'
-        development_branch: 'documentation'
-        allow_ff: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build:
-    needs: [nightly-merge]
     runs-on: ubuntu-latest
     strategy:
       matrix:
