@@ -6,7 +6,7 @@ exports.roll_number = roll_number;
  * @description Function that returns a discord message that contains n random values
  * @param  { DiscordMessageType } message - Message that user sent to bot
  * @param  { Number } number - N number of dices to roll
- * @returns { DiscordMessageType } - Reply message to user that requested a dice roll
+ * @returns Reply message to user that requested a dice roll
  */
 async function roll_number (message, number) {
 
