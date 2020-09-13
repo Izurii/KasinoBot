@@ -15,7 +15,7 @@ exports.randomInt = async (min, max) => {
 /**
  * @description Function that return the average of number on a determined array
  * @param  { Array } array - Array that contains the numbers to be averaged off
- * @returns Return the average number between numbers on a array
+ * @returns Return the average number between numbers on the array
  */
 exports.average = async (array) => {
 	return (array.reduce(function (a, b){ return a+b;}))/array.length;
