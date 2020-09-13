@@ -24,7 +24,7 @@ exports.chan = require('./chan').chan;
 /**
  * @description Function that formats string to a specific tag format that boorus accept.
  * @param  { string } text
- * @returns { string } Returns the formatted string 
+ * @returns Returns the formatted string 
  */
 async function formatTagsForBooru(text) {
 	let tags = text;
