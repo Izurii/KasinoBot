@@ -4,7 +4,7 @@ exports.execute = execute;
 
 /**
  * @description Function that process the 'play', 'loop' command
- * @param { DiscordMessageType } message - Message that user sended to bot
+ * @param { DiscordMessageType } message - Message that user sent to bot
  * @param { string } serverPrefix - Server bot prefix
  */
 async function execute (message, serverPrefix) {
@@ -47,7 +47,7 @@ async function execute (message, serverPrefix) {
 				voiceChannel: voiceChannel,
 				connection: null,
 				songs: [],
-				volume: 4,
+				volume: 1,
 				playing: true,
 				loop: false
 			};
@@ -170,13 +170,16 @@ async function execute (message, serverPrefix) {
 					.setColor('#ff2400')
 					.setThumbnail('https://cdn.discordapp.com/attachments/715236372423639070/725129163609997312/nico.png')
 					.setTitle('ESCOLHE AÍ CHEFIA')
-					.setDescription(tracks.map((t, i) => `**${i+1} -** ${t.title}`).join("\n"))
+					.setDescription(tracks.map((t, i) => `**${i+1} -** [${t.title}](${t.link}) (${t.duration})`).join("\n"))
 					.setFooter('Tem 15 segundos pra escolher ou cancele '+serverPrefix+ 'cancel');
 					message.channel.send(embed);
 					
-					const filter = m => m.content >= 1 && m.content <= 5;
+					const filter = m => (m.content >= 1 && m.content <= 5) || m.content == serverPrefix+'cancel';
 					await message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ["time"] })
 					.then((collected) => {
+
+						if(collected.first().content==serverPrefix+'cancel')
+							return collected.first().reply("C4nc3la memo p41 :'(");
 		
 						let index = parseInt(collected.first().content, 10);
 						let track = tracks[index-1];

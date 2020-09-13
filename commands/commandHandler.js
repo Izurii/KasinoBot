@@ -9,15 +9,17 @@ const pornController = require('./porn/pornController');
 
 /**
  * @description Function that handle commands send through messages
- * @param  { JSDocTypes.DiscordMessageType } message - Message that user sended to bot
+ * @param  { JSDocTypes.DiscordMessageType } message - Message that user sent to bot
  * @param  { string } prefix - Server bot prefix
  */
 async function commandHandler (message, prefix) {
 
 	let command = message.content.substring(1).split(" ");
 	command = command[0];
-
-	if (command.startsWith('play') || command.startsWith('loop')) {
+	
+	if (command.startsWith('changeprefix')) {
+		utilityController.changePrefix(message, prefix);
+	} else if (command.startsWith('play') || command.startsWith('loop')) {
 		audioController.execute(message, prefix);
 	} else if (command.startsWith('skip')) {
 		audioController.skip(message);
@@ -37,6 +39,8 @@ async function commandHandler (message, prefix) {
 		audioController.repeat(message);
 	} else if (command.startsWith('boss')) {
 		audioController.boss(message);
+	} else if (command.startsWith('volume')) {
+		audioController.volume(message);
 	} else if (command.startsWith('urss')) {
 		audioController.urss(message);
 	} else if (command.startsWith('magik')) {
