@@ -23,6 +23,7 @@ exports.resume = require('./resume.js').resume;
 exports.boss = require('./boss.js').boss;
 exports.repeat = require('./repeat.js').repeat;
 exports.shuffle = require('./shuffle.js').shuffle;
+exports.volume = require('./volume.js').volume;
 // exports.random = require('./random').random; passar os fun commands
 exports.urss = require('./urss').urss;
 
@@ -36,7 +37,7 @@ exports.timeout_player = timeout_player;
 
 exports.stopAllPlayUnique = stopAllPlayUnique;
 /**
- * @param  { DiscordMessageType } message - Message that user sended to bot
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  * @param  { Object } music - Object that carry the title and link of YouTube Video
  * @param  { string } music.title - Video title
  * @param  { string } music.url - Video url

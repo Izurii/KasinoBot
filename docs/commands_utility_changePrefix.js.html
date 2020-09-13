@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/porn/idol.js</title>
+    <title>JSDoc: Source: commands/utility/changePrefix.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/porn/idol.js</h1>
+    <h1 class="page-title">Source: commands/utility/changePrefix.js</h1>
 
     
 
@@ -26,60 +26,77 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Controller = require('./pornController');
+            <pre class="prettyprint source linenums"><code>const Controller = require('./utilityController');
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
-exports.idol = idol;
+exports.changePrefix = changePrefix;
 
 /**
- * @description Function that executes a python script that get images from the SakuraComplex booru IDOL
+ * @description Function that allows owner/administrators to change the prefix used to call the bot
  * @param  { DiscordMessageType } message - Message that user sent to bot
+ * @param  { string } prefix - Server bot prefix
  */
-async function idol(message) {
+async function changePrefix (message, prefix) {
 
-	let tags = await Controller.formatTagsForBooru(message.content);
-	if(tags.length==0)
-		tags = '';
+	if(!message.member.guild.me.hasPermission('ADMINISTRATOR') &amp;&amp; message.author.id !== message.guild.ownerID)
+		return message.reply("T4 achand0 qu3 é c4s4 dx m4e Juan4?? Ch4m4 um ad3m1r aí par4 faz3r 3ss4 m3rda");
+	
+	let prefixMessage = await message.channel.send("O prefixo atual do bot é...");
+	setTimeout(() => {
+		prefixMessage.edit("Sou "+message.author.username+" e ad0r0~ DAR UMA SUGADA NUMA ROLA!"); 
+		setTimeout(() => {
+			prefixMessage.edit(
+				'O Prefixo atual do bot é ``'+prefix+'``\n'+
+				'Você deseja mudar ele? Responda reagindo a mensagem, você tem 15 segundos para reagir.'
+			);
+			prefixMessage.react('👍').then(() => prefixMessage.react('👎'));
+			reactionHandler(prefixMessage);
+		}, 500);
+	}, 1000);
+}
 
-	var options = {
-		args: [tags, message.guild.id]
+/**
+ * @description Function that handles the reaction on the message and change the bot prefix if needed
+ * @param { DiscordMessageType } message - Message that user sent to bot
+ */
+async function reactionHandler (message) {
+
+	const filter = (reaction, user) => {
+		return ['👍', '👎'].includes(reaction.emoji.name) &amp;&amp; user.id !== message.author.id;
 	};
+	
+	message.awaitReactions(filter, { max: 1, time: 15000, errors: ['time'] })
+	.then(collected => {
+		const reaction = collected.first();
+		if (reaction.emoji.name === '👍') {
 
-	let processMessage = await message.channel.send("Pr0c3554nd0...");
-	let processMessageID = processMessage.id;
-	Controller.pythonShell.run(Controller.pathToIdolScript, options, function (err, results) {
-		if (err) { console.log(err); return processMessage.edit("Ihhh d3u p4u no 515t3m4."); };
-		sendImage(results);
-	});
-
-	async function sendImage(results) {
-
-		let processedResult = results[0].split(" ");
-
-		if(processedResult[0].startsWith('Skipping')) {
-			console.log(processedResult)
-			return processMessage.edit("Ihhh d3u p4u no 515t3m4.");
-		} else if(processedResult[0].startsWith('nothing')) {
-			return processMessage.edit("N4o 4ch4m0s n4d4 c0l3g4.");
-		} else if(processedResult[0].startsWith('tempts')) {
-			return processMessage.edit("Vishhh já foram tr35 tentativas");
-		}
-
-		filename = processedResult[0];
-		let path = "./images/" + message.guild.id + "/" + filename;
-		if (Controller.fs.existsSync(path)) {
-
-			Controller.utilFunctions.deleteMessage(message.channel, processMessageID);
-			message.channel.send(
-				"``IDOL-SankakuComplex``\n``Score: " + processedResult[1] + "``",
-				{ files: [path] }
-			).then(Controller.fs.remove(path));
+			message.reactions.removeAll();
+			message.channel.send("**Por favor digite o novo prefixo. (Limite de 5 caracteres)**");
+			
+			const prefixFilter = response => {
+				return (response.member.guild.me.hasPermission('ADMINISTRATOR') ||
+					(response.author.id === message.guild.ownerID)) &amp;&amp; response.content.length &lt; 6;
+			};
+			
+			message.channel.awaitMessages(prefixFilter, { max: 1, time: 15000, errors: ['time'] })
+			.then(async (response) => {
+				const newPrefix = response.first();
+				try {
+					await Controller.db.query(`UPDATE KBGuild SET KBGPrefix = '${newPrefix.content}' WHERE KBGGuildID = ${newPrefix.guild.id}`);
+					newPrefix.reply("alteração realizada com sucesso.");
+				} catch (error) {
+					newPrefix.reply("Deu ruim chame o DONO.");
+				}
+			})
+			.catch(response => {
+				message.channel.send("Ab4nd0na m3xm0 m4né.");
+			});
 
 		} else {
-			processMessage.edit("Ihhh br0h foi mal mas deu pau na máquina.");
+			message.reply('Pau no seu cú mano');
 		}
-		
-	}
-	
+	})
+	.catch(collected => {
+	});
 }</code></pre>
         </article>
     </section>

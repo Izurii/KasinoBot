@@ -39,7 +39,7 @@ async function play(guild, song) {
 
 	Controller.last_play[guild.id] = song.url;
 	const dispatcher = serverQueue.connection
-		.play( await Controller.ytdl(song.url), { type: 'opus' } )
+		.play(await Controller.ytdl(song.url), { type: 'opus' })
 		.on("finish", () => {
 			if (!serverQueue.loop) {
 				serverQueue.songs.shift();
@@ -50,6 +50,6 @@ async function play(guild, song) {
 		})
 		.on("error", error => console.error(error));
 
-	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+	dispatcher.setVolume(serverQueue.volume);
 	
 }

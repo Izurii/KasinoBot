@@ -4,7 +4,7 @@ exports.rule34 = rule34;
 
 /**
  * @description Function that makes a GET request to rule34
- * @param { DiscordMessageType } message 
+ * @param { DiscordMessageType } message - Message that user sent to bot
  */
 async function rule34 (message) {
 
