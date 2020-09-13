@@ -1,0 +1,30 @@
+name: Documentation Update
+on:
+  push:
+    branches:
+      - '*'
+jobs:
+  sync-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Merging master into documentation
+        uses: devmasx/merge-branch@v1.3.0
+        with:
+          type: now
+          from_branch: master
+          target_branch: documentation
+          github_token: ${{ github.token }}
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: NPM Script Documentation
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm run doc
