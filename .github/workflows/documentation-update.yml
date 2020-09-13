@@ -4,19 +4,21 @@ on:
     branches:
       - '*'
 jobs:
-  sync-branch:
+  nightly-merge:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-
-      - name: Merging master into documentation
-        uses: devmasx/merge-branch@v1.3.0
-        with:
-          type: now
-          target_branch: documentation
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Updating documentation code
+      uses: actions/checkout@v1
+    - name: Merge master into documentation
+      uses: robotology/gh-action-nightly-merge@v1.2.0
+      with:
+        stable_branch: 'master'
+        development_branch: 'documentation'
+        allow_ff: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build:
-    needs: [sync-branch]
+    needs: [nightly-merge]
     runs-on: ubuntu-latest
     strategy:
       matrix:
