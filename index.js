@@ -4,6 +4,7 @@ require('dotenv').config();
 const Discord = require('discord.js');
 const discordToken = process.env.DISCORD_TOKEN;
 const client = new Discord.Client();
+const utilFunctions = require('./utilFunctions');
 const db = require('./database');
 const { commandHandler } = require('./commands/commandHandler');
 
@@ -28,6 +29,17 @@ client.on('ready', () => {
 client.on('message', async message => {
 
 	if(message.author.bot) return;
+	
+	let xingamentos = [
+		'VAI SE FUDE OTÁRIO',
+		'VEM AQUI DÁ UMA SUGADA NA MINHA ROLA',
+		'Tá mandando mensagem por que? Tá achando que aqui é Twitter?',
+		'~Tua mãe tá solteira?',
+	];
+	let chanceXingamento = await utilFunctions.randomInt(1, 3000);
+	if(chanceXingamento<=10)
+		message.reply(xingamentos[await utilFunctions.randomInt(0, xingamentos.length)]);
+
 	let prefix = await db.query("SELECT KBGPrefix FROM KBGuild WHERE KBGGuildID = "+message.guild.id);
 	prefix = prefix.KBGPrefix;
 
