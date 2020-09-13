@@ -17,58 +17,60 @@ async function commandHandler (message, prefix) {
 	let command = message.content.substring(1).split(" ");
 	command = command[0];
 	
-	if (command.startsWith('changeprefix')) {
-		utilityController.changePrefix(message, prefix);
-	} else if (command.startsWith('play') || command.startsWith('loop')) {
+	if ((command == 'play') || (command == 'loop')) {
 		audioController.execute(message, prefix);
-	} else if (command.startsWith('skip')) {
+	} else if (command == 'playlist') {
+		audioController.playlist(message);
+	} else if (command == 'skip') {
 		audioController.skip(message);
-	} else if (command.startsWith('stop')) {
+	} else if (command == 'stop') {
 		audioController.stop(message);
-	} else if (command.startsWith('resume')) {
+	} else if (command == 'resume') {
 		audioController.resume(message);
-	} else if (command.startsWith('pause')) {
+	} else if (command == 'pause') {
 		audioController.pause(message);
-	} else if (command.startsWith('shuffle')){
+	} else if (command == 'shuffle'){
 		audioController.shuffle(message);
-	} else if (command.startsWith('random')) {
+	} else if (command == 'random') {
 		audioController.random(message);
-	} else if (command.startsWith('cancel')) {
+	} else if (command == 'cancel') {
 		return;
-	} else if (command.startsWith('repeat')) {
+	} else if (command == 'repeat') {
 		audioController.repeat(message);
-	} else if (command.startsWith('boss')) {
+	} else if (command == 'boss') {
 		audioController.boss(message);
-	} else if (command.startsWith('volume')) {
+	} else if (command == 'volume') {
 		audioController.volume(message);
-	} else if (command.startsWith('urss')) {
+	} else if (command == 'urss') {
 		audioController.urss(message);
-	} else if (command.startsWith('magik')) {
+	} else if (command == 'magik') {
 		memeController.magik(message);
-	} else if (command.startsWith('rule34')) {
+	} else if (command == 'rule34') {
 		pornController.rule34(message);
-	} else if (command.startsWith('idol')) {
+	} else if (command == 'idol') {
 		pornController.idol(message);
-	} else if (command.startsWith('chan')) {
+	} else if (command == 'chan') {
 		pornController.chan(message);
-	} else if (command.startsWith('anime')) {
+	} else if (command == 'anime') {
 		miscController.anime(message);
-	} else if (command.startsWith('dolar')) {
+	} else if (command == 'dolar') {
 		miscController.dolar(message);
-	} else if (command.startsWith('euro')) {
+	} else if (command == 'euro') {
 		miscController.euro(message);
-	} else if (command.startsWith('libra')) {
+	} else if (command == 'libra') {
 		miscController.libra(message);
-	} else if (command.match('[0-9]')) {
+	} else if (command[0].match('[0-9]')) {
 		miscController.number_functions(message);
-	} else if (command.startsWith('d')) {
+	} else if (command == 'd') {
 		miscController.roll_number(message);
-	} else if (command.startsWith('corona')) {
+	} else if (command == 'corona') {
 		miscController.corona(message);
-	} else if (command.startsWith('reverse')) {
+	} else if (command == 'reverse') {
 		miscController.reverse(message);
-	} else if (command.startsWith('help')) {
+	} else if (command == 'help') {
 		utilityController.help(message, prefix);
+	} else if (command == 'changeprefix') {
+			utilityController.changePrefix(message, prefix);
 	} else {
 		message.reply("VAI TOMA NO CU ANALFABETO NA0 S4B3 D1G1T4R MEU");
 	}
