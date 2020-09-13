@@ -45,58 +45,60 @@ async function commandHandler (message, prefix) {
 	let command = message.content.substring(1).split(" ");
 	command = command[0];
 	
-	if (command.startsWith('changeprefix')) {
-		utilityController.changePrefix(message, prefix);
-	} else if (command.startsWith('play') || command.startsWith('loop')) {
+	if ((command == 'play') || (command == 'loop')) {
 		audioController.execute(message, prefix);
-	} else if (command.startsWith('skip')) {
+	} else if (command == 'playlist') {
+		audioController.playlist(message);
+	} else if (command == 'skip') {
 		audioController.skip(message);
-	} else if (command.startsWith('stop')) {
+	} else if (command == 'stop') {
 		audioController.stop(message);
-	} else if (command.startsWith('resume')) {
+	} else if (command == 'resume') {
 		audioController.resume(message);
-	} else if (command.startsWith('pause')) {
+	} else if (command == 'pause') {
 		audioController.pause(message);
-	} else if (command.startsWith('shuffle')){
+	} else if (command == 'shuffle'){
 		audioController.shuffle(message);
-	} else if (command.startsWith('random')) {
+	} else if (command == 'random') {
 		audioController.random(message);
-	} else if (command.startsWith('cancel')) {
+	} else if (command == 'cancel') {
 		return;
-	} else if (command.startsWith('repeat')) {
+	} else if (command == 'repeat') {
 		audioController.repeat(message);
-	} else if (command.startsWith('boss')) {
+	} else if (command == 'boss') {
 		audioController.boss(message);
-	} else if (command.startsWith('volume')) {
+	} else if (command == 'volume') {
 		audioController.volume(message);
-	} else if (command.startsWith('urss')) {
+	} else if (command == 'urss') {
 		audioController.urss(message);
-	} else if (command.startsWith('magik')) {
+	} else if (command == 'magik') {
 		memeController.magik(message);
-	} else if (command.startsWith('rule34')) {
+	} else if (command == 'rule34') {
 		pornController.rule34(message);
-	} else if (command.startsWith('idol')) {
+	} else if (command == 'idol') {
 		pornController.idol(message);
-	} else if (command.startsWith('chan')) {
+	} else if (command == 'chan') {
 		pornController.chan(message);
-	} else if (command.startsWith('anime')) {
+	} else if (command == 'anime') {
 		miscController.anime(message);
-	} else if (command.startsWith('dolar')) {
+	} else if (command == 'dolar') {
 		miscController.dolar(message);
-	} else if (command.startsWith('euro')) {
+	} else if (command == 'euro') {
 		miscController.euro(message);
-	} else if (command.startsWith('libra')) {
+	} else if (command == 'libra') {
 		miscController.libra(message);
-	} else if (command.match('[0-9]')) {
+	} else if (command[0].match('[0-9]')) {
 		miscController.number_functions(message);
-	} else if (command.startsWith('d')) {
+	} else if (command == 'd') {
 		miscController.roll_number(message);
-	} else if (command.startsWith('corona')) {
+	} else if (command == 'corona') {
 		miscController.corona(message);
-	} else if (command.startsWith('reverse')) {
+	} else if (command == 'reverse') {
 		miscController.reverse(message);
-	} else if (command.startsWith('help')) {
+	} else if (command == 'help') {
 		utilityController.help(message, prefix);
+	} else if (command == 'changeprefix') {
+			utilityController.changePrefix(message, prefix);
 	} else {
 		message.reply("VAI TOMA NO CU ANALFABETO NA0 S4B3 D1G1T4R MEU");
 	}
@@ -112,13 +114,13 @@ exports.commandHandler = commandHandler;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#chan">chan</a></li><li><a href="global.html#changePrefix">changePrefix</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#deleteMessage">deleteMessage</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#editMessage">editMessage</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#fetchMessages">fetchMessages</a></li><li><a href="global.html#formatTagsForBooru">formatTagsForBooru</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#help_with_args">help_with_args</a></li><li><a href="global.html#help_without_args">help_without_args</a></li><li><a href="global.html#idol">idol</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#magik">magik</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#reactionHandler">reactionHandler</a></li><li><a href="global.html#readXmlString">readXmlString</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#rule34">rule34</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#urss">urss</a></li><li><a href="global.html#volume">volume</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#chan">chan</a></li><li><a href="global.html#changePrefix">changePrefix</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#deleteMessage">deleteMessage</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#editMessage">editMessage</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#fetchMessages">fetchMessages</a></li><li><a href="global.html#formatTagsForBooru">formatTagsForBooru</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#help_with_args">help_with_args</a></li><li><a href="global.html#help_without_args">help_without_args</a></li><li><a href="global.html#idol">idol</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#magik">magik</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#playlist">playlist</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#reactionHandler">reactionHandler</a></li><li><a href="global.html#readXmlString">readXmlString</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#rule34">rule34</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#urss">urss</a></li><li><a href="global.html#volume">volume</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Sat Sep 12 2020 22:49:10 GMT-0300 (GMT-03:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Sat Sep 12 2020 23:14:06 GMT-0300 (GMT-03:00)
 </footer>
 
 <script> prettyPrint(); </script>

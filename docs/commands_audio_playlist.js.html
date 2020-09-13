@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/audio/skip.js</title>
+    <title>JSDoc: Source: commands/audio/playlist.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/audio/skip.js</h1>
+    <h1 class="page-title">Source: commands/audio/playlist.js</h1>
 
     
 
@@ -27,22 +27,31 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>const Controller = require('./audioController');
-const JSDocTypes = Controller.JSDocTypes;
-const DiscordMessageType = JSDocTypes.DiscordMessageType;
-exports.skip = skip;
+const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
+exports.playlist = playlist;
 
 /**
- * @description Function that skips a song if the guild has more than one song on queue.
- * @param  { DiscordMessageType } message - Message that user sent to bot
+ * @description Function that search playlists on YouTube
+ * @param { DiscordMessageType } message - Message that user sent to bot
  */
-async function skip(message) {
-	let serverQueue = Controller.serverQueue.get(message.guild.id);
-	if (!serverQueue || (serverQueue.songs.length == 1)) {
-		return message.channel.send("EU NÃO PULO CORDA NÃO!");
-	} else if (serverQueue.songs.length > 1 &amp;&amp; serverQueue.songs[0].loop) {
-		serverQueue.loop = false;
-	}
-	serverQueue.connection.dispatcher.end();
+async function playlist (message) {
+
+	let searchTerm = message.content.split(" ");
+	searchTerm = searchTerm[1];
+	
+	Controller.ytsr.getFilters(searchTerm, (err, filters) => {
+		if(err) throw err;
+		filter = filters.get('Type').find(o => o.name === 'Playlist');
+		Controller.ytsr.getFilters(filter.ref, (err, filters) => { 
+
+			if(err) throw err;
+			var options = { limit: 5, nextpageRef: filter.ref, safeSearch: false };
+
+			Controller.ytsr(null, options, async function(err, result) {
+				console.log(result);
+			});
+		});
+	});
 }</code></pre>
         </article>
     </section>
