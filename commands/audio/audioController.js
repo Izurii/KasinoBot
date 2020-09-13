@@ -23,6 +23,7 @@ exports.resume = require('./resume.js').resume;
 exports.boss = require('./boss.js').boss;
 exports.repeat = require('./repeat.js').repeat;
 exports.shuffle = require('./shuffle.js').shuffle;
+exports.volume = require('./volume.js').volume;
 // exports.random = require('./random').random; passar os fun commands
 exports.urss = require('./urss').urss;
 

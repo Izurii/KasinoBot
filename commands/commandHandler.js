@@ -39,6 +39,8 @@ async function commandHandler (message, prefix) {
 		audioController.repeat(message);
 	} else if (command.startsWith('boss')) {
 		audioController.boss(message);
+	} else if (command.startsWith('volume')) {
+		audioController.volume(message);
 	} else if (command.startsWith('urss')) {
 		audioController.urss(message);
 	} else if (command.startsWith('magik')) {

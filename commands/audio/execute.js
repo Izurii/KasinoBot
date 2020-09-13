@@ -47,7 +47,7 @@ async function execute (message, serverPrefix) {
 				voiceChannel: voiceChannel,
 				connection: null,
 				songs: [],
-				volume: 4,
+				volume: 1,
 				playing: true,
 				loop: false
 			};
