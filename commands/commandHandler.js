@@ -20,7 +20,7 @@ async function commandHandler (message, prefix) {
 	if ((command == 'play') || (command == 'loop')) {
 		audioController.execute(message, prefix);
 	} else if (command == 'playlist') {
-		audioController.playlist(message);
+		audioController.playlist(message, prefix);
 	} else if (command == 'skip') {
 		audioController.skip(message);
 	} else if (command == 'stop') {
