@@ -170,7 +170,7 @@ async function execute (message, serverPrefix) {
 					.setColor('#ff2400')
 					.setThumbnail('https://cdn.discordapp.com/attachments/715236372423639070/725129163609997312/nico.png')
 					.setTitle('ESCOLHE AÍ CHEFIA')
-					.setDescription(tracks.map((t, i) => `**${i+1} -** ${t.title}`).join("\n"))
+					.setDescription(tracks.map((t, i) => `**${i+1} -** [${t.title}](${t.link}) (${t.duration})`).join("\n"))
 					.setFooter('Tem 15 segundos pra escolher ou cancele '+serverPrefix+ 'cancel');
 					message.channel.send(embed);
 					
