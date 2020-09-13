@@ -42,7 +42,7 @@ async function roll_number (message, number) {
 	}
 
 	if(message.content.includes("dm"))
-		return_message += "  (Média: "+await Controller.utilFunctions.average(numeros)+")";
+		return_message += "  (Média: "+parseFloat(await Controller.utilFunctions.average(numeros)).toFixed(2)+")";
 
 	return message.channel.send(return_message);
 
