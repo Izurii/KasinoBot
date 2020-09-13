@@ -21,3 +21,4 @@ jobs:
     - run: git config --local user.name "Izurii"
     - run: git add ./
     - run: git commit -m "Documentation update."
+    - run: git push
