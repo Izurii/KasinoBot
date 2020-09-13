@@ -15,6 +15,7 @@ exports.serverQueue = serverQueue;
 
 //Exporting functions
 exports.execute = require('./execute.js').execute;
+exports.playlist = require('./playlist.js').playlist;
 exports.play = require('./play.js').play;
 exports.skip = require('./skip.js').skip;
 exports.stop = require('./stop.js').stop;
