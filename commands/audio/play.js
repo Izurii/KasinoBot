@@ -8,7 +8,7 @@ exports.play = play;
  * @param  { Object } song - Object that carry the title and link of YouTube Video and loop state of that song
  * @param  { string } song.title - Video title
  * @param  { string } song.url - Video url
- * @param  { boolean } song.loop - Loop state of that specific song
+ * @param  { boolean } song.loop - Loop state of that specific sang
  */
 async function play(guild, song) {
 
