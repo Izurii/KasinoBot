@@ -175,7 +175,7 @@ async function help_with_args (message, serverPrefix) {
 		//Audio commands
 		'play': '``musica`` aqui você pode passar um link de uma música do YouTube ou até mesmo uma playlist. Caso você não tenha um link você digitar algo na frente e o bot irá te mostrar 5 opções para você escolher.',
 		'loop': '``musica`` aqui você pode passar um link de uma música do YouTube ou até mesmo uma playlist. Caso você não tenha um link você digitar algo na frente e o bot irá te mostrar 5 opções para você escolher.',
-		'volume': '``@`` você deve digitar um número de 1 a 10, ele irá alterar o volume do áudio que o bot está tocando no momento para ele. O valor padrão é ``1``.',
+		'volume': '``@`` você deve digitar um número de 1 a 5, ele irá alterar o volume do áudio que o bot está tocando no momento para ele. O valor padrão é ``1``.',
 
 		//Meme commands
 		'magik': '``$`` Aqui você coloca um número de 1 a 10, esse número indica o quanto o bot irá magikar essa imagem, quanto maior o valor maior o estrago e mais demorado é.',
