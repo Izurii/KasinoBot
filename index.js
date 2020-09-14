@@ -24,6 +24,7 @@ client.on('guildCreate', async guild => {
 
 client.on('ready', () => {
 	console.log(`Ready!`);
+	client.user.setActivity("com seu cú | -help");
 });
 
 client.on('message', async message => {
