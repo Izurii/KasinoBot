@@ -10,3 +10,4 @@ exports.db = db;
 //Exporting functions
 exports.help = require('./help').help;
 exports.changePrefix = require('./changePrefix').changePrefix;
+exports.donate = require('./donate').donate;

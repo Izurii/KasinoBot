@@ -70,7 +70,9 @@ async function commandHandler (message, prefix) {
 	} else if (command == 'help') {
 		utilityController.help(message, prefix);
 	} else if (command == 'changeprefix') {
-			utilityController.changePrefix(message, prefix);
+		utilityController.changePrefix(message, prefix);
+	} else if (command == 'donate') {
+		utilityController.donate(message);
 	} else {
 		message.reply("VAI TOMA NO CU ANALFABETO NA0 S4B3 D1G1T4R MEU");
 	}

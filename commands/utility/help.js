@@ -129,6 +129,7 @@ async function help_with_args (message, serverPrefix) {
 
 		//Util commands
 		'help': 'Lista de comandos e seus usos.',
+		'donate': 'Instruções para doações',
 		'changeprefix' : 'Muda o prefixo do servidor utilizado para chamar o bot.',
 
 	}
@@ -167,7 +168,8 @@ async function help_with_args (message, serverPrefix) {
 		
 		//Util commands
 		'help': serverPrefix+'help <comando>',
-		'changeprefix': serverPrefix+' (É só mandar o comando, sem frescuras)',
+		'donate': serverPrefix+'donate (É so mandar o comando, com muito carinho)',
+		'changeprefix': serverPrefix+'changeprefix (É só mandar o comando, sem frescuras)',
 
 	}
 
