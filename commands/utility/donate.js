@@ -36,7 +36,7 @@ async function donate(message) {
 		  },
 		  {
 			"name": "PayPal",
-			"value": "http://shorturl.at/pqwSU",
+			"value": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GYEJ3388PSG9E&source=url",
 			"inline": true
 		  },
 		  {
