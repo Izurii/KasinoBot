@@ -38,18 +38,25 @@ async function play(guild, song) {
 		clearTimeout(Controller.timeout_player[guild.id]);
 
 	Controller.last_play[guild.id] = song.url;
-	const dispatcher = serverQueue.connection
-		.play(await Controller.ytdl(song.url), { type: 'opus' })
-		.on("finish", () => {
-			if (!serverQueue.loop) {
-				serverQueue.songs.shift();
-				play(guild, serverQueue.songs[0]);
-			} else {
-				play(guild, serverQueue.songs[0]);
-			}
-		})
-		.on("error", error => console.error(error));
-
+	
+	try {
+		const dispatcher = serverQueue.connection
+			.play(await Controller.ytdl(song.url), { type: 'opus' })
+			.on("finish", () => {
+				if (!serverQueue.loop) {
+					serverQueue.songs.shift();
+					play(guild, serverQueue.songs[0]);
+				} else {
+					play(guild, serverQueue.songs[0]);
+				}
+			})
+			.on("error", error => console.error(error));
+	} catch (error) {
+		console.log(error);
+		serverQueue.songs.shift();
+		serverQueue.textChannel.send(`D3u p4u n3ss4 buc3t4 aqu1: **${song.title}** (O vídeo provavelmente está privado, +18 ou está indisponível para a região)`);
+		play(guild, serverQueue.songs[0]);
+	}
 	dispatcher.setVolume(serverQueue.volume);
 	
 }
