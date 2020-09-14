@@ -34,7 +34,7 @@ exports.formatTextLimitCharacters = async (text, length=1024) => {
 	if (text.length <= length) {
 		return text;
 	}
-	text = text.substring(0, length);
+	text = text.substring(0, length+3);
 	last = text.lastIndexOf(" ");
 	text = text.substring(0, last);
 	return text + "...";
