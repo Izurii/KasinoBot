@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/porn/chan.js</title>
+    <title>JSDoc: Source: commands/utility/donate.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/porn/chan.js</h1>
+    <h1 class="page-title">Source: commands/utility/donate.js</h1>
 
     
 
@@ -26,59 +26,55 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Controller = require('./pornController');
+            <pre class="prettyprint source linenums"><code>const Controller = require('./utilityController');
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
-exports.chan = chan;
+exports.donate = donate;
 
 /**
- * @description Function that executes a python script that get images from the SakuraComplex booru CHAN
- * @param  { DiscordMessageType } message - Message that user sent to bot
- */
-async function chan(message) {
+ * @description Function that returns a message with links to donate
+ * @param { DiscordMessageType } message - Message that user sent to bot
+ * @returns Embed message
+*/
+async function donate(message) {
 
-	let tags = await Controller.formatTagsForBooru(message.content);
-	if(tags.length==0)
-		tags = '';
-
-	var options = {
-		args: [tags, message.guild.id]
-	};
-
-	let processMessage = await message.channel.send("Pr0c3554nd0...");
-	let processMessageID = processMessage.id;
-	Controller.pythonShell.run(Controller.pathToChanScript, options, function (err, results) {
-		if (err) { console.log(err); return processMessage.edit("Ihhh d3u p4u no 515t3m4."); };
-		sendImage(results);
-	});
-
-	async function sendImage(results) {
-
-		let processedResult = results[0].split(" ");
-
-		if(processedResult[0].startsWith('Skipping')) {
-			console.log(processedResult);
-			return processMessage.edit("Ihhh d3u p4u no 515t3m4.");
-		} else if(processedResult[0].startsWith('nothing')) {
-			return processMessage.edit("N4o 4ch4m0s n4d4 c0l3g4.");
-		} else if(processedResult[0].startsWith('tempts')) {
-			return processMessage.edit("Vishhh já foram tr35 tentativas");
-		}
-
-		filename = processedResult[0];
-		let path = "./images/" + message.guild.id + "/" + filename;
-		if (Controller.fs.existsSync(path)) {
-
-			Controller.utilFunctions.deleteMessage(message.channel, processMessageID);
-			message.channel.send(
-				"``CHAN-SankakuComplex``\n``Score: " + processedResult[1] + "``",
-				{ files: [path] }
-			).then(Controller.fs.remove(path));
-
-		} else {
-			processMessage.edit("Ihhh br0h foi mal mas deu pau na máquina.");
-		}
-		
-	}
+	const embed = {
+		"title": "Doação para o bot Kasino se manter vivo",
+		"color": 16720896,
+		"footer": {
+		  "text": "Assinado, Heitor."
+		},
+		"thumbnail": {
+		  "url": "https://cdn.discordapp.com/attachments/514299610366345216/755114165718352063/logo.png"
+		},
+		"image": {
+		  "url": "https://cdn.discordapp.com/attachments/648016758346612759/755113932821102662/1452367820_large_1.gif"
+		},
+		"author": {
+		  "name": "Izurii Hootoh - Dono do KASINÃO",
+		  "icon_url": "https://images-ext-1.discordapp.net/external/uLTLo54TWz5xVGtDLJI_RCvyHhKi4DcGami8g_dB5YA/%3Fsize%3D256/https/cdn.discordapp.com/avatars/229096474762280960/1088ddf9ad0ad2f9ec4720e6f3cf3326.png"
+		},
+		"fields": [
+		  {
+			"name": "Por hora o dono gasta em torno de ~R$35 reais ao mês para manter o Kasino vivo, se puderem ajudar com algo, o Kasino agradece.",
+			"value": "Você pode doar pelo PagSeguro ou pelo PayPal, cartão de crédito e o cacete a 4. Caso queira também pode fazer assinatura e pagar todo mês sem se preocupar."
+		  },
+		  {
+			"name": "Explicação por cima dos gastos",
+			"value": "Esse custo vem de servidor (AWS)+Proxys que preciso utilizar para que ele funcione corretamente."
+		  },
+		  {
+			"name": "PayPal",
+			"value": "http://shorturl.at/pqwSU",
+			"inline": true
+		  },
+		  {
+			"name": "PagSeguro",
+			"value": "https://pag.ae/7Wba24YTP",
+			"inline": true
+		  }
+		]
+	  };
+	  return message.channel.send({embed});
 }</code></pre>
         </article>
     </section>
