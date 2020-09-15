@@ -5,17 +5,15 @@ exports.roll_number = roll_number;
 /**
  * @description Function that returns a discord message that contains n random values
  * @param  { DiscordMessageType } message - Message that user sent to bot
- * @param  { Number } number - N number of dices to roll
+ * @param  { Number } number=1 - N number of dices to roll
  * @returns Reply message to user that requested a dice roll
  */
-async function roll_number (message, number) {
+async function roll_number (message, number=1) {
 
 	if(number>10)
 		return message.channel.send("N40 p0d3 p4ss4r de 10 caralho");
 	else if(number===0)
 		return message.channel.send("Z3r0 n40 d4 pô");
-	else if(number==="")
-		number=1;
 
 	let numero_sorteado;
 	if(message.content.includes("dm"))
