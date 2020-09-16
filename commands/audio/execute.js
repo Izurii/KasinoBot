@@ -17,7 +17,7 @@ async function execute (message, serverPrefix) {
 	voice_channels.forEach((channel) => { voiceChannel = channel; })
 
 	if (voiceChannel.length == 0)
-		return; // message.channel.send("PORRA TÔ SOZINHO AQUI VELHO :'( vão se foder.");
+		return message.channel.send("PORRA TÔ SOZINHO AQUI VELHO :'( vão se foder não dá para tocar nada, algu3m t3m que3 entr4r a1");
 
 	const permissions = voiceChannel.permissionsFor(message.client.user);
 	if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
