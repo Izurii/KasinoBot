@@ -9,6 +9,8 @@ exports.playlist = playlist;
  */
 async function playlist (message, serverPrefix) {
 
+	return message.channel.send("Manutenção por tempo indeterminado. Desculpe.");
+
 	let argument = message.content.slice(serverPrefix.length+9);
 
 	if(Controller.ytpl.validateURL(argument)) {
