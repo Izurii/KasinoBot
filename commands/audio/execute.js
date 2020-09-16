@@ -27,7 +27,7 @@ async function execute (message, serverPrefix) {
 	}
 
 	let serverQueue = Controller.serverQueue.get(message.guild.id);
-	if(Controller.ytdl.validateURL(args[1])&&!(Controller.ytpl.validateURL(args[1]))) {
+	if(Controller.ytdl.validateURL(args[1])&&!(Controller.ytpl.validateID(args[1]))) {
 		
 		let video_link = args[1];
 		
@@ -95,9 +95,11 @@ async function execute (message, serverPrefix) {
 			}
 		}
 
-	} else if (!Controller.ytdl.validateURL(args[1])&&(Controller.ytpl.validateURL(args[1]))){
+	} else if (!Controller.ytdl.validateURL(args[1])&&(Controller.ytpl.validateID(args[1]))){
+
+		return message.channel.send("Manutenção por tempo indeterminado. Desculpe.");
 		
-		Controller.ytpl(args[1], { limit: Infinity }, (err,  result) => {
+		Controller.ytpl(args[1], { limit: Infinity }).then(result => {
 
 			let videos = result.items;
 			let songs_list = [];
