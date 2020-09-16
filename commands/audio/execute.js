@@ -63,7 +63,7 @@ async function execute (message, serverPrefix) {
 					queueContruct.songs[indexSong].loop = true;
 
 				Controller.serverQueue.set(message.guild.id, queueContruct);
-				Controller.play(message.guild, queueContruct.songs[0]);
+				Controller.play(message.guild, queueContruct.songs[0], serverPrefix);
 
 			} catch (e) {
 				console.log(e);
