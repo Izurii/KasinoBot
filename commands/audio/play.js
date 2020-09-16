@@ -9,10 +9,17 @@ exports.play = play;
  * @param  { string } song.title - Video title
  * @param  { string } song.url - Video url
  * @param  { boolean } song.loop - Loop state of that specific song
+ * @param  { string } serverPrefix - Server bot prefix
  */
-async function play(guild, song) {
+async function play(guild, song, serverPrefix) {
 
 	const serverQueue = Controller.serverQueue.get(guild.id);
+
+	if (serverQueue.voiceChannel.members.size <= 1 && serverQueue.songs.length > 1) {
+		//serverQueue.textChannel.send("B4nd0 de g4y, m3 aband0nar4m aqu1. PARA VOLTAR A MÚsica É sÓ dar o comando ``"+serverPrefix+"resume``");
+		//return;
+	}
+
 	if (!song) {
 		Controller.serverQueue.delete(guild.id);
 		Controller.timeout_player[guild.id] = setTimeout(() => {
@@ -42,7 +49,9 @@ async function play(guild, song) {
 	try {
 		const dispatcher = serverQueue.connection
 			.play(await Controller.ytdl(song.url), { type: 'opus' })
-			.on("finish", () => {
+			.on("finish",async () => {
+
+			
 				if (!serverQueue.loop) {
 					serverQueue.songs.shift();
 					play(guild, serverQueue.songs[0]);
@@ -51,12 +60,12 @@ async function play(guild, song) {
 				}
 			})
 			.on("error", error => console.error(error));
+		dispatcher.setVolume(serverQueue.volume);
 	} catch (error) {
 		console.log(error);
 		serverQueue.songs.shift();
 		serverQueue.textChannel.send(`D3u p4u n3ss4 buc3t4 aqu1: **${song.title}** (O vídeo provavelmente está privado, +18 ou está indisponível para a região)`);
 		play(guild, serverQueue.songs[0]);
 	}
-	dispatcher.setVolume(serverQueue.volume);
 	
 }

@@ -15,9 +15,8 @@ client.on('guildCreate', async guild => {
 		await db.query(`INSERT INTO KBGuild (KBGGUildID, KBGName) VALUES (${guild.id}, '${guild.name}')`);
 	} else {
 		let guildName = guildDB.KBGName;
-		if(guildName!=guild.name) {
+		if(guildName!=guild.name)
 			await db.query(`UPDATE KBGuild SET KBGName = '${guild.name}' WHERE KBGGuildID = ${guild.id}`);
-		}
 	}
 
 })
@@ -47,6 +46,22 @@ client.on('message', async message => {
 	if(message.content.startsWith(prefix)) {
 		commandHandler(message, prefix);
 	}
+
+});
+
+client.on('voiceStateUpdate', async (oldState, newState) => {
+
+	const audioController = require('./commands/audio/audioController');
+	const serverQueue = audioController.serverQueue.get(oldState.guild.id);
+	
+	if(serverQueue==undefined)
+		return;
+
+	if(oldState.channelID!==newState.channelID)
+		serverQueue.voiceChannel = newState.guild.channels.cache.get(newState.channelID);
+	
+	if(!oldState.serverMute&&newState.serverMute)
+		serverQueue.textChannel.send("Mut0u porqu3 g4y? :s");
 
 });
 
