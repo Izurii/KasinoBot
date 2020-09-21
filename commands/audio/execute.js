@@ -97,8 +97,6 @@ async function execute (message, serverPrefix) {
 
 	} else if (!Controller.ytdl.validateURL(args[1])&&(Controller.ytpl.validateID(args[1]))){
 
-		return message.channel.send("Manutenção por tempo indeterminado. Desculpe.");
-		
 		Controller.ytpl(args[1], { limit: Infinity }).then(result => {
 
 			let videos = result.items;
