@@ -9,11 +9,9 @@ exports.playlist = playlist;
  */
 async function playlist (message, serverPrefix) {
 
-	return message.channel.send("Manutenção por tempo indeterminado. Desculpe.");
-
 	let argument = message.content.slice(serverPrefix.length+9);
 
-	if(Controller.ytpl.validateURL(argument)) {
+	if(Controller.ytpl.validateID(argument)) {
 
 		let modified_message = message;
 		modified_message.content = serverPrefix+'play '+argument;
@@ -21,7 +19,7 @@ async function playlist (message, serverPrefix) {
 		Controller.execute(modified_message, serverPrefix);
 		return;
 
-	} else if (Controller.ytdl.validateURL(argument)) {
+	} else if (Controller.ytdl.validateID(argument)) {
 		return message.reply("Verif1que3 se tue l1nk é de pl4yli5t mesmno manim");
 	}
 
