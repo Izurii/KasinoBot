@@ -27,6 +27,7 @@ async function help_without_args (message) {
 			'boss',
 			'2077',
 			'play',
+			'playlist',
 			'loop',
 			'pause',
 			'resume',
@@ -101,8 +102,9 @@ async function help_with_args (message, serverPrefix) {
 		'urss' : 'Well, MOTHERLAND!!!',
 		'boss' : 'Para tudo o que bot está fazendo para tocar uma puta música épica de boss.',
 		'2077' : 'サイバーパンク 2.0.7.7!',
-		'play': 'Consegue tocar músicas através de links do YouTube ou através da selação quando você digita uma frase, como também pode tocar playlists inteiras.',
-		'loop': 'Consegue tocar músicas através de links do YouTube ou através da selação quando você digita uma frase, como também pode tocar playlists inteiras. (Porém ele irá repetir o que você colocou por tempo indeterminado)',
+		'play': 'Consegue tocar músicas através de links do YouTube ou através da seleção quando você digita uma frase, como também pode tocar playlists inteiras.',
+		'playlist': 'Consegue tocar playlists através de links do YouTube ou através da seleção quando você digita uma frase.',
+		'loop': 'Consegue tocar músicas através de links do YouTube ou através da seleção quando você digita uma frase, como também pode tocar playlists inteiras. (Porém ele irá repetir o que você colocou por tempo indeterminado)',
 		'pause': 'Pausa o que o bot está tocando.',
 		'resume': 'Resume o que o bot estava tocando.',
 		'repeat': 'Repete a última coisa tocada no server.',
@@ -142,6 +144,7 @@ async function help_with_args (message, serverPrefix) {
 		'boss' : serverPrefix+'boss (É só mandar o comando, sem frescuras)',
 		'2077' : serverPrefix+'2077 (É só mandar o comando, sem frescuras)',
 		'play': serverPrefix+'play <musica>',
+		'playlist': serverPrefix+'playlist <lista>',
 		'loop': serverPrefix+'loop <musica>',
 		'pause': serverPrefix+'pause (É só mandar o comando, sem frescuras)',
 		'resume': serverPrefix+'resume (É só mandar o comando, sem frescuras)',
@@ -179,6 +182,7 @@ async function help_with_args (message, serverPrefix) {
 	let commands_parameters = {
 		//Audio commands
 		'play': '``musica`` aqui você pode passar um link de uma música do YouTube ou até mesmo uma playlist. Caso você não tenha um link você digitar algo na frente e o bot irá te mostrar 5 opções para você escolher.',
+		'playlist': '``lista`` aqui você pode passar um link de uma playlist do YouTube. Caso você não tenha um link você digitar algo na frente e o bot irá te mostrar 5 opções para você escolher.',
 		'loop': '``musica`` aqui você pode passar um link de uma música do YouTube ou até mesmo uma playlist. Caso você não tenha um link você digitar algo na frente e o bot irá te mostrar 5 opções para você escolher.',
 		'volume': '``@`` você deve digitar um número de 1 a 5, ele irá alterar o volume do áudio que o bot está tocando no momento para ele. O valor padrão é ``1``.',
 
