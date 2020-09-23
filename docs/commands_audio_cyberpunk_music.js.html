@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/audio/boss.js</title>
+    <title>JSDoc: Source: commands/audio/cyberpunk_music.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/audio/boss.js</h1>
+    <h1 class="page-title">Source: commands/audio/cyberpunk_music.js</h1>
 
     
 
@@ -27,16 +27,16 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>const Controller = require('./audioController');
-const boss_music = { title: 'BOSS BUCETA, SENTA QUE LÁ VEM PICA', url: 'https://www.youtube.com/watch?v=PBwMGiju0G4' };
+const cyber_music = { title: 'サイバーパンク 2.0.7.7', url: 'https://www.youtube.com/watch?v=9ayYeLLT8bs' };
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
-exports.boss = boss;
+exports.cyberpunk_music = cyberpunk_music;
 
 /**
- * @description You better be prepared for that!
+ * @description サイバーパンク 2.0.7.7!
  * @param  { DiscordMessageType } message - Message that user sent to bot
  */
-async function boss (message) {
-	Controller.stopAllPlayUnique(message, boss_music);
+async function cyberpunk_music (message) {
+	Controller.stopAllPlayUnique(message, cyber_music);
 }</code></pre>
         </article>
     </section>
