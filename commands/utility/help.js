@@ -25,6 +25,7 @@ async function help_without_args (message) {
 		'Comandos de t0c4r a f35t4 t0d4:' : [
 			'urss',
 			'boss',
+			'2077',
 			'play',
 			'loop',
 			'pause',
