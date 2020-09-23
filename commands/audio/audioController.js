@@ -62,7 +62,7 @@ async function stopAllPlayUnique (message, music) {
 		voiceChannel: voiceChannel,
 		connection: null,
 		songs: [],
-		volume: 4,
+		volume: 0.5,
 		playing: true,
 		loop: false
 	};
