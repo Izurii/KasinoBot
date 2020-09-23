@@ -27,6 +27,7 @@ exports.shuffle = require('./shuffle.js').shuffle;
 exports.volume = require('./volume.js').volume;
 // exports.random = require('./random').random; passar os fun commands
 exports.urss = require('./urss').urss;
+exports.cyberpunk_music = require('./cyberpunk_music.js').cyberpunk_music;
 
 //Last play array shared between all filesz
 var last_play = [];
