@@ -99,6 +99,7 @@ async function help_with_args (message, serverPrefix) {
 		//Audio commands
 		'urss' : 'Well, MOTHERLAND!!!',
 		'boss' : 'Para tudo o que bot está fazendo para tocar uma puta música épica de boss.',
+		'2077' : 'サイバーパンク 2.0.7.7!',
 		'play': 'Consegue tocar músicas através de links do YouTube ou através da selação quando você digita uma frase, como também pode tocar playlists inteiras.',
 		'loop': 'Consegue tocar músicas através de links do YouTube ou através da selação quando você digita uma frase, como também pode tocar playlists inteiras. (Porém ele irá repetir o que você colocou por tempo indeterminado)',
 		'pause': 'Pausa o que o bot está tocando.',
@@ -138,6 +139,7 @@ async function help_with_args (message, serverPrefix) {
 		//Audio commands
 		'urss': serverPrefix+'urss (É só mandar o comando, sem frescuras)',
 		'boss' : serverPrefix+'boss (É só mandar o comando, sem frescuras)',
+		'2077' : serverPrefix+'2077 (É só mandar o comando, sem frescuras)',
 		'play': serverPrefix+'play <musica>',
 		'loop': serverPrefix+'loop <musica>',
 		'pause': serverPrefix+'pause (É só mandar o comando, sem frescuras)',
