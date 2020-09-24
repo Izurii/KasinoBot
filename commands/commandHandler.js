@@ -77,6 +77,8 @@ async function commandHandler (message, prefix) {
 		utilityController.changePrefix(message, prefix);
 	} else if (command == 'donate') {
 		utilityController.donate(message);
+	} else if (command == 'adm_message') {
+		utilityController.adm_message(message);
 	} else {
 		message.reply("VAI TOMA NO CU ANALFABETO NA0 S4B3 D1G1T4R MEU");
 	}
