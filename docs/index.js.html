@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/misc/dolar.js</title>
+    <title>JSDoc: Source: index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/misc/dolar.js</h1>
+    <h1 class="page-title">Source: index.js</h1>
 
     
 
@@ -26,26 +26,83 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Controller = require('./miscController');
-const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
-exports.dolar = dolar;
+            <pre class="prettyprint source linenums"><code>//Inicializando as variáveis de ambiente (use process.env.NOME_DA_VAR)
+require('dotenv').config();
 
+const Discord = require('discord.js');
+const discordToken = process.env.DISCORD_TOKEN;
+const client = new Discord.Client();
+const utilFunctions = require('./utilFunctions');
+const db = require('./database');
+const { commandHandler } = require('./commands/commandHandler');
+
+client.on('guildCreate', async guild => {
+	
+	let guildDB = await db.query(`SELECT * FROM KBGuild WHERE KBGGuildID = ${guild.id}`);
+	if(guildDB==undefined) {
+		await db.query(`INSERT INTO KBGuild (KBGGUildID, KBGName) VALUES (${guild.id}, '${guild.name}')`);
+	} else {
+		let guildName = guildDB.KBGName;
+		if(guildName!=guild.name)
+			await db.query(`UPDATE KBGuild SET KBGName = '${guild.name}' WHERE KBGGuildID = ${guild.id}`);
+	}
+
+})
+
+client.on('ready', () => {
+	console.log(`Ready!`);
+	client.user.setActivity("com seu cú | -help");
+});
+
+client.on('message', async message => {
+
+	if(message.author.bot) return;
+	
+	let xingamentos = [
+		'VAI SE FUDE OTÁRIO',
+		'VEM AQUI DÁ UMA SUGADA NA MINHA ROLA',
+		'Tá mandando mensagem por que? Tá achando que aqui é Twitter?',
+		'~Tua mãe tá solteira?',
+	];
+	let chanceXingamento = await utilFunctions.randomInt(1, 3000);
+	if(chanceXingamento&lt;=10)
+		message.reply(xingamentos[await utilFunctions.randomInt(0, xingamentos.length)]);
+
+	let prefix = await db.query("SELECT KBGPrefix FROM KBGuild WHERE KBGGuildID = "+message.guild.id);
+	prefix = prefix.KBGPrefix;
+
+	if(message.content.startsWith(prefix)) {
+		commandHandler(message, prefix);
+	}
+
+});
+
+client.on('voiceStateUpdate', async (oldState, newState) => {
+
+	const audioController = require('./commands/audio/audioController');
+	const serverQueue = audioController.serverQueue.get(oldState.guild.id);
+	
+	if(serverQueue==undefined)
+		return;
+
+	if(oldState.channelID!==newState.channelID)
+		serverQueue.voiceChannel = newState.guild.channels.cache.get(newState.channelID);
+	
+	if(!oldState.serverMute&amp;&amp;newState.serverMute)
+		serverQueue.textChannel.send("Mut0u porqu3 g4y? :s");
+
+});
+
+client.login(discordToken);
+
+exports.getAllGuilds = getAllGuilds;
 /**
- * @description Function that returns the actual value of USD to BRL
- * @param  { DiscordMessageType } message - Message that user sent to bot
+ * @description Function that returns an array with all guilds connected
+ * @returns Array containing all guilds
  */
-async function dolar (message) { 
-	await Controller.axios.get('https://economia.awesomeapi.com.br/all/USD-BRL')
-	.then (response => {
-		let valor = parseFloat(response.data.USD.ask).toFixed(2).replace(".", ",");
-		message.reply("``Dólar está: R$"+valor+'``');
-	})
-	.catch ( error => {
-		console.log(error);
-		message.reply("M3u l0rd d3u 4lg0 de err4d0 p41, v41 fic4r par4 ma15 tard3.");
-	});
-}
-</code></pre>
+async function getAllGuilds() {
+	return client.guilds.cache;
+}</code></pre>
         </article>
     </section>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/misc/dolar.js</title>
+    <title>JSDoc: Source: commands/audio/cholamais.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/misc/dolar.js</h1>
+    <h1 class="page-title">Source: commands/audio/cholamais.js</h1>
 
     
 
@@ -26,26 +26,18 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Controller = require('./miscController');
+            <pre class="prettyprint source linenums"><code>const Controller = require('./audioController');
+const chola_music = { title: 'CHOLA MEMO V14D0!!!', url: 'https://www.youtube.com/watch?v=peA6xbaBMBk' };
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
-exports.dolar = dolar;
+exports.cholamais = cholamais;
 
 /**
- * @description Function that returns the actual value of USD to BRL
+ * @description CHOLA MAIS CORNO!!!!
  * @param  { DiscordMessageType } message - Message that user sent to bot
  */
-async function dolar (message) { 
-	await Controller.axios.get('https://economia.awesomeapi.com.br/all/USD-BRL')
-	.then (response => {
-		let valor = parseFloat(response.data.USD.ask).toFixed(2).replace(".", ",");
-		message.reply("``Dólar está: R$"+valor+'``');
-	})
-	.catch ( error => {
-		console.log(error);
-		message.reply("M3u l0rd d3u 4lg0 de err4d0 p41, v41 fic4r par4 ma15 tard3.");
-	});
-}
-</code></pre>
+async function cholamais (message) {
+	Controller.stopAllPlayUnique(message, chola_music);
+}</code></pre>
         </article>
     </section>
 
