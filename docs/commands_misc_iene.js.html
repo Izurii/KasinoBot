@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/misc/dolar.js</title>
+    <title>JSDoc: Source: commands/misc/iene.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/misc/dolar.js</h1>
+    <h1 class="page-title">Source: commands/misc/iene.js</h1>
 
     
 
@@ -28,17 +28,17 @@
         <article>
             <pre class="prettyprint source linenums"><code>const Controller = require('./miscController');
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
-exports.dolar = dolar;
+exports.iene = iene;
 
 /**
- * @description Function that returns the actual value of USD to BRL
+ * @description Function that returns the actual value of JPY to BRL
  * @param  { DiscordMessageType } message - Message that user sent to bot
  */
-async function dolar (message) { 
-	await Controller.axios.get('https://economia.awesomeapi.com.br/all/USD-BRL')
+async function iene (message) { 
+	await Controller.axios.get('https://economia.awesomeapi.com.br/all/JPY-BRL')
 	.then (response => {
-		let valor = parseFloat(response.data.USD.ask).toFixed(2).replace(".", ",");
-		message.reply("``Dólar está: R$"+valor+'``');
+		let valor = parseFloat(response.data.JPY.ask).toFixed(5).replace(".", ",");
+		message.reply("``Iene está: R$"+valor+'``');
 	})
 	.catch ( error => {
 		console.log(error);

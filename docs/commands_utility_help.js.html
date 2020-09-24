@@ -54,6 +54,7 @@ async function help_without_args (message) {
 			'urss',
 			'boss',
 			'2077',
+			'cholamais',
 			'play',
 			'playlist',
 			'loop',
@@ -79,6 +80,7 @@ async function help_without_args (message) {
 			'dolar',
 			'euro',
 			'libra',
+			'iene',
 			'd',
 			'reverse',
 			'corona',
@@ -130,6 +132,7 @@ async function help_with_args (message, serverPrefix) {
 		'urss' : 'Well, MOTHERLAND!!!',
 		'boss' : 'Para tudo o que bot está fazendo para tocar uma puta música épica de boss.',
 		'2077' : 'サイバーパンク 2.0.7.7!',
+		'cholamais': 'CHOLA MAIS SEU COLNO!!!',
 		'play': 'Consegue tocar músicas através de links do YouTube ou através da seleção quando você digita uma frase, como também pode tocar playlists inteiras.',
 		'playlist': 'Consegue tocar playlists através de links do YouTube ou através da seleção quando você digita uma frase.',
 		'loop': 'Consegue tocar músicas através de links do YouTube ou através da seleção quando você digita uma frase, como também pode tocar playlists inteiras. (Porém ele irá repetir o que você colocou por tempo indeterminado)',
@@ -155,6 +158,7 @@ async function help_with_args (message, serverPrefix) {
 		'dolar': 'Mostra a cotação atual do dólar.',
 		'euro': 'Mostra a cotação atual do euro.',
 		'libra': 'Mostra a cotação atual da libra.',
+		'iene': 'Mostra a cotação atual do iene.',
 		'd': 'Basicamente um sorteador de números ou dados por assim dizer.',
 		'reverse': 'Espelha uma frase.',
 		'corona': 'Retorna dados sobre o estado atual do COVID-19 em determinado país.',
@@ -171,6 +175,7 @@ async function help_with_args (message, serverPrefix) {
 		'urss': serverPrefix+'urss (É só mandar o comando, sem frescuras)',
 		'boss' : serverPrefix+'boss (É só mandar o comando, sem frescuras)',
 		'2077' : serverPrefix+'2077 (É só mandar o comando, sem frescuras)',
+		'cholamais' : serverPrefix+'cholamais (É só mandar o comando, sem frescuras)',
 		'play': serverPrefix+'play &lt;musica>',
 		'playlist': serverPrefix+'playlist &lt;lista>',
 		'loop': serverPrefix+'loop &lt;musica>',
@@ -196,6 +201,7 @@ async function help_with_args (message, serverPrefix) {
 		'dolar': serverPrefix+'dolar (É só mandar o comando, sem frescuras)',
 		'euro': serverPrefix+'euro (É só mandar o comando, sem frescuras)',
 		'libra': serverPrefix+'libra (É só mandar o comando, sem frescuras)',
+		'iene': serverPrefix+'iene (É só mandar o comando, sem frescuras)',
 		'd': serverPrefix+'&lt;$>d&lt;@> ou ${prefix}&lt;$>dm&lt;@> Caso você utiliza segundo comando, ele irá devolver os sorteios e entre parênteses a média dos sorteios.',
 		'reverse': serverPrefix+'reverse &lt;frase>',
 		'corona': serverPrefix+'corona ou "${prefix}corona &lt;país>". Caso você mande o comando sem argumentos ele irá retornar uma lista com possíveis países para você ver os dados do COVID-19, lembrando que você deverá utilizar o código do país não o nome.',
@@ -265,13 +271,13 @@ async function help_with_args (message, serverPrefix) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#chan">chan</a></li><li><a href="global.html#changePrefix">changePrefix</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#cyberpunk_music">cyberpunk_music</a></li><li><a href="global.html#deleteMessage">deleteMessage</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#donate">donate</a></li><li><a href="global.html#editMessage">editMessage</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#fetchMessages">fetchMessages</a></li><li><a href="global.html#formatTagsForBooru">formatTagsForBooru</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#help_with_args">help_with_args</a></li><li><a href="global.html#help_without_args">help_without_args</a></li><li><a href="global.html#idol">idol</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#magik">magik</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#playlist">playlist</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#reactionHandler">reactionHandler</a></li><li><a href="global.html#readXmlString">readXmlString</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#rule34">rule34</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#urss">urss</a></li><li><a href="global.html#volume">volume</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#adm_message">adm_message</a></li><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#chan">chan</a></li><li><a href="global.html#changePrefix">changePrefix</a></li><li><a href="global.html#cholamais">cholamais</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#cyberpunk_music">cyberpunk_music</a></li><li><a href="global.html#deleteMessage">deleteMessage</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#donate">donate</a></li><li><a href="global.html#editMessage">editMessage</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#fetchMessages">fetchMessages</a></li><li><a href="global.html#formatTagsForBooru">formatTagsForBooru</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#getAllGuilds">getAllGuilds</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#help_with_args">help_with_args</a></li><li><a href="global.html#help_without_args">help_without_args</a></li><li><a href="global.html#idol">idol</a></li><li><a href="global.html#iene">iene</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#magik">magik</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#playlist">playlist</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#reactionHandler">reactionHandler</a></li><li><a href="global.html#readXmlString">readXmlString</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#rule34">rule34</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#urss">urss</a></li><li><a href="global.html#volume">volume</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Sep 23 2020 17:49:24 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Sep 24 2020 18:36:09 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
