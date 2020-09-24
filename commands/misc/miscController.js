@@ -14,6 +14,7 @@ exports.DiscordEmbedPagination = require('discord-paginationembed');
 exports.dolar = require('./dolar').dolar;
 exports.euro = require('./euro').euro;
 exports.libra = require('./libra').libra;
+exports.iene = require('./iene').iene;
 exports.number_functions = require('./number_functions').number_functions;
 exports.roll_number = require('./roll_number').roll_number;
 exports.reverse = require('./reverse').reverse;
