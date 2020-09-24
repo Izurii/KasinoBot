@@ -43,6 +43,8 @@ async function commandHandler (message, prefix) {
 		audioController.volume(message);
 	} else if (command == 'urss') {
 		audioController.urss(message);
+	} else if (command == 'cholamais') {
+		audioController.cholamais(message);
 	} else if (command == 'magik') {
 		memeController.magik(message);
 	} else if (command == 'rule34') {
