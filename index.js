@@ -66,3 +66,12 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
 });
 
 client.login(discordToken);
+
+exports.getAllGuilds = getAllGuilds;
+/**
+ * @description Function that returns an array with all guilds connected
+ * @returns Array containing all guilds
+ */
+async function getAllGuilds() {
+	return client.guilds.cache;
+}
