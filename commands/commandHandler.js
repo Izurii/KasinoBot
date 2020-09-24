@@ -59,6 +59,8 @@ async function commandHandler (message, prefix) {
 		miscController.euro(message);
 	} else if (command == 'libra') {
 		miscController.libra(message);
+	} else if (command == 'iene') {
+		miscController.iene(message);
 	} else if (command[0].match('[0-9]')) {
 		miscController.number_functions(message, prefix);
 	} else if (command.match('[d][0-9]?[0-9]')) {
