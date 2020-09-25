@@ -9,7 +9,11 @@ exports.execute = execute;
  */
 async function execute (message, serverPrefix) {
 
-	const args = message.content.split(" ");
+	const args = message.content.slice(serverPrefix.length+4).trim();
+	
+	if(args.length==0)
+		return message.channel.send("Tu pr3c1s4 dig1t4r alg0 né irmão");
+
 	const channels = message.guild.channels;
 
 	var voiceChannel = [];
@@ -27,9 +31,9 @@ async function execute (message, serverPrefix) {
 	}
 
 	let serverQueue = Controller.serverQueue.get(message.guild.id);
-	if(Controller.ytdl.validateURL(args[1])&&!(Controller.ytpl.validateID(args[1]))) {
+	if(Controller.ytdl.validateURL(args)&&!(Controller.ytpl.validateID(args))) {
 		
-		let video_link = args[1];
+		let video_link = args;
 		
 		const songInfo = await Controller.ytdl.getInfo(video_link);
 		const song = {
@@ -95,9 +99,9 @@ async function execute (message, serverPrefix) {
 			}
 		}
 
-	} else if (!Controller.ytdl.validateURL(args[1])&&(Controller.ytpl.validateID(args[1]))){
+	} else if (!Controller.ytdl.validateURL(args)&&(Controller.ytpl.validateID(args))){
 
-		Controller.ytpl(args[1], { limit: Infinity }).then(result => {
+		Controller.ytpl(args, { limit: Infinity }).then(result => {
 
 			let videos = result.items;
 			let songs_list = [];
@@ -186,7 +190,7 @@ async function execute (message, serverPrefix) {
 		
 						let serverQueue = Controller.serverQueue.get(message.guild.id);
 						let modified_message = message;
-						modified_message.content = args[0]+' '+track.link;
+						modified_message.content = serverPrefix+'play '+track.link;
 						try {
 							if(!serverQueue)
 								execute(modified_message);
