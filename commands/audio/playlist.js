@@ -9,7 +9,7 @@ exports.playlist = playlist;
  */
 async function playlist (message, serverPrefix) {
 
-	let argument = message.content.slice(serverPrefix.length+9);
+	let argument = message.content.slice(serverPrefix.length+9).trim();
 
 	if(Controller.ytpl.validateID(argument)) {
 
