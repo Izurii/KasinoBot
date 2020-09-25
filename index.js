@@ -60,8 +60,16 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
 	if(oldState.channelID!==newState.channelID)
 		serverQueue.voiceChannel = newState.guild.channels.cache.get(newState.channelID);
 	
-	if(!oldState.serverMute&&newState.serverMute)
+	let message = [];
+	message.guild = [];
+	message.guild.id = newState.guild.id;
+	
+	if(!oldState.serverMute&&newState.serverMute) {
 		serverQueue.textChannel.send("Mut0u porqu3 g4y? :s");
+		audioController.pause(message, false);
+	} else {
+		audioController.resume(message, false);
+	}
 
 });
 
