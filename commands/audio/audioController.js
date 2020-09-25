@@ -56,7 +56,7 @@ async function stopAllPlayUnique (message, music) {
 	voice_channels.forEach((channel) => { voiceChannel = channel; });
 
 	if (voiceChannel.length == 0)
-		return message.channe.send("Algu3m t3m que entr4r n4 v0z m3u");
+		return message.channel.send("Algu3m t3m que entr4r n4 v0z m3u");
 
 	const queueContruct = {
 		textChannel: message.channel,
