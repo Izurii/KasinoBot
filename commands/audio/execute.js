@@ -211,7 +211,6 @@ async function execute (message, serverPrefix) {
 					}).catch((err) => {
 						message.channel.send("<:cry:751921538462253077> 4band0n4 m3sm0 vai, baka~");
 					});
-		
 				});
 			});
 		});
