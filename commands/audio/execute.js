@@ -19,7 +19,7 @@ async function execute (message, serverPrefix) {
 
 	var voiceChannel = [];
 	const voice_channels = channels.cache.filter(c => c.type === 'voice' && (c.name !== 'AFK') && c.members.size > 0);
-	voice_channels.forEach((channel) => { voiceChannel = channel; })
+	voice_channels.forEach((channel) => { voiceChannel = channel; });
 
 	if (voiceChannel.length == 0)
 		return message.channel.send("PORRA TÔ SOZINHO AQUI VELHO :'( vão se foder não dá para tocar nada, algu3m t3m que3 entr4r a1");
