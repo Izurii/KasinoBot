@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/utility/adm_message.js</title>
+    <title>JSDoc: Source: commands/audio/bilada.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/utility/adm_message.js</h1>
+    <h1 class="page-title">Source: commands/audio/bilada.js</h1>
 
     
 
@@ -26,30 +26,21 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Controller = require('./utilityController');
+            <pre class="prettyprint source linenums"><code>const Controller = require('./audioController');
+const bilada_music = {
+	title: 'BOM, PRO PESSOAL GAMER, FICA A LIÇÃO PARA CONSEGUIR '+
+	'EDUCAR A MULHER PARA ELA PARAR DE ENCHER O SACO E TE DAR SOSSEGO E TRANQUILIDADE',
+	url: 'https://www.youtube.com/watch?v=PvNwPuQybVQ'
+};
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
-const Bot = require('../../');
-exports.adm_message = adm_message;
+exports.bilada = bilada;
 
 /**
- * @description Function that sends a specific message to all guilds connected, only works with Izurii_Hootoh
+ * @description BILADA!
  * @param  { DiscordMessageType } message - Message that user sent to bot
  */
-async function adm_message (message) { 
-	
-	const izht_id = '229096474762280960';
-
-	if(message.author.id!==izht_id)
-		return;
-
-	let messageToSend = message.content.substr(message.content.indexOf(' ')+1);
-	let guilds = await Bot.getAllGuilds();
-
-	guilds.forEach(server => {
-		let systemChannel = server.systemChannel;
-		systemChannel.send(messageToSend);
-	});
-
+async function bilada (message) {
+	Controller.stopAllPlayUnique(message, bilada_music);
 }</code></pre>
         </article>
     </section>
