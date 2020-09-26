@@ -8,7 +8,8 @@ exports.corona = corona;
  */
 async function corona (message) {
 
-	let args = message.content.split(" ");	
+	const split = message.content.split(" "); split.shift();
+	const args = split.join("").trim();
 
 	if(args.length > 1)
 		get_data_country(message);
@@ -73,10 +74,11 @@ async function get_countries (message) {
  */
 async function get_data_country(message) {
 
-	let args = message.content.split(" ");
-	
+	const split = message.content.split(" "); split.shift();
+	const args = split.join("").trim();
+
 	var options = {
-		params: {code: args[1]},
+		params: {code: args},
 		headers: {
 		'x-rapidapi-host': 'covid-19-data.p.rapidapi.com',
 		'x-rapidapi-key': 'dec675cfe8msh7e8a5dc7fe6b8e9p1f31bejsn58cd2a236591',
