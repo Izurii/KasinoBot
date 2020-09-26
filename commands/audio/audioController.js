@@ -30,6 +30,7 @@ exports.urss = require('./urss').urss;
 exports.cyberpunk_music = require('./cyberpunk_music.js').cyberpunk_music;
 exports.cholamais = require('./cholamais.js').cholamais;
 exports.bilada = require('./bilada.js').bilada;
+exports.felipao = require('./felipao.js').felipao;
 
 //Last play array shared between all filesz
 var last_play = [];
@@ -41,6 +42,7 @@ exports.timeout_player = timeout_player;
 
 exports.stopAllPlayUnique = stopAllPlayUnique;
 /**
+ * @description Stop the current song and clear the queue, after plays a fucking unique song
  * @param  { DiscordMessageType } message - Message that user sent to bot
  * @param  { Object } music - Object that carry the title and link of YouTube Video
  * @param  { string } music.title - Video title
@@ -75,6 +77,37 @@ async function stopAllPlayUnique (message, music) {
 		queueContruct.connection = connection;
 		serverQueue.set(message.guild.id, queueContruct);
 		exports.play(message.guild, queueContruct.songs[0]);
+	} catch (err) {
+		console.log(err);
+		serverQueue.delete(message.guild.id);
+		return message.reply("D3u 4lgum p4u n0 b0t ch4m4 o Führer l0c4l");
+	}
+
+}
+
+exports.stopAllPlayMP3 = stopAllPlayMP3;
+/**
+ * @description - Stop the current song and clear the queue, after play a mp3 file
+ * @param  { DiscordMessageType } message - Message that user sent to bot
+ * @param  { string } path - The path to reach mp3
+ */
+async function stopAllPlayMP3 (message, path) {
+
+	exports.stop(message);
+
+	const channels = message.guild.channels;
+	const pathToMp3 = require('path').join(__dirname, path);
+
+	var voiceChannel = [];
+	const voice_channels = channels.cache.filter(c => c.type === 'voice' && (c.name !== 'AFK') && c.members.size > 0);
+	voice_channels.forEach((channel) => { voiceChannel = channel; });
+
+	if (voiceChannel.length == 0)
+		return message.channel.send("Algu3m t3m que entr4r n4 v0z m3u");
+
+	try {
+		var connection = await voiceChannel.join();
+		connection.play(pathToMp3, { volume: 0.5 });
 	} catch (err) {
 		console.log(err);
 		serverQueue.delete(message.guild.id);
