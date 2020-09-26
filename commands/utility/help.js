@@ -8,11 +8,15 @@ exports.help = help;
  * @param { string } serverPrefix - Server bot prefix
  */
 async function help (message, serverPrefix) {
-	const args = message.content.split(" ");
+	
+	const split = message.content.split(" "); split.shift();
+	const args = split.join("").trim();
+
 	if(args.length > 1)
 		help_with_args(message, serverPrefix);
 	else
 		help_without_args(message);
+		
 }
 
 /**
@@ -92,12 +96,10 @@ async function help_without_args (message) {
  */
 async function help_with_args (message, serverPrefix) {
 
-	const args = message.content.split(" ");
+	const split = message.content.split(" "); split.shift();
+	const args = split.join("").trim();
 
-	if(args.length > 2)
-		return message.channel.send("Tu dig1t0u m4is do que d3v1a.");
-	
-	let command = args[1];
+	let command = args;
 	
 	let commands_description = {
 		//Audio commands

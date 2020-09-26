@@ -9,10 +9,10 @@ exports.volume = volume;
 async function volume (message) {
 	
 	let serverQueue = Controller.serverQueue.get(message.guild.id);
-	let volume = message.content.split(" ");
-	volume = volume[1];
+	const split = message.content.split(" "); split.shift();
+	const volume = parseFloat(split.join("").trim());
 
-	if(volume==undefined||!volume.match('[0-9]')||volume > 5||volume==0)
+	if(isNaN(volume)||volume > 5||volume==0)
 		return message.reply("Verifique se você digitou certo o volume cacete de cacuete. Pode ser de 1 a 5.");
 	try {
 		if(

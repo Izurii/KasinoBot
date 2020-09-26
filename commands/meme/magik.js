@@ -8,8 +8,10 @@ exports.magik = magik;
  */
 async function magik(message) {
 
-	const args = message.content.split(" ");
-	var scale = parseInt(args[1]);
+	const split = message.content.split(" "); split.shift();
+	const args = split.join("").trim();
+
+	var scale = parseInt(args);
 	let image = [];
 
 	if(!Number.isInteger(scale))

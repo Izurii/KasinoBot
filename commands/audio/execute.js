@@ -8,8 +8,9 @@ exports.execute = execute;
  * @param { string } serverPrefix - Server bot prefix
  */
 async function execute (message, serverPrefix) {
-
-	const args = message.content.slice(serverPrefix.length+4).trim();
+	
+	const split = message.content.split(" "); split.shift();
+	const args = split.join("").trim();
 	
 	if(args.length==0)
 		return message.channel.send("Tu pr3c1s4 dig1t4r alg0 né irmão");
@@ -129,7 +130,7 @@ async function execute (message, serverPrefix) {
 					try {
 
 						if(!serverQueue)
-							await execute(modified_message);
+							await execute(modified_message, serverPrefix);
 						else
 							serverQueue.songs.push(item);
 							
@@ -193,7 +194,7 @@ async function execute (message, serverPrefix) {
 						modified_message.content = serverPrefix+'play '+track.link;
 						try {
 							if(!serverQueue)
-								execute(modified_message);
+								execute(modified_message, serverPrefix);
 							else {
 								const song = {
 									title: track.title,
