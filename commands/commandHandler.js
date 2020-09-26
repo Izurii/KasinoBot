@@ -45,6 +45,8 @@ async function commandHandler (message, prefix) {
 		audioController.urss(message);
 	} else if (command == 'cholamais') {
 		audioController.cholamais(message);
+	} else if (command == 'bilada') {
+		audioController.bilada(message);
 	} else if (command == 'magik') {
 		memeController.magik(message);
 	} else if (command == 'rule34') {
