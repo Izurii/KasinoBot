@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/audio/pause.js</title>
+    <title>JSDoc: Source: commands/audio/felipao.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/audio/pause.js</h1>
+    <h1 class="page-title">Source: commands/audio/felipao.js</h1>
 
     
 
@@ -27,24 +27,16 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>const Controller = require('./audioController');
+const felipao_path = '../../audios/felipao.mp3';
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
-exports.pause = pause;
+exports.felipao = felipao;
 
 /**
- * @description Function that pauses the video strem on discord guild
+ * @description FELIPAOO!
  * @param  { DiscordMessageType } message - Message that user sent to bot
- * @param  { boolean } userRequest - Param that indicates if command got a call from a user
  */
-async function pause(message, userRequest=true) {
-	let serverQueue = Controller.serverQueue.get(message.guild.id);
-	if(
-		serverQueue.connection!==undefined &amp;&amp;
-		!serverQueue.connection.dispatcher.paused
-	) {
-		serverQueue.connection.dispatcher.pause();
-		if(userRequest)
-			message.channel.send("Tá pauzado gay.");
-	}
+async function felipao (message) {
+	Controller.stopAllPlayMP3(message, felipao_path);
 }</code></pre>
         </article>
     </section>
