@@ -107,7 +107,13 @@ async function stopAllPlayMP3 (message, path) {
 
 	try {
 		var connection = await voiceChannel.join();
-		connection.play(pathToMp3, { volume: 0.5 });
+		connection.play(pathToMp3, { volume: 0.5 })
+		.on("finish",() => {
+			timeout_player[message.guild.id] = setTimeout(() => {
+				timeout_player[guild.id] = null;
+				voiceChannel.leave();
+			}, 5000);
+		});
 	} catch (err) {
 		console.log(err);
 		serverQueue.delete(message.guild.id);
