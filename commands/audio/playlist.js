@@ -56,12 +56,13 @@ async function playlist (message, serverPrefix) {
 					let modified_message = message;
 					modified_message.content = serverPrefix+'play '+track.link;
 					try {
-						if(!serverQueue)
 							Controller.execute(modified_message, serverPrefix);
 					} catch (error) {
 						console.log(error);
 						message.reply("D3uu p4u n4 m4qu1n4, p4u na maqu1na4! ADemir Z00m Z00m")
 					}
+				}).catch((err) => {
+					message.channel.send("<:cry:751921538462253077> f01 compr4 c1g4rr0 3m p4i??~");
 				});
 			});
 		});
