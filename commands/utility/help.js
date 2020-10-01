@@ -52,6 +52,7 @@ async function help_without_args (message) {
 			'rule34',
 			'idol',
 			'chan',
+			'nhentai',
 		],
 		'C0m4ndus 1nút3is (l3g41s): ' : [
 			'anime',
@@ -130,6 +131,7 @@ async function help_with_args (message, serverPrefix) {
 		'rule34': 'It is what it is',
 		'idol': 'It is what it is',
 		'chan': 'It is what it is',
+		'nhentai': 'It is what it is',
 
 		//Misc commands
 		'anime': 'Manda de volta um anime aleatório, vai que é bom.',
@@ -175,6 +177,7 @@ async function help_with_args (message, serverPrefix) {
 		'rule34': serverPrefix+'rule34 <tags>',
 		'idol': serverPrefix+'idol <tags>',
 		'chan': serverPrefix+'chan <tags>',
+		'nhentai': serverPrefix+'nhentai <tags>',
 
 		//Misc commands
 		'anime': serverPrefix+'anime (É só mandar o comando, sem frescuras)',
@@ -204,9 +207,10 @@ async function help_with_args (message, serverPrefix) {
 		'magik': '``$`` Aqui você coloca um número de 1 a 10, esse número indica o quanto o bot irá magikar essa imagem, quanto maior o valor maior o estrago e mais demorado é.',
 
 		//Porn commands
-		'rule34': '``tags`` Sistema de tags de boorus da vida aí. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas oi mais palavras sendo uma tag separe as palavras por um underline.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar uma coisa aleatória.',
-		'idol': '``tags`` Sistema de tags de boorus da vida aí. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas oi mais palavras sendo uma tag separe as palavras por um underline.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar uma coisa aleatória.',
-		'chan': '``tags`` Sistema de tags de boorus da vida aí. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas oi mais palavras sendo uma tag separe as palavras por um underline.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar uma coisa aleatória.',
+		'rule34': '``tags`` Sistema de tags de boorus da vida aí. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas ou mais palavras sendo uma tag separe as palavras por um underline.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar uma coisa aleatória.',
+		'idol': '``tags`` Sistema de tags de boorus da vida aí. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas ou mais palavras sendo uma tag separe as palavras por um underline.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar uma coisa aleatória.',
+		'chan': '``tags`` Sistema de tags de boorus da vida aí. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas ou mais palavras sendo uma tag separe as palavras por um underline.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar uma coisa aleatória.',
+		'nhentai': '``tags`` Sistema de tags bem simples. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas ou mais palavras sendo apenas uma tag coloque a palavra entre aspas.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar um doujin aleatório.',
 
 		//Misc commands
 		'd': '``$`` Nesse primeiro parâmetro você pode colocar um número de dados a serem sorteado, podendo ser de 1 a 10 sendo que esse parâmetro é ``OPCIONAL`` então caso você não digite ele irá entender como ``1``.\n\n'
