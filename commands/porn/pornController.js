@@ -31,11 +31,11 @@ exports.nhentai = require('./nhentai').nhentai;
  * @returns Returns the formatted string 
  */
 async function formatTagsForBooru(text) {
-	let tags = text;
-	tags = tags.substr(tags.indexOf(' ')+1).replace(' ', '+');
 	
-	if(tags.startsWith('-'))
-		tags = "";
+	const split = text.split(" "); split.shift();
+	const args = split.join(" ").trim();
+	
+	tags = args.substr(args.indexOf(' ')+1).replace(' ', '+');
 
 	return tags;
 }
