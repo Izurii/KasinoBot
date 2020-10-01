@@ -10,7 +10,7 @@ exports.execute = execute;
 async function execute (message, serverPrefix) {
 	
 	const split = message.content.split(" "); split.shift();
-	const args = split.join("").trim();
+	const args = split.join(" ").trim();
 	
 	if(args.length==0)
 		return message.channel.send("Tu pr3c1s4 dig1t4r alg0 né irmão");
@@ -180,7 +180,7 @@ async function execute (message, serverPrefix) {
 					message.channel.send(embed);
 					
 					const filter = m => (m.content >= 1 && m.content <= 5) || m.content == serverPrefix+'cancel';
-					await message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ["time"] })
+					await message.channel.awaitMessages(filter, { max: 1, time: 15000, errors: ["time"] })
 					.then((collected) => {
 
 						if(collected.first().content==serverPrefix+'cancel')
