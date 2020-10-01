@@ -180,7 +180,7 @@ async function execute (message, serverPrefix) {
 					message.channel.send(embed);
 					
 					const filter = m => (m.content >= 1 && m.content <= 5) || m.content == serverPrefix+'cancel';
-					await message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ["time"] })
+					await message.channel.awaitMessages(filter, { max: 1, time: 15000, errors: ["time"] })
 					.then((collected) => {
 
 						if(collected.first().content==serverPrefix+'cancel')
