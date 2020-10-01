@@ -80,6 +80,7 @@ async function help_without_args (message) {
 			'rule34',
 			'idol',
 			'chan',
+			'nhentai',
 		],
 		'C0m4ndus 1nút3is (l3g41s): ' : [
 			'anime',
@@ -158,6 +159,7 @@ async function help_with_args (message, serverPrefix) {
 		'rule34': 'It is what it is',
 		'idol': 'It is what it is',
 		'chan': 'It is what it is',
+		'nhentai': 'It is what it is',
 
 		//Misc commands
 		'anime': 'Manda de volta um anime aleatório, vai que é bom.',
@@ -203,6 +205,7 @@ async function help_with_args (message, serverPrefix) {
 		'rule34': serverPrefix+'rule34 &lt;tags>',
 		'idol': serverPrefix+'idol &lt;tags>',
 		'chan': serverPrefix+'chan &lt;tags>',
+		'nhentai': serverPrefix+'nhentai &lt;tags>',
 
 		//Misc commands
 		'anime': serverPrefix+'anime (É só mandar o comando, sem frescuras)',
@@ -232,9 +235,10 @@ async function help_with_args (message, serverPrefix) {
 		'magik': '``$`` Aqui você coloca um número de 1 a 10, esse número indica o quanto o bot irá magikar essa imagem, quanto maior o valor maior o estrago e mais demorado é.',
 
 		//Porn commands
-		'rule34': '``tags`` Sistema de tags de boorus da vida aí. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas oi mais palavras sendo uma tag separe as palavras por um underline.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar uma coisa aleatória.',
-		'idol': '``tags`` Sistema de tags de boorus da vida aí. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas oi mais palavras sendo uma tag separe as palavras por um underline.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar uma coisa aleatória.',
-		'chan': '``tags`` Sistema de tags de boorus da vida aí. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas oi mais palavras sendo uma tag separe as palavras por um underline.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar uma coisa aleatória.',
+		'rule34': '``tags`` Sistema de tags de boorus da vida aí. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas ou mais palavras sendo uma tag separe as palavras por um underline.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar uma coisa aleatória.',
+		'idol': '``tags`` Sistema de tags de boorus da vida aí. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas ou mais palavras sendo uma tag separe as palavras por um underline.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar uma coisa aleatória.',
+		'chan': '``tags`` Sistema de tags de boorus da vida aí. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas ou mais palavras sendo uma tag separe as palavras por um underline.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar uma coisa aleatória.',
+		'nhentai': '``tags`` Sistema de tags bem simples. Se digitar duas palavras separadas isso indica duas tags diferente, se quiser digitar duas ou mais palavras sendo apenas uma tag coloque a palavra entre aspas.\nPode ser utilizado sem ``tags``, nesse caso ele irá retornar um doujin aleatório.',
 
 		//Misc commands
 		'd': '``$`` Nesse primeiro parâmetro você pode colocar um número de dados a serem sorteado, podendo ser de 1 a 10 sendo que esse parâmetro é ``OPCIONAL`` então caso você não digite ele irá entender como ``1``.\n\n'
@@ -279,13 +283,13 @@ async function help_with_args (message, serverPrefix) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#adm_message">adm_message</a></li><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#bilada">bilada</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#chan">chan</a></li><li><a href="global.html#changePrefix">changePrefix</a></li><li><a href="global.html#cholamais">cholamais</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#cyberpunk_music">cyberpunk_music</a></li><li><a href="global.html#deleteMessage">deleteMessage</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#donate">donate</a></li><li><a href="global.html#editMessage">editMessage</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#felipao">felipao</a></li><li><a href="global.html#fetchMessages">fetchMessages</a></li><li><a href="global.html#formatTagsForBooru">formatTagsForBooru</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#getAllGuilds">getAllGuilds</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#help_with_args">help_with_args</a></li><li><a href="global.html#help_without_args">help_without_args</a></li><li><a href="global.html#idol">idol</a></li><li><a href="global.html#iene">iene</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#magik">magik</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#playlist">playlist</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#reactionHandler">reactionHandler</a></li><li><a href="global.html#readXmlString">readXmlString</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#rule34">rule34</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayMP3">stopAllPlayMP3</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#urss">urss</a></li><li><a href="global.html#volume">volume</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#adm_message">adm_message</a></li><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#bilada">bilada</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#chan">chan</a></li><li><a href="global.html#changePrefix">changePrefix</a></li><li><a href="global.html#cholamais">cholamais</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#cyberpunk_music">cyberpunk_music</a></li><li><a href="global.html#deleteMessage">deleteMessage</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#donate">donate</a></li><li><a href="global.html#editMessage">editMessage</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#felipao">felipao</a></li><li><a href="global.html#fetchMessages">fetchMessages</a></li><li><a href="global.html#formatTagsForBooru">formatTagsForBooru</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#getAllGuilds">getAllGuilds</a></li><li><a href="global.html#getRandomDoujin">getRandomDoujin</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#help_with_args">help_with_args</a></li><li><a href="global.html#help_without_args">help_without_args</a></li><li><a href="global.html#idol">idol</a></li><li><a href="global.html#iene">iene</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#magik">magik</a></li><li><a href="global.html#nhentai">nhentai</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#playlist">playlist</a></li><li><a href="global.html#prepareTagsAuthorsForEmbed">prepareTagsAuthorsForEmbed</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#reactionHandler">reactionHandler</a></li><li><a href="global.html#readXmlString">readXmlString</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#rule34">rule34</a></li><li><a href="global.html#sendDoujinEmbedMessage">sendDoujinEmbedMessage</a></li><li><a href="global.html#sendEmbedChooseDoujin">sendEmbedChooseDoujin</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayMP3">stopAllPlayMP3</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#urss">urss</a></li><li><a href="global.html#volume">volume</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Sat Sep 26 2020 14:36:09 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Oct 01 2020 21:01:09 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
