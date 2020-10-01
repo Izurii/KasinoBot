@@ -10,7 +10,7 @@ exports.execute = execute;
 async function execute (message, serverPrefix) {
 	
 	const split = message.content.split(" "); split.shift();
-	const args = split.join("").trim();
+	const args = split.join(" ").trim();
 	
 	if(args.length==0)
 		return message.channel.send("Tu pr3c1s4 dig1t4r alg0 né irmão");
