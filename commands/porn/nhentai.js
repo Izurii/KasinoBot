@@ -11,9 +11,10 @@ async function nhentai (message, serverPrefix) {
 
 	const split = message.content.split(" "); split.shift();
 	const args = split.join(" ").trim();
+
 	let doujin = [];
 	let searchState = false;
-	console.log(args);
+
 	if(args.length > 1) {
 		if(args.match('[0-9]+')) {
 			if(!Controller.nHentai.exists(args))
@@ -22,6 +23,8 @@ async function nhentai (message, serverPrefix) {
 		} else {
 			searchState = true;
 			await Controller.nHentai.search(args, 1, 'popular').then((result) => {
+				if(result.results.length <= 0)
+					return message.channel.send("D1git4 d3 n0v0 qu3 n40 ache1 n4d1nha");
 				sendEmbedChooseDoujin(message, result.results, serverPrefix);
 			});
 		}
