@@ -89,14 +89,16 @@ exports.stopAllPlayMP3 = stopAllPlayMP3;
 /**
  * @description - Stop the current song and clear the queue, after play a mp3 file
  * @param  { DiscordMessageType } message - Message that user sent to bot
- * @param  { string } path - The path to reach mp3
+ * @param  { object } song - Object that carries the path to reach mp3 and message to send
+ * @param  { string } song.message - Message to send
+ * @param  { string } song.path - Path to mp3
  */
-async function stopAllPlayMP3 (message, path) {
+async function stopAllPlayMP3 (message, song) {
 
 	exports.stop(message);
 
 	const channels = message.guild.channels;
-	const pathToMp3 = require('path').join(__dirname, path);
+	const pathToMp3 = require('path').join(__dirname, song.path);
 
 	var voiceChannel = [];
 	const voice_channels = channels.cache.filter(c => c.type === 'voice' && (c.name !== 'AFK') && c.members.size > 0);
@@ -107,6 +109,7 @@ async function stopAllPlayMP3 (message, path) {
 
 	try {
 		var connection = await voiceChannel.join();
+		message.channel.send(song.message);
 		connection.play(pathToMp3, { volume: 0.5 })
 		.on("finish",() => {
 			timeout_player[message.guild.id] = setTimeout(() => {

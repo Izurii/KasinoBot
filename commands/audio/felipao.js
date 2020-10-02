@@ -1,5 +1,5 @@
 const Controller = require('./audioController');
-const felipao_path = '../../audios/felipao.mp3';
+const felipao_song = { path: '../../audios/felipao.mp3', message: 'FELIPAOO!' };
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
 exports.felipao = felipao;
 
@@ -8,5 +8,5 @@ exports.felipao = felipao;
  * @param  { DiscordMessageType } message - Message that user sent to bot
  */
 async function felipao (message) {
-	Controller.stopAllPlayMP3(message, felipao_path);
+	Controller.stopAllPlayMP3(message, felipao_song);
 }
