@@ -23,6 +23,8 @@ async function playlist (message, serverPrefix) {
 		return message.reply("Verif1que3 se tue l1nk é de pl4yli5t mesmno manim");
 	}
 
+	return message.channel.send("Pesquisas no YouTube em manutenção.");
+
 	Controller.ytsr.getFilters(argument, (err, filters) => {
 		if(err) throw err;
 		filter = filters.get('Type').find(o => o.name === 'Playlist');
