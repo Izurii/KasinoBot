@@ -154,6 +154,8 @@ async function execute (message, serverPrefix) {
 
 	} else {
 
+		return message.channel.send("Pesquisas no YouTube em manutenção.");
+
 		let searchTerm = message.content.slice(serverPrefix.length+5);
 		Controller.ytsr.getFilters(searchTerm, (err, filters) => {
 			
