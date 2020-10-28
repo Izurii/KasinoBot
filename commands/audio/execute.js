@@ -1,3 +1,4 @@
+const { chan } = require('../porn/chan');
 const Controller = require('./audioController');
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
 exports.execute = execute;
@@ -15,14 +16,18 @@ async function execute (message, serverPrefix) {
 	if(args.length==0)
 		return message.channel.send("Tu pr3c1s4 dig1t4r alg0 né irmão");
 
-	const channels = message.guild.channels;
-
 	var voiceChannel = [];
+	const channels = message.guild.channels;
 	const voice_channels = channels.cache.filter(c => c.type === 'voice' && (c.name !== 'AFK') && c.members.size > 0);
-	voice_channels.forEach((channel) => { voiceChannel = channel; });
+	voice_channels.forEach((channel) => {
+		channel.members.forEach((member) => {
+			if(member.id==message.author.id)
+				voiceChannel = channel;
+		});
+	});
 
 	if (voiceChannel.length == 0)
-		return message.channel.send("PORRA TÔ SOZINHO AQUI VELHO :'( vão se foder não dá para tocar nada, algu3m t3m que3 entr4r a1");
+		return message.reply("vai se fuder, entr4 a1 m3u");
 
 	const permissions = voiceChannel.permissionsFor(message.client.user);
 	if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
