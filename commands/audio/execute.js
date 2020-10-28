@@ -38,8 +38,8 @@ async function execute (message, serverPrefix) {
 		
 		const songInfo = await Controller.ytdl.getInfo(video_link);
 		const song = {
-			title: songInfo.title,
-			url: songInfo.video_url
+			title: songInfo.videoDetails.title,
+			url: songInfo.videoDetails.video_url
 		};
 		
 		let command = message.content.substring(1).split(" ");
@@ -72,7 +72,7 @@ async function execute (message, serverPrefix) {
 
 			} catch (e) {
 				console.log(e);
-				return message.reply("D3u 4lgum p4u n3s5e l1x0 4qu1: **"+songInfo.title+"**");
+				return message.reply("D3u 4lgum p4u n3s5e l1x0 4qu1: **"+songInfo.videoDetails.title+"**");
 			}
 
 
@@ -158,7 +158,7 @@ async function execute (message, serverPrefix) {
 
 		let searchTerm = message.content.slice(serverPrefix.length+5);
 		Controller.ytsr.getFilters(searchTerm, (err, filters) => {
-			
+			console.log(filters);
 			if(err) throw err;
 			filter = filters.get('Type').find(o => o.name === 'Video');
 			Controller.ytsr.getFilters(filter.ref, (err, filters) => { 
