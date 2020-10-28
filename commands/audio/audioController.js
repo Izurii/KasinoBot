@@ -55,8 +55,14 @@ async function stopAllPlayUnique (message, music) {
 	const channels = message.guild.channels;
 
 	var voiceChannel = [];
+	const channels = message.guild.channels;
 	const voice_channels = channels.cache.filter(c => c.type === 'voice' && (c.name !== 'AFK') && c.members.size > 0);
-	voice_channels.forEach((channel) => { voiceChannel = channel; });
+	voice_channels.forEach((channel) => {
+		channel.members.forEach((member) => {
+			if(member.id==message.author.id)
+				voiceChannel = channel;
+		});
+	});
 
 	if (voiceChannel.length == 0)
 		return message.channel.send("Algu3m t3m que entr4r n4 v0z m3u");
