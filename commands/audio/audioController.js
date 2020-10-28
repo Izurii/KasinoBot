@@ -62,6 +62,8 @@ async function stopAllPlayUnique (message, music) {
 		});
 	});
 
+	console.log(voiceChannel);
+
 	if (voiceChannel.length == 0)
 		return message.channel.send("Algu3m t3m que entr4r n4 v0z m3u");
 
