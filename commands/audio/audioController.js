@@ -52,8 +52,6 @@ async function stopAllPlayUnique (message, music) {
 	
 	exports.stop(message);
 
-	const channels = message.guild.channels;
-
 	var voiceChannel = [];
 	const channels = message.guild.channels;
 	const voice_channels = channels.cache.filter(c => c.type === 'voice' && (c.name !== 'AFK') && c.members.size > 0);
