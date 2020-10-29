@@ -6,6 +6,7 @@ const miscController = require('./misc/miscController');
 const utilityController = require('./utility/utilityController');
 const memeController = require('./meme/memeController');
 const pornController = require('./porn/pornController');
+const chan = require('./porn/chan'); //Temp
 
 /**
  * @description Function that handle commands send through messages
@@ -56,7 +57,8 @@ async function commandHandler (message, prefix) {
 	} else if (command == 'idol') {
 		pornController.idol(message);
 	} else if (command == 'chan') {
-		pornController.chan(message);
+		chan.chan(message);
+		//pornController.chan(message);
 	} else if (command == 'nhentai') {
 		pornController.nhentai(message, prefix);
 	} else if (command == 'anime') {
