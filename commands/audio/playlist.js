@@ -23,18 +23,20 @@ async function playlist (message, serverPrefix) {
 		return message.reply("Verif1que3 se tue l1nk é de pl4yli5t mesmno manim");
 	}
 
-	return message.channel.send("Pesquisas no YouTube em manutenção.");
+	return message.channel.send("Pesquisa de playlist em manutenção");
 
-	Controller.ytsr.getFilters(argument, (err, filters) => {
-		if(err) throw err;
+	Controller.ytsr.getFilters(argument)
+	.then((filters) => {
+
 		filter = filters.get('Type').find(o => o.name === 'Playlist');
-		Controller.ytsr.getFilters(filter.ref, (err, filters) => { 
+		Controller.ytsr.getFilters(filter.ref)
+		.then((filters) => { 
 
-			if(err) throw err;
-			var options = { limit: 5, nextpageRef: filter.ref, safeSearch: false };
+			var options = { nextpageRef: filter.ref, safeSearch: false };
 
-			Controller.ytsr(null, options, async function(err, result) {
-
+			Controller.ytsr(argument, options)
+			.then(async function(result) {
+				console.log(result);
 				let tracks = result.items;
 				const embed = new Controller.Discord.MessageEmbed()
 				.setColor('#ff2400')
@@ -66,7 +68,13 @@ async function playlist (message, serverPrefix) {
 				}).catch((err) => {
 					message.channel.send("<:cry:751921538462253077> f01 compr4 c1g4rr0 3m p4i??~");
 				});
+			}).catch((err) => {
+				console.log(err);
 			});
+		}).catch((err) => {
+			console.log(err);
 		});
+	}).catch((err) => {
+		console.log(err);
 	});
 }
