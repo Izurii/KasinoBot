@@ -151,75 +151,59 @@ async function execute (message, serverPrefix) {
 					return_message += " ("+errors+" música(s) deu/deram problema :s)";
 
 				return message.channel.send(return_message);
-
 			}
-
 		});
-
-
 	} else {
 
-		return message.channel.send("Pesquisas no YouTube em manutenção.");
-
 		let searchTerm = message.content.slice(serverPrefix.length+5);
-		Controller.ytsr.getFilters(searchTerm, (err, filters) => {
-			console.log(filters);
-			if(err) throw err;
-			filter = filters.get('Type').find(o => o.name === 'Video');
-			Controller.ytsr.getFilters(filter.ref, (err, filters) => { 
+		Controller.ytsr(searchTerm)
+		.then(async function(result) {
 
-				if(err) throw err;
-				var options = {
-					limit: 5,
-					nextpageRef: filter.ref,
-					safeSearch: false
+			let results = result.items.filter(item => { return item.type == 'video'}).splice(0, 5);
+			const embed = new Controller.Discord.MessageEmbed()
+			.setColor('#ff2400')
+			.setThumbnail('https://cdn.discordapp.com/attachments/715236372423639070/725129163609997312/nico.png')
+			.setTitle('ESCOLHE AÍ CHEFIA')
+			.setDescription(results.map((t, i) => `**${i+1} -** [${t.title}](${t.link}) (${t.duration ? t.duration : 'N/A'})`).join("\n"))
+			.setFooter('Tem 15 segundos pra escolher ou cancele '+serverPrefix+ 'cancel');
+			message.channel.send(embed);
+			
+			const filter = m => (m.content >= 1 && m.content <= 5) || m.content == serverPrefix+'cancel';
+			await message.channel.awaitMessages(filter, { max: 1, time: 15000, errors: ["time"] })
+			.then((collected) => {
+
+				if(collected.first().content==serverPrefix+'cancel')
+					return collected.first().reply("C4nc3la memo p41 :'(");
+
+				let index = parseInt(collected.first().content, 10);
+				let track = tracks[index-1];
+
+				let serverQueue = Controller.serverQueue.get(message.guild.id);
+				let modified_message = message;
+				modified_message.content = serverPrefix+'play '+track.link;
+				try {
+					if(!serverQueue)
+						execute(modified_message, serverPrefix);
+					else {
+						const song = {
+							title: track.title,
+							url: track.link
+						};
+						serverQueue.songs.push(song);
+						message.reply("T4 na f1l4 patr40, 4g0r4 s0 3sper4 0 buj40 ch3g4");
+					}
+				} catch (e) {
+					console.log(e);
+					message.reply("D3u 4lgum p4u n3s5e l1x0 4qu1: **"+track.title+"**");
 				}
 
-				Controller.ytsr(null, options, async function(err, result) {
-
-					let tracks = result.items;
-					const embed = new Controller.Discord.MessageEmbed()
-					.setColor('#ff2400')
-					.setThumbnail('https://cdn.discordapp.com/attachments/715236372423639070/725129163609997312/nico.png')
-					.setTitle('ESCOLHE AÍ CHEFIA')
-					.setDescription(tracks.map((t, i) => `**${i+1} -** [${t.title}](${t.link}) (${t.duration})`).join("\n"))
-					.setFooter('Tem 15 segundos pra escolher ou cancele '+serverPrefix+ 'cancel');
-					message.channel.send(embed);
-					
-					const filter = m => (m.content >= 1 && m.content <= 5) || m.content == serverPrefix+'cancel';
-					await message.channel.awaitMessages(filter, { max: 1, time: 15000, errors: ["time"] })
-					.then((collected) => {
-
-						if(collected.first().content==serverPrefix+'cancel')
-							return collected.first().reply("C4nc3la memo p41 :'(");
-		
-						let index = parseInt(collected.first().content, 10);
-						let track = tracks[index-1];
-		
-						let serverQueue = Controller.serverQueue.get(message.guild.id);
-						let modified_message = message;
-						modified_message.content = serverPrefix+'play '+track.link;
-						try {
-							if(!serverQueue)
-								execute(modified_message, serverPrefix);
-							else {
-								const song = {
-									title: track.title,
-									url: track.link
-								};
-								serverQueue.songs.push(song);
-								message.reply("T4 na f1l4 patr40, 4g0r4 s0 3sper4 0 buj40 ch3g4");
-							}
-						} catch (e) {
-							console.log(e);
-							message.reply("D3u 4lgum p4u n3s5e l1x0 4qu1: **"+track.title+"**");
-						}
-		
-					}).catch((err) => {
-						message.channel.send("<:cry:751921538462253077> 4band0n4 m3sm0 vai, baka~");
-					});
-				});
+			}).catch((err) => {
+				console.log(err);
+				message.channel.send("<:cry:751921538462253077> 4band0n4 m3sm0 vai, baka~");
 			});
+		}).catch((err) => {
+			console.log(err);
+			message.reply("K33p c4lm e v3m sug4r m1nha r0la. É n4d4, ch4m4 o d0n0.")
 		});
 	}
 }
