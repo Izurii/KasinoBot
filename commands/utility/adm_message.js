@@ -20,7 +20,7 @@ async function adm_message (message) {
 	guilds.forEach(server => {
 		
 		if(server.id=="535935100123086858")
-			continue;
+			return;
 		
 		let systemChannel = server.systemChannel;
 		systemChannel.send(messageToSend);
