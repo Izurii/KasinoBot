@@ -18,6 +18,10 @@ async function adm_message (message) {
 	let guilds = await Bot.getAllGuilds();
 
 	guilds.forEach(server => {
+		
+		if(server.systemChannel.id=='535935100123086858')
+			continue;
+		
 		let systemChannel = server.systemChannel;
 		systemChannel.send(messageToSend);
 	});

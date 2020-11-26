@@ -107,7 +107,7 @@ async function execute (message, serverPrefix) {
 
 	} else if (!Controller.ytdl.validateURL(args)&&(Controller.ytpl.validateID(args))){
 
-		Controller.ytpl(args, { limit: Infinity }).then(result => {
+		Controller.ytpl(args).then(result => {
 
 			let videos = result.items;
 			let songs_list = [];
@@ -117,7 +117,7 @@ async function execute (message, serverPrefix) {
 				for(let item of videos) {
 					const song = {
 						title: item.title,
-						url: item.url_simple
+						url: item.url
 					};
 					songs_list.push(song);
 				}
@@ -146,7 +146,7 @@ async function execute (message, serverPrefix) {
 					}
 				}
 
-				let return_message = "Adicionado "+(result.total_items-errors)+" músicas na fila vindas da playlist: **"+result.title+"**";
+				let return_message = "Adicionado "+(result.estimated_items-errors)+" músicas na fila vindas da playlist: **"+result.title+"**";
 				if(errors>0)
 					return_message += " ("+errors+" música(s) deu/deram problema :s)";
 
@@ -156,50 +156,63 @@ async function execute (message, serverPrefix) {
 	} else {
 
 		let searchTerm = message.content.slice(serverPrefix.length+5);
-		Controller.ytsr(searchTerm)
-		.then(async function(result) {
+		Controller.ytsr.getFilters(searchTerm)
+		.then(async (filters) => {
 
-			let results = result.items.filter(item => { return item.type == 'video'}).splice(0, 5);
-			const embed = new Controller.Discord.MessageEmbed()
-			.setColor('#ff2400')
-			.setThumbnail('https://cdn.discordapp.com/attachments/715236372423639070/725129163609997312/nico.png')
-			.setTitle('ESCOLHE AÍ CHEFIA')
-			.setDescription(results.map((t, i) => `**${i+1} -** [${t.title}](${t.link}) (${t.duration ? t.duration : 'N/A'})`).join("\n"))
-			.setFooter('Tem 15 segundos pra escolher ou cancele '+serverPrefix+ 'cancel');
-			message.channel.send(embed);
+			filter = filters.get('Sort by').find(o => o.name === 'View count');
+			filters2 = await Controller.ytsr.getFilters(searchTerm, filter.ref);
+			filter2 = filters2.get('Type').find(o => o.name === 'Video');
 			
-			const filter = m => (m.content >= 1 && m.content <= 5) || m.content == serverPrefix+'cancel';
-			await message.channel.awaitMessages(filter, { max: 1, time: 15000, errors: ["time"] })
-			.then((collected) => {
+			var options = { nextpageRef: filter2.ref, safeSearch: false, limit: 5 };
 
-				if(collected.first().content==serverPrefix+'cancel')
-					return collected.first().reply("C4nc3la memo p41 :'(");
+			Controller.ytsr(searchTerm, options)
+			.then(async function(result) {
 
-				let index = parseInt(collected.first().content, 10);
-				let track = tracks[index-1];
+				let tracks = result.items;
+				const embed = new Controller.Discord.MessageEmbed()
+				.setColor('#ff2400')
+				.setThumbnail('https://cdn.discordapp.com/attachments/715236372423639070/725129163609997312/nico.png')
+				.setTitle('ESCOLHE AÍ CHEFIA')
+				.setDescription(tracks.map((t, i) => `**${i+1} -** [${t.title}](${t.link}) (${t.duration ? t.duration : 'N/A'})`).join("\n"))
+				.setFooter('Tem 15 segundos pra escolher ou cancele '+serverPrefix+ 'cancel');
+				message.channel.send(embed);
+				
+				const filter = m => (m.content >= 1 && m.content <= 5) || m.content == serverPrefix+'cancel';
+				await message.channel.awaitMessages(filter, { max: 1, time: 15000, errors: ["time"] })
+				.then((collected) => {
 
-				let serverQueue = Controller.serverQueue.get(message.guild.id);
-				let modified_message = message;
-				modified_message.content = serverPrefix+'play '+track.link;
-				try {
-					if(!serverQueue)
-						execute(modified_message, serverPrefix);
-					else {
-						const song = {
-							title: track.title,
-							url: track.link
-						};
-						serverQueue.songs.push(song);
-						message.reply("T4 na f1l4 patr40, 4g0r4 s0 3sper4 0 buj40 ch3g4");
+					if(collected.first().content==serverPrefix+'cancel')
+						return collected.first().reply("C4nc3la memo p41 :'(");
+
+					let index = parseInt(collected.first().content, 10);
+					let track = tracks[index-1];
+
+					let serverQueue = Controller.serverQueue.get(message.guild.id);
+					let modified_message = message;
+					modified_message.content = serverPrefix+'play '+track.link;
+					try {
+						if(!serverQueue)
+							execute(modified_message, serverPrefix);
+						else {
+							const song = {
+								title: track.title,
+								url: track.link
+							};
+							serverQueue.songs.push(song);
+							message.reply("T4 na f1l4 patr40, 4g0r4 s0 3sper4 0 buj40 ch3g4");
+						}
+					} catch (e) {
+						console.log(e);
+						message.reply("D3u 4lgum p4u n3s5e l1x0 4qu1: **"+track.title+"**");
 					}
-				} catch (e) {
-					console.log(e);
-					message.reply("D3u 4lgum p4u n3s5e l1x0 4qu1: **"+track.title+"**");
-				}
 
+				}).catch((err) => {
+					console.log(err);
+					message.channel.send("<:cry:751921538462253077> 4band0n4 m3sm0 vai, baka~");
+				});
 			}).catch((err) => {
 				console.log(err);
-				message.channel.send("<:cry:751921538462253077> 4band0n4 m3sm0 vai, baka~");
+				message.channel.send("<:cry:751921538462253077> Ixiii d3u c4c4 de p0mb0!@#?~");
 			});
 		}).catch((err) => {
 			console.log(err);
