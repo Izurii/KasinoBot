@@ -2,3 +2,5 @@ node_modules/
 package-lock.json
 *.code-workspace
 .vscode/
+*.sql
+.env
