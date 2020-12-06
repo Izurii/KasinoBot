@@ -1,5 +1,5 @@
 const Controller = require('./audioController');
-const cyber_music = { title: 'サイバーパンク 2.0.7.7', url: 'https://www.youtube.com/watch?v=9ayYeLLT8bs' };
+const cyber_music = { title: 'サイバーパンク 2.0.7.7', url: 'https://www.youtube.com/watch?v=RrkqiYZbuH8' };
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
 exports.cyberpunk_music = cyberpunk_music;
 

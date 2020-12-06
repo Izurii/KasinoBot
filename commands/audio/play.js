@@ -48,9 +48,12 @@ async function play(guild, song, serverPrefix) {
 	
 	try {
 		const dispatcher = serverQueue.connection
-			.play(await Controller.ytdl(song.url), { type: 'opus' })
+			.play(await Controller.ytdl(song.url,
+				{
+					filter: "audioonly",
+					opusEncoded: true
+				}), { type: 'opus' })
 			.on("finish",async () => {
-
 			
 				if (!serverQueue.loop) {
 					serverQueue.songs.shift();

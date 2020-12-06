@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 import requests, json, mimetypes
 from lxml.html import fromstring
 from itertools import cycle
@@ -19,8 +20,8 @@ tempts = 0
 
 #Args for getting the file url
 headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0'}
-proxies={"https": "https://qrzbtagd-1:nttmmtro4mgy@p.webshare.io:80/"}
-url_get_file_url = 'https://capi-v2.sankakucomplex.com/posts?limit=50'
+proxies={"https": os.getenv("WEBSHARE_PROXY")}
+url_get_file_url = os.getenv("SANKAKU_COMPLEX_CHAN_BASE_URL")
 url_get_file_url += '&tags='+tags+'+-video' if tags!="" else ''
 
 def get_file_url():
