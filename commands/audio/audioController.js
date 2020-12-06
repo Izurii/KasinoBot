@@ -1,5 +1,5 @@
 //Exporting YouTube modules
-exports.ytdl = require('ytdl-core-discord');
+exports.ytdl = require('discord-ytdl-core');
 exports.ytpl = require('ytpl');
 exports.ytsr = require('ytsr');
 
