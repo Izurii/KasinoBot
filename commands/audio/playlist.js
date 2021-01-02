@@ -28,13 +28,13 @@ async function playlist (message, serverPrefix) {
 	Controller.ytsr.getFilters(argument)
 	.then(async (filters) => {
 
-		filter = filters.get('Sort by').find(o => o.name === 'View count');
+		filter = filters.get('Sort by').get('View count');
 		filters2 = await Controller.ytsr.getFilters(argument, filter.ref);
-		filter2 = filters2.get('Type').find(o => o.name === 'Playlist');
+		filter2 = filters2.get('Type').get('Playlist');
 		
 		var options = { nextpageRef: filter2.ref, safeSearch: false, limit: 5 };
 
-		Controller.ytsr(argument, options)
+		Controller.ytsr(filter2.url, options)
 		.then(async function(result) {
 
 			let tracks = result.items;
@@ -42,7 +42,7 @@ async function playlist (message, serverPrefix) {
 			.setColor('#ff2400')
 			.setThumbnail('https://cdn.discordapp.com/attachments/715236372423639070/725129163609997312/nico.png')
 			.setTitle('ESCOLHE A PL4Y DE HOJE PAI')
-			.setDescription(tracks.map((t, i) => `**${i+1} -** [${t.title}](${t.link}) (${t.length})`).join("\n"))
+			.setDescription(tracks.map((t, i) => `**${i+1} -** [${t.title}](${t.url}) (${t.length})`).join("\n"))
 			.setFooter('Tem 15 segundos pra escolher ou cancele '+serverPrefix+ 'cancel');
 			message.channel.send(embed);
 			
@@ -58,7 +58,7 @@ async function playlist (message, serverPrefix) {
 
 				let serverQueue = Controller.serverQueue.get(message.guild.id);
 				let modified_message = message;
-				modified_message.content = serverPrefix+'play '+track.link;
+				modified_message.content = serverPrefix+'play '+track.url;
 				try {
 						Controller.execute(modified_message, serverPrefix);
 				} catch (error) {
