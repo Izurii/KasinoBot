@@ -12,6 +12,9 @@ async function execute (message, serverPrefix) {
 	
 	const split = message.content.split(" "); split.shift();
 	const args = split.join(" ").trim();
+
+	let command = message.content.substring(1).split(" ");
+		command = command[0];
 	
 	if(args.length==0)
 		return message.channel.send("Tu pr3c1s4 dig1t4r alg0 né irmão");
@@ -37,7 +40,57 @@ async function execute (message, serverPrefix) {
 	}
 
 	let serverQueue = Controller.serverQueue.get(message.guild.id);
-	if(Controller.ytdl.validateURL(args)&&!(Controller.ytpl.validateID(args))) {
+
+	if((Controller.ytpl.validateID(args))&&(!Controller.ytdl.validateURL(args))) {
+
+		Controller.ytpl(args).then(result => {
+
+			let videos = result.items;
+			let songs_list = [];
+			let errors = 0;
+
+			async function do_songs_list() {
+				for(let item of videos) {
+					const song = {
+						title: item.title,
+						url: item.url
+					};
+					songs_list.push(song);
+				}
+				do_list();
+			}
+			do_songs_list();
+
+			async function do_list() {
+				
+				for(let item of songs_list) {
+
+					let serverQueue = Controller.serverQueue.get(message.guild.id);
+					let modified_message = message;
+					modified_message.content = serverPrefix+'play '+item.url;
+					try {
+
+						if(!serverQueue)
+							await execute(modified_message, serverPrefix);
+						else
+							serverQueue.songs.push(item);
+							
+					} catch (e) {
+						console.log(e);
+						errors++;
+						message.reply("D3u 4lgum p4u n3s5e l1x0 4qu1: **"+item.title+"**");
+					}
+				}
+
+				let return_message = "Adicionado "+(result.estimatedItemCount-errors)+" músicas na fila vindas da playlist: **"+result.title+"**";
+				if(errors>0)
+					return_message += " ("+errors+" música(s) deu/deram problema :s)";
+
+				return message.channel.send(return_message);
+			}
+		});
+		
+	} else if(Controller.ytdl.validateURL(args)) {
 		
 		let video_link = args;
 		
@@ -46,9 +99,6 @@ async function execute (message, serverPrefix) {
 			title: songInfo.videoDetails.title,
 			url: songInfo.videoDetails.video_url
 		};
-		
-		let command = message.content.substring(1).split(" ");
-		command = command[0];
 		
 		if (!serverQueue) {
 
@@ -104,68 +154,20 @@ async function execute (message, serverPrefix) {
 				return message.channel.send(err);
 			}
 		}
-
-	} else if (!Controller.ytdl.validateURL(args)&&(Controller.ytpl.validateID(args))){
-
-		Controller.ytpl(args).then(result => {
-
-			let videos = result.items;
-			let songs_list = [];
-			let errors = 0;
-
-			async function do_songs_list() {
-				for(let item of videos) {
-					const song = {
-						title: item.title,
-						url: item.url
-					};
-					songs_list.push(song);
-				}
-				do_list();
-			}
-			do_songs_list();
-
-			async function do_list() {
-				
-				for(let item of songs_list) {
-
-					let serverQueue = Controller.serverQueue.get(message.guild.id);
-					let modified_message = message;
-					modified_message.content = serverPrefix+'play '+item.url;
-					try {
-
-						if(!serverQueue)
-							await execute(modified_message, serverPrefix);
-						else
-							serverQueue.songs.push(item);
-							
-					} catch (e) {
-						console.log(e);
-						errors++;
-						message.reply("D3u 4lgum p4u n3s5e l1x0 4qu1: **"+item.title+"**");
-					}
-				}
-
-				let return_message = "Adicionado "+(result.estimated_items-errors)+" músicas na fila vindas da playlist: **"+result.title+"**";
-				if(errors>0)
-					return_message += " ("+errors+" música(s) deu/deram problema :s)";
-
-				return message.channel.send(return_message);
-			}
-		});
+	
 	} else {
 
 		let searchTerm = message.content.slice(serverPrefix.length+5);
 		Controller.ytsr.getFilters(searchTerm)
 		.then(async (filters) => {
 
-			filter = filters.get('Sort by').find(o => o.name === 'View count');
+			filter = filters.get('Sort by').get('View count');
 			filters2 = await Controller.ytsr.getFilters(searchTerm, filter.ref);
-			filter2 = filters2.get('Type').find(o => o.name === 'Video');
+			filter2 = filters2.get('Type').get('Video');
 			
 			var options = { nextpageRef: filter2.ref, safeSearch: false, limit: 5 };
 
-			Controller.ytsr(searchTerm, options)
+			Controller.ytsr(filter2.url, options)
 			.then(async function(result) {
 
 				let tracks = result.items;
@@ -173,7 +175,7 @@ async function execute (message, serverPrefix) {
 				.setColor('#ff2400')
 				.setThumbnail('https://cdn.discordapp.com/attachments/715236372423639070/725129163609997312/nico.png')
 				.setTitle('ESCOLHE AÍ CHEFIA')
-				.setDescription(tracks.map((t, i) => `**${i+1} -** [${t.title}](${t.link}) (${t.duration ? t.duration : 'N/A'})`).join("\n"))
+				.setDescription(tracks.map((t, i) => `**${i+1} -** [${t.title}](${t.url}) (${t.duration ? t.duration : 'N/A'})`).join("\n"))
 				.setFooter('Tem 15 segundos pra escolher ou cancele '+serverPrefix+ 'cancel');
 				message.channel.send(embed);
 				
@@ -189,14 +191,14 @@ async function execute (message, serverPrefix) {
 
 					let serverQueue = Controller.serverQueue.get(message.guild.id);
 					let modified_message = message;
-					modified_message.content = serverPrefix+'play '+track.link;
+					modified_message.content = serverPrefix+(command=='loop' ? 'loop': 'play')+' '+track.url;
 					try {
 						if(!serverQueue)
 							execute(modified_message, serverPrefix);
 						else {
 							const song = {
 								title: track.title,
-								url: track.link
+								url: track.url
 							};
 							serverQueue.songs.push(song);
 							message.reply("T4 na f1l4 patr40, 4g0r4 s0 3sper4 0 buj40 ch3g4");
