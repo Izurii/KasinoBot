@@ -50,6 +50,8 @@ async function commandHandler (message, prefix) {
 		audioController.bilada(message);
 	} else if (command == 'felipao') {
 		audioController.felipao(message);
+	} else if (command == 'kubo') {
+		audioController.kubo(message);
 	} else if (command == 'magik') {
 		memeController.magik(message);
 	} else if (command == 'rule34') {
