@@ -32,6 +32,7 @@ exports.cholamais = require('./cholamais.js').cholamais;
 exports.bilada = require('./bilada.js').bilada;
 exports.felipao = require('./felipao.js').felipao;
 exports.kubo = require('./kubo.js').kubo;
+exports.mongol = require('./mongol.js').mongol;
 
 //Last play array shared between all filesz
 var last_play = [];
