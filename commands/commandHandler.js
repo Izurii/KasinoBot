@@ -52,6 +52,8 @@ async function commandHandler (message, prefix) {
 		audioController.felipao(message);
 	} else if (command == 'kubo') {
 		audioController.kubo(message);
+	}  else if (command == 'mongol') {
+		audioController.mongol(message);	
 	} else if (command == 'magik') {
 		memeController.magik(message);
 	} else if (command == 'rule34') {
