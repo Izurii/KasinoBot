@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/utility/adm_message.js</title>
+    <title>JSDoc: Source: commands/audio/mongol.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/utility/adm_message.js</h1>
+    <h1 class="page-title">Source: commands/audio/mongol.js</h1>
 
     
 
@@ -26,34 +26,17 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Controller = require('./utilityController');
+            <pre class="prettyprint source linenums"><code>const Controller = require('./audioController');
+const mongol_music = { title: 'm0nG01', url: 'https://www.youtube.com/watch?v=ysmobwk7FTE&amp;ab_channel=IzuriiHootoh' };
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
-const Bot = require('../../');
-exports.adm_message = adm_message;
+exports.mongol = mongol;
 
 /**
- * @description Function that sends a specific message to all guilds connected, only works with Izurii_Hootoh
+ * @description Mongol!
  * @param  { DiscordMessageType } message - Message that user sent to bot
  */
-async function adm_message (message) { 
-	
-	const izht_id = '229096474762280960';
-
-	if(message.author.id!==izht_id)
-		return;
-
-	let messageToSend = message.content.substr(message.content.indexOf(' ')+1);
-	let guilds = await Bot.getAllGuilds();
-
-	guilds.forEach(server => {
-		
-		if(server.id=="535935100123086858")
-			return;
-		
-		let systemChannel = server.systemChannel;
-		systemChannel.send(messageToSend);
-	});
-
+async function mongol (message) {
+	Controller.stopAllPlayUnique(message, mongol_music);
 }</code></pre>
         </article>
     </section>
