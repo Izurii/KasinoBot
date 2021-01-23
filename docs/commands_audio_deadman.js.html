@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/audio/volume.js</title>
+    <title>JSDoc: Source: commands/audio/deadman.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/audio/volume.js</h1>
+    <h1 class="page-title">Source: commands/audio/deadman.js</h1>
 
     
 
@@ -27,33 +27,16 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>const Controller = require('./audioController');
+const deadman_music = { title: '0M4E WA M0U SH1NDEIRU!', url: 'https://www.youtube.com/watch?v=9n-yiNx8sbY' };
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
+exports.deadman = deadman;
 
-exports.volume = volume;
 /**
- * @description Function that changes the stream volume
+ * @description deadman - omae wa mou shindeiru!
  * @param  { DiscordMessageType } message - Message that user sent to bot
  */
-async function volume (message) {
-	
-	let serverQueue = Controller.serverQueue.get(message.guild.id);
-	const split = message.content.split(" "); split.shift();
-	const volume = parseFloat(split.join("").trim());
-
-	if(isNaN(volume)||volume > 5||volume==0)
-		return message.reply("Verifique se você digitou certo o volume cacete de cacuete. Pode ser de 1 a 5.");
-	try {
-		if(
-			serverQueue==undefined||
-			serverQueue.connection==undefined||
-			serverQueue.connection.dispatcher==undefined
-		)
-			return message.reply("Não t4 t0cand0 n4d4 irmã0 s3m mud4nç4s.");
-		serverQueue.connection.dispatcher.setVolume(volume);
-	} catch (error) {
-		console.log(error);
-		message.reply("HUSAMFW JPO ERRO CARLHO, chaM3 o ADM");
-	}
+async function deadman (message) {
+	Controller.stopAllPlayUnique(message, deadman_music);
 }</code></pre>
         </article>
     </section>
