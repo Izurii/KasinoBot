@@ -33,6 +33,8 @@ exports.bilada = require('./bilada.js').bilada;
 exports.felipao = require('./felipao.js').felipao;
 exports.kubo = require('./kubo.js').kubo;
 exports.mongol = require('./mongol.js').mongol;
+exports.wiisports = require('./wiisports.js').wiisports;
+exports.deadman = require('./deadman.js').deadman;
 
 //Last play array shared between all filesz
 var last_play = [];
