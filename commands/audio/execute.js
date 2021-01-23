@@ -1,4 +1,3 @@
-const { chan } = require('../porn/chan');
 const Controller = require('./audioController');
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
 exports.execute = execute;
