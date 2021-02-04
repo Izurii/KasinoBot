@@ -58,6 +58,8 @@ async function commandHandler (message, prefix) {
 		audioController.wiisports(message);	
 	} else if (command == 'deadman') {
 		audioController.deadman(message);	
+	} else if (command == 'oxii') {
+		audioController.oxii(message);	
 	} else if (command == 'magik') {
 		memeController.magik(message);
 	} else if (command == 'rule34') {
