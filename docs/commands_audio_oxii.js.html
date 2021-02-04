@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/audio/kubo.js</title>
+    <title>JSDoc: Source: commands/audio/oxii.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/audio/kubo.js</h1>
+    <h1 class="page-title">Source: commands/audio/oxii.js</h1>
 
     
 
@@ -27,16 +27,16 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>const Controller = require('./audioController');
-const kubo_song = { path: '../../audios/kubo.mp3', message: 'KUUBOOOOOOOOOOOO!!' };
+const oxii_music = { title: 'm0nG01', url: 'https://www.youtube.com/watch?v=ysmobwk7FTE&amp;ab_channel=IzuriiHootoh' };
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
-exports.kubo = kubo;
+exports.oxii = oxii;
 
 /**
- * @description KUUBOOOOOOOOOOOO!!
+ * @description Oooxxiii!
  * @param  { DiscordMessageType } message - Message that user sent to bot
  */
-async function kubo (message) {
-	Controller.stopAllPlayMP3(message, kubo_song);
+async function oxii (message) {
+	Controller.stopAllPlayUnique(message, oxii_music);
 }</code></pre>
         </article>
     </section>

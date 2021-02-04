@@ -35,6 +35,7 @@ exports.kubo = require('./kubo.js').kubo;
 exports.mongol = require('./mongol.js').mongol;
 exports.wiisports = require('./wiisports.js').wiisports;
 exports.deadman = require('./deadman.js').deadman;
+exports.oxii = require('./oxii.js').oxii;
 
 //Last play array shared between all filesz
 var last_play = [];
