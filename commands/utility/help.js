@@ -120,7 +120,7 @@ async function help_with_args (message, serverPrefix) {
 		'mongol': 'M0NG0!',
 		'wiisports': '!!!',
 		'deadman': 'OMAE WA MOU, SHINDEIRU!',
-		'oxii' : 'Oooxxiii!',
+		'oxii' : 'Oooxxiii! test deploy',
 		'kubo' : 'MaM44a4a4c0o0o!!i!i!!',
 		'play': 'Consegue tocar músicas através de links do YouTube ou através da seleção quando você digita uma frase, como também pode tocar playlists inteiras.',
 		'playlist': 'Consegue tocar playlists através de links do YouTube ou através da seleção quando você digita uma frase.',
