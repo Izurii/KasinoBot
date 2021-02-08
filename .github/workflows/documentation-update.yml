@@ -19,6 +19,7 @@ jobs:
     - run: npm run doc
     - run: git config --local user.email "heitor_massarente@msn.com"
     - run: git config --local user.name "Izurii"
+    - run: git checkout -b documentation
     - run: git add ./
     - run: git commit -m "Documentation update."
-    - run: git push
+    - run: git push -f -u origin documentation
