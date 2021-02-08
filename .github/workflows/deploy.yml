@@ -1,0 +1,21 @@
+name: Deploy Kaisnaooo
+ 
+on:
+  push:
+    branches: [ master ]
+ 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Deploy KasinoBot in Contabo Server
+       uses: appleboy/ssh-action@v0.1.2
+       with:
+         host: ${{secrests.SSH_HOST}}
+         username: ${{secrets.SSH_USERNAME}}
+         password: ${{secrets.SSH_PASSWORD}}
+         script: |
+           cd ~/KasinoBot
+           git pull
+           npm install
+           pm2 restart all
