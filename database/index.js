@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'H#T&Ph%e7n-dw.;=-/3#@Y&O#*FH$IO&GTI',
+  password : process.env.MYSQL_PASSWORD,
   database: 'KasinoBot'
 });
 
