@@ -11,7 +11,7 @@ jobs:
      - name: Deploy KasinoBot in Contabo Server
        uses: appleboy/ssh-action@v0.1.2
        with:
-         host: ${{secrests.SSH_HOST}}
+         host: ${{secrets.SSH_HOST}}
          username: ${{secrets.SSH_USERNAME}}
          password: ${{secrets.SSH_PASSWORD}}
          script: |
