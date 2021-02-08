@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const Discord = require('discord.js');
 const discordToken = process.env.DISCORD_TOKEN;
-const client = new Discord.Client({ shardCount: 'auto' });
+const client = new Discord.Client({ shards: 'auto' });
 const utilFunctions = require('./utilFunctions');
 const db = require('./database');
 const { commandHandler } = require('./commands/commandHandler');
