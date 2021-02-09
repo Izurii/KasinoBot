@@ -40,9 +40,13 @@ client.on('message', async message => {
 	if(chanceXingamento<=10)
 		message.reply(xingamentos[await utilFunctions.randomInt(0, xingamentos.length)]);
 
-	let prefix = await db.query("SELECT KBGPrefix FROM KBGuild WHERE KBGGuildID = "+message.guild.id);
-	prefix = prefix.KBGPrefix;
+	let guildDB = await db.query(`SELECT * FROM KBGuild WHERE KBGGuildID = ${message.guild.id}`);
 
+        let guildName = guildDB.KBGName;
+        if(guildName!=message.guild.name)
+            await db.query(`UPDATE KBGuild SET KBGName = '${message.guild.name}' WHERE KBGGuildID = ${message.guild.id}`);
+
+	let prefix = guildDB.KBGPrefix;
 	if(message.content.startsWith(prefix)) {
 		commandHandler(message, prefix);
 	}
