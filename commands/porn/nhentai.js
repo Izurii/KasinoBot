@@ -9,6 +9,9 @@ exports.nhentai = nhentai;
  */
 async function nhentai (message, serverPrefix) {
 
+        if(!message.channel.nsfw) 
+                return;
+
 	const split = message.content.split(" "); split.shift();
 	const args = split.join(" ").trim();
 

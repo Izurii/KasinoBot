@@ -8,6 +8,9 @@ exports.rule34 = rule34;
  */
 async function rule34 (message) {
 
+        if(!message.channel.nsfw) 
+                return;
+
 	let tags = await Controller.formatTagsForBooru(message.content);
 	let url_request = 'https://rule34.xxx/index.php?page=dapi&s=post&q=index&tags='+tags;
 	let process_message = await message.channel.send("Pr0c3554nd0...");

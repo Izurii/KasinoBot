@@ -8,6 +8,9 @@ exports.chan = chan;
  */
 async function chan(message) {
 
+	if(!message.channel.nsfw)
+		return;
+
 	let tags = await Controller.formatTagsForBooru(message.content);
 	if(tags.length==0)
 		tags = '';
