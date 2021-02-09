@@ -38,7 +38,7 @@ def get_file_url():
 		random_index = random.randint(0, (response_json_length-1))
 		filesize = response_get_file_url[random_index]['file_size'] / 1000000
 		
-		if tempts == 2:
+		if tempts == 10:
 			return print("tempts")
 
 		if filesize > 20:

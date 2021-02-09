@@ -18,7 +18,7 @@ async function anime (message) {
 	var tempts = 0;
 
 	async function get_random_anime (index) {
-		if(tempts>10)
+		if(tempts>20)
 			return false;
 
 		let anime_info = mal.findAnime(index)
