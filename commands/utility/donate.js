@@ -13,7 +13,7 @@ async function donate(message) {
 		"title": "Doação para o bot Kasino se manter vivo",
 		"color": 16720896,
 		"footer": {
-		  "text": "Assinado, Heitor."
+		  "text": "Assinado, Izurii."
 		},
 		"thumbnail": {
 		  "url": "https://cdn.discordapp.com/attachments/514299610366345216/755114165718352063/logo.png"

@@ -257,7 +257,7 @@ async function help_with_args (message, serverPrefix) {
 		.attachFiles(attachment)
 		.setThumbnail('attachment://logo.png')
 		.addFields(embed_fields_data)
-		.setFooter('Tá aí filho, se não entendeu contate o ADEMIR.')
+		.setFooter('Tá aí filho, se não entendeu contate o ADEMIR. Izurii#9017')
 		.setAuthor('Explicação do comando '+serverPrefix+command);
 	
 	message.channel.send(help_message);
