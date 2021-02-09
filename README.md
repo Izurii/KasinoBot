@@ -8,7 +8,7 @@ Basicamente é um bot para o discord. Está sendo feito em JS.
 
 ## Comandos
 - ``-help``: O comando que mostra todos os comandos do bot e caso você use a função ``-help`` com um comando na frente (ex: ``-help shuffle``) ele irá descrever como utilizar o comando.
-- ``changeprefix``: Comando para mudar o prefixo utilizado pelo bot por padrão.
+- ``-changeprefix``: Comando para mudar o prefixo utilizado pelo bot por padrão.
 - ``-donate``: Dá uma ajuda aí para manter o bot meu kkkkk.
 - ``-play``: Você pode colocar um link do YouTube, podendo ser playlist ou vídeo, para ele tocar ou pode digitar algo e ele irá surgir com uma lista de 5 escolhas, você terá 15 segundos para escolher até que a busca se cancele, ou você pode cancelar ela com um ``-cancel`` como também se você utilizar outro ``-play`` ele cancela a pesquisa anterior.
 - ``-playlist``: Você pode passar um link de playlist e ele irá tocar ela inteira ou pode pesquisar por playlists diretamente através desse comando.
