@@ -16,7 +16,7 @@ const chan = require('./porn/chan'); //Temp
 async function commandHandler (message, prefix) {
 
 	let command = message.content.substring(1).split(" ");
-	command = command[0];
+	command = command[0].toLowerCase();
 	
 	if ((command == 'play') || (command == 'loop')) {
 		audioController.execute(message, prefix);
