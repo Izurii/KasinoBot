@@ -72,6 +72,7 @@ async function help_without_args (message) {
 		'C0mand5s 0K: ' : [
 			'help',
 			'changeprefix',
+			'donate',
 		]
 	};
 
@@ -157,6 +158,7 @@ async function help_with_args (message, serverPrefix) {
 		'help': 'Lista de comandos e seus usos.',
 		'donate': 'Instruções para doações',
 		'changeprefix' : 'Muda o prefixo do servidor utilizado para chamar o bot.',
+		'donate' : 'Caso você queira ajudar o Kasino a se manter vivo.',
 
 	}
 
@@ -234,7 +236,7 @@ async function help_with_args (message, serverPrefix) {
 		'corona': '<país> esse parâmetro é o código do país.',
 
 		//Util commands
-		'help': '``comando`` Você pode utilizar o comando help sem argumento algum e ele irá te retornar uma lista de comandos no bot, mas caso haja um comando na frente ele irá te retornar como utilizar o comando.'
+		'help': '``comando`` Você pode utilizar o comando help sem argumento algum e ele irá te retornar uma lista de comandos no bot, mas caso haja um comando na frente ele irá te retornar como utilizar o comando.',
 
 	}
 
