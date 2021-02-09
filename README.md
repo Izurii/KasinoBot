@@ -1,5 +1,7 @@
 # Bot do KASSINNÃOOO (+18) (NSFW && NSFF && NSFK)
 
+https://discord.com/api/oauth2/authorize?client_id=713558867249987614&permissions=36961344&scope=bot (Link para adicionar o BOT)
+
 O melhor e mais estúpido bot de todos. O prefixo do bot é um ``-`` (sinal de menos).
 
 Aviso que ele não é um bot saudável, não é amigável de forma alguma, ele vai te xingar, mandar você calar a boca, falar que você é analfabeto e etc...
