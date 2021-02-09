@@ -1,6 +1,8 @@
-# Bot do KASSINNÃOOO (NSFW && NSFF && NSFK)
+# Bot do KASSINNÃOOO (+18) (NSFW && NSFF && NSFK)
 
 O melhor e mais estúpido bot de todos. O prefixo do bot é um ``-`` (sinal de menos).
+
+Aviso que ele não é um bot saudável, não é amigável de forma alguma, ele vai te xingar, mandar você calar a boca, falar que você é analfabeto e etc...
 
 ## Bot Kasino
 
