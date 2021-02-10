@@ -6,14 +6,18 @@ exports.rule34 = rule34;
  * @description Function that makes a GET request to rule34
  * @param { DiscordMessageType } message - Message that user sent to bot
  */
-async function rule34 (message) {
+async function rule34 (message, system=false, process_message=false) {
 
-        if(!message.channel.nsfw) 
-                return;
+	if(!message.channel.nsfw) 
+		return;
 
 	let tags = await Controller.formatTagsForBooru(message.content);
 	let url_request = 'https://rule34.xxx/index.php?page=dapi&s=post&q=index&tags='+tags;
-	let process_message = await message.channel.send("Pr0c3554nd0...");
+
+	if(!process_message&&!system) {
+		process_message = await message.channel.send("Pr0c3554nd0...");
+	}
+	
 	let request_rule34 = await Controller.axios.get(url_request)
 	.then(response => {
 		return response.data;
@@ -34,6 +38,12 @@ async function rule34 (message) {
 
 		let randomIndex = await Controller.utilFunctions.randomInt(0, (post_result.length+1));
 		post_result = post_result[randomIndex];
+
+		if(post_result['$'].has_children) {
+			rule34(message, true, process_message);
+			return;
+		}
+
 		let image_url = post_result['$'].file_url;
 		let score = post_result['$'].score;
 		process_message.edit("``Rule34``\n``Score: " + score + "``\n"+image_url)
