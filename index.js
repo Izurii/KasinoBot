@@ -55,25 +55,25 @@ client.on('message', async message => {
 
 client.on('voiceStateUpdate', async (oldState, newState) => {
 
-	const audioController = require('./commands/audio/audioController');
-	const serverQueue = audioController.serverQueue.get(oldState.guild.id);
+	// const audioController = require('./commands/audio/audioController');
+	// const serverQueue = audioController.serverQueue.get(oldState.guild.id);
 	
-	if(serverQueue==undefined)
-		return;
+	// if(serverQueue==undefined)
+	// 	return;
 
-	if(oldState.channelID!==newState.channelID)
-		serverQueue.voiceChannel = newState.guild.channels.cache.get(newState.channelID);
+	// if(oldState.channelID!==newState.channelID)
+	// 	serverQueue.voiceChannel = newState.guild.channels.cache.get(newState.channelID);
 	
-	let message = [];
-	message.guild = [];
-	message.guild.id = newState.guild.id;
+	// let message = [];
+	// message.guild = [];
+	// message.guild.id = newState.guild.id;
 	
-	if(!oldState.serverMute&&newState.serverMute) {
-		serverQueue.textChannel.send("Mut0u porqu3 g4y? :s");
-		audioController.pause(message, false);
-	} else {
-		audioController.resume(message, false);
-	}
+	// if(!oldState.serverMute&&newState.serverMute) {
+	// 	serverQueue.textChannel.send("Mut0u porqu3 g4y? :s");
+	// 	audioController.pause(message, false);
+	// } else {
+	// 	audioController.resume(message, false);
+	// }
 
 });
 
