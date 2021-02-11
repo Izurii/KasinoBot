@@ -31,8 +31,7 @@ async function chan(message) {
 		let processedResult = results[0].split(" ");
 
 		if(processedResult[0].startsWith('Skipping')) {
-			console.log(processedResult);
-			return processMessage.edit("Ihhh d3u p4u no 515t3m4.");
+			chan(message); return;
 		} else if(processedResult[0].startsWith('nothing')) {
 			return processMessage.edit("N4o 4ch4m0s n4d4 c0l3g4.");
 		} else if(processedResult[0].startsWith('tempts')) {

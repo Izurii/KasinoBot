@@ -1,4 +1,6 @@
 const badWords = ['cp', 'chilld', 'loli', 'lolicon', 'lolita', 'shotacon', 'shota', 'kid', 'kiddo', 'kids', 'lolis', 'kiddy', 'children', 'baby', 'babies', 'jb', 'jailbait', 'lollipop', 'cub', 'toddlercon', 'toddler'];
+exports.badWords = badWords;
+
 const JSDocTypes = require('../JSDocTypes');
 
 //Importing commands controllers
@@ -17,7 +19,7 @@ const chan = require('./porn/chan'); //Temp
 async function commandHandler (message, prefix) {
 
 	if(badWords.some(x => message.content.includes(x)))
-		return message.reply("0ps você naum p0d3 pesquisar por 1ss0");
+		return message.reply("0ps você naum p0d3 m4nd4r 1ss0 n40, p3d0");
 
 	let command = message.content.substring(1).split(" ");
 	command = command[0].toLowerCase();

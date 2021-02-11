@@ -9,19 +9,21 @@ exports.nhentai = nhentai;
  */
 async function nhentai (message, serverPrefix) {
 
-        if(!message.channel.nsfw) 
-                return;
+	if(!message.channel.nsfw) 
+		return;
 
 	const split = message.content.split(" "); split.shift();
 	const args = split.join(" ").trim();
 
 	let doujin = [];
 	let searchState = false;
+	let func = 0;
 
 	if(args.length > 1) {
 		if(args.match('[0-9]+')) {
 			if(!Controller.nHentai.exists(args))
 				return message.channel.send("We3ab0o escr0t0, 3ss4 parad4 n4o exi1ste não.");
+			func = 1;
 			doujin = await Controller.nHentai.getDoujin(args);
 		} else {
 			searchState = true;
@@ -36,7 +38,7 @@ async function nhentai (message, serverPrefix) {
 	}
 
 	if(!searchState)
-		sendDoujinEmbedMessage(message, doujin);
+		sendDoujinEmbedMessage(message, doujin, func);
 
 }
 
@@ -55,6 +57,11 @@ async function getRandomDoujin () {
 	});
 }
 
+// Func types
+// 0 - Random nHentai - just search for another one
+// 1 - Doujin by ID - check tags and in case has any bad tags return a error message
+// 2 - Choosen Doujin - check tags and in case has any bad tags return a error message
+
 /**
  * @description Function that prepare an embed message with description, title, links etc from a doujin and send it
  * @param { DiscordMessageType } message - Message that user sent to bot
@@ -66,13 +73,29 @@ async function getRandomDoujin () {
  * @param  { object } doujin.details.artists - Artists
  * @param  { object } doujin.details.pages - Number of pages
  */
-async function sendDoujinEmbedMessage (message, doujin) {
-
+async function sendDoujinEmbedMessage (message, doujin, func) {
+	
+	let badTagsCheck = false;
 	let tagsEmbedField = '';
 	let tags = await prepareTagsAuthorsForEmbed(doujin.details.tags);
-	tags.forEach(tag => {
-		tagsEmbedField += '``'+tag+'`` ';
-	});
+
+	if(tags!==undefined) {
+		tags.forEach(tag => {
+			tagsEmbedField += '``'+tag+'`` ';
+			if(Controller.badWords.some(x => tag.includes(x))) {
+				badTagsCheck = true;	
+			}
+		});
+	} 
+
+	if(badTagsCheck&&func!==0)
+		return message.reply("Est3 d0uj1n contém tags proibidas amigo, deixa para lá pedo");
+	else if(badTagsCheck&&func===0) {
+		let doujin = await getRandomDoujin();
+		sendDoujinEmbedMessage(message, doujin, func);
+		return;
+	}
+
 
 	let artistsEmbedField = '';
 	let artists = await prepareTagsAuthorsForEmbed(doujin.details.artists);
@@ -135,7 +158,7 @@ async function sendEmbedChooseDoujin (message, doujins, serverPrefix) {
 		let doujin = [];
 		doujin = await Controller.nHentai.getDoujin(doujinId);
 
-		sendDoujinEmbedMessage(message, doujin);
+		sendDoujinEmbedMessage(message, doujin, 2);
 
 	}).catch((err) => {
 		message.channel.send("<:cry:751921538462253077> 4band0n4 m3sm0 vai, ばか~");
