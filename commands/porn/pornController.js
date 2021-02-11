@@ -6,6 +6,7 @@ const { PythonShell } = require('python-shell');
 const nHentai = require('nhentai-js');
 const pathToIdolScript = __dirname+'../../../scripts/idol.py';
 const pathToChanScript = __dirname+'../../../scripts/chan.py';
+const { badWords } = require('../commandHandler');
 
 //Exports needs
 exports.Discord = require('discord.js');
@@ -18,6 +19,7 @@ exports.pathToIdolScript = pathToIdolScript;
 exports.pathToChanScript = pathToChanScript;
 exports.formatTagsForBooru = formatTagsForBooru;
 exports.fs = require('fs-extra');
+exports.badWords = badWords;
 
 //Exports functions
 exports.rule34 = require('./rule34').rule34;
@@ -28,13 +30,13 @@ exports.nhentai = require('./nhentai').nhentai;
 /**
  * @description Function that formats string to a specific tag format that boorus accept.
  * @param  { string } text
- * @returns Returns the formatted string 
+ * @returns Returns the formatted string
  */
 async function formatTagsForBooru(text) {
-	
+
 	const split = text.split(" "); split.shift();
 	const args = split.join(" ").trim();
-	
+
 	tags = args.substr(args.indexOf(' ')+1).replace(' ', '+');
 
 	return tags;
