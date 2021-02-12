@@ -39,7 +39,7 @@ async function rule34 (message, system=false, process_message=false) {
 		let randomIndex = await Controller.utilFunctions.randomInt(0, (post_result.length+1));
 		post_result = post_result[randomIndex];
 
-		if(post_result['$'].has_children) {
+		if(post_result['$'].has_children==true) {
 			rule34(message, true, process_message);
 			return;
 		}
