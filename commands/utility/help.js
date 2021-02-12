@@ -202,7 +202,7 @@ async function help_with_args (message, serverPrefix) {
 		'euro': serverPrefix+'euro (É só mandar o comando, sem frescuras)',
 		'libra': serverPrefix+'libra (É só mandar o comando, sem frescuras)',
 		'iene': serverPrefix+'iene (É só mandar o comando, sem frescuras)',
-		'd': serverPrefix+`<$>d<@> ou ${serverPrefix}<$>dm<@> Caso você utiliza segundo comando, ele irá devolver os sorteios e entre parênteses a média dos sorteios.`,
+		'd': '"'+serverPrefix+`<$>d<@>" ou "${serverPrefix}<$>dm<@>" Caso você utiliza segundo comando, ele irá devolver os sorteios e entre parênteses a média dos sorteios.`,
 		'reverse': serverPrefix+'reverse <frase>',
 		'corona': serverPrefix+`corona ou "${serverPrefix}corona <país>". Caso você mande o comando sem argumentos ele irá retornar uma lista com possíveis países para você ver os dados do COVID-19, lembrando que você deverá utilizar o código do país não o nome.`,
 		
