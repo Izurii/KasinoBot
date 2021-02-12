@@ -12,7 +12,7 @@ async function help (message, serverPrefix) {
 	const split = message.content.split(" "); split.shift();
 	const args = split.join("").trim();
 
-	if(args.length > 1)
+	if(args.length >= 1)
 		help_with_args(message, serverPrefix);
 	else
 		help_without_args(message);
