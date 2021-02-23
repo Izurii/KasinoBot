@@ -26,6 +26,7 @@ exports.rule34 = require('./rule34').rule34;
 exports.idol = require('./idol').idol;
 exports.chan = require('./chan').chan;
 exports.nhentai = require('./nhentai').nhentai;
+exports.berserk = require('./berserk').berserk;
 
 /**
  * @description Function that formats string to a specific tag format that boorus accept.

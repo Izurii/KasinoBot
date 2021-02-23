@@ -79,6 +79,8 @@ async function commandHandler (message, prefix) {
 		//pornController.chan(message);
 	} else if (command == 'nhentai') {
 		pornController.nhentai(message, prefix);
+	} else if (command == 'berserk') {
+		pornController.berserk(message, prefix);
 	} else if (command == 'anime') {
 		miscController.anime(message);
 	} else if (command == 'dolar') {

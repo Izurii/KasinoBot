@@ -59,6 +59,7 @@ async function help_without_args (message) {
 			'idol',
 			'chan',
 			'nhentai',
+			'berserk',
 		],
 		'C0m4ndus 1nút3is (l3g41s): ' : [
 			'anime',
@@ -145,6 +146,7 @@ async function help_with_args (message, serverPrefix) {
 		'idol': 'It is what it is',
 		'chan': 'It is what it is',
 		'nhentai': 'It is what it is',
+		'berserk': 'IT IS WHAT IT IS',
 
 		//Misc commands
 		'anime': 'Manda de volta um anime aleatório, vai que é bom.',
@@ -198,6 +200,7 @@ async function help_with_args (message, serverPrefix) {
 		'idol': '``' + serverPrefix + 'idol`` <tags>',
 		'chan': '``' + serverPrefix + 'chan`` <tags>',
 		'nhentai': '``' + serverPrefix + 'nhentai`` <tags>',
+		'berserk': '``' + serverPrefix + 'berserk`` (É só mandar o comando, sem frescuras)',
 
 		//Misc commands
 		'anime': '``' + serverPrefix + 'anime`` (É só mandar o comando, sem frescuras)',
