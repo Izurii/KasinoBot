@@ -15,11 +15,20 @@ async function roll_number (message, number=1) {
 	else if(number===0)
 		return message.channel.send("Z3r0 n40 d4 pô");
 
+	var modificador = false;
+	var endSearchString = message.content.search(/[+\-*\/]\s*/);
+	if(endSearchString==-1||message.content==endSearchString) {
+		endSearchString = message.content.length;
+	} else {
+		modificador = message.content.substring(endSearchString);
+	}
+
 	let numero_sorteado;
-	if(message.content.includes("dm"))
-		numero_sorteado = message.content.substring(message.content.search(/[a-z]/)+2);
-	else
-		numero_sorteado = message.content.substring(message.content.search(/[a-z]/)+1);
+	if(message.content.includes("dm")) {
+		numero_sorteado = message.content.substring(message.content.search(/[a-z]/)+2, endSearchString);
+	} else {
+		numero_sorteado = message.content.substring(message.content.search(/[a-z]/)+1, endSearchString);
+	}
 
 	let regex_block = new RegExp(/[a-z]/);
 	if(numero_sorteado.startsWith('0'))
@@ -35,8 +44,9 @@ async function roll_number (message, number=1) {
 	let numeros = [];
 	for(let i = 0; i < number; i++) {
 		let dado_rolado = await Controller.utilFunctions.randomInt(1, numero_sorteado+1);
-		numeros.push(dado_rolado);
-		return_message += (':game_die: ``'+dado_rolado+'``   ');
+		let resultado_final = modificador ? eval(dado_rolado + modificador) : dado_rolado;
+		numeros.push(resultado_final);
+		return_message += (':game_die: ``' + resultado_final + (modificador ? ` (${modificador})` : '') +'``');
 	}
 
 	if(message.content.includes("dm"))
