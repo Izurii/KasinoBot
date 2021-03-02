@@ -14,7 +14,7 @@ async function number_functions (message, serverPrefix) {
 	let number = message.content.substring(1, message.content.search(/[a-z]/));
 
 	if(command.startsWith('d'))
-		Controller.roll_number(message, number);
+		Controller.roll_number(message, serverPrefix, number);
 
 	if(command==serverPrefix+'2077')
 		audioController.cyberpunk_music(message);

@@ -5,10 +5,11 @@ exports.roll_number = roll_number;
 /**
  * @description Function that returns a discord message that contains n random values
  * @param  { DiscordMessageType } message - Message that user sent to bot
+ * @param { string } serverPrefix - Server bot prefix
  * @param  { Number } number=1 - N number of dices to roll
  * @returns Reply message to user that requested a dice roll
  */
-async function roll_number (message, number=1) {
+async function roll_number (message, prefix, number=1) {
 
 	if(number>10)
 		return message.channel.send("N40 p0d3 p4ss4r de 10 caralho");
@@ -16,11 +17,11 @@ async function roll_number (message, number=1) {
 		return message.channel.send("Z3r0 n40 d4 pô");
 
 	var modificador = false;
-	var endSearchString = message.content.search(/[+\-*\/]\s*/);
+	var endSearchString = message.content.substring(prefix.length).search(/[+\-*\/]\s*/);
 	if(endSearchString==-1||message.content==endSearchString) {
 		endSearchString = message.content.length;
 	} else {
-		modificador = message.content.substring(endSearchString);
+		modificador = message.content.substring(endSearchString+1);
 	}
 
 	let numero_sorteado;
