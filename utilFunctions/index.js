@@ -1,6 +1,7 @@
 const JSDocTypes = require('../JSDocTypes');
 const DiscordChannelType = JSDocTypes.DiscordChannelType;
 const xml2js = require('xml2js');
+const axios = require('axios').default;
 
 /**
  * @description Function that returns a random int given the minimum and maximum passed to the function
@@ -83,4 +84,23 @@ exports.editMessage = async (channel, message_id, new_message) => {
 exports.readXmlString = async (data) => {
 	var parser = new xml2js.Parser();
 	return parser.parseStringPromise(data);
+}
+
+/**
+ * @description Function that fetch the currency value from an external api
+ * @param  { string } moedaOrigem - From currency
+ * @param  { string } moedaDestino - To current
+ * @returns { boolean | Number } Function returns false in case of error or the value of the currency
+ */
+exports.getValueCurrency = async (moedaOrigem, moedaDestino) => {
+
+	return await axios.get(`https://economia.awesomeapi.com.br/all/${moedaOrigem}-${moedaDestino}`)
+	.then (response => {
+		return parseFloat(response.data[moedaOrigem].ask).toFixed(2);
+	})
+	.catch ( error => {
+		console.log(error);
+		return false;
+	});
+
 }
