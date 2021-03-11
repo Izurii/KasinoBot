@@ -2,11 +2,13 @@
 const JSDocTypes = require('../../JSDocTypes');
 const axios = require('axios').default;
 const utilFunctions = require('../../utilFunctions');
+const fs = require('fs');
 
 //Exporting needs
 exports.Discord = require('discord.js');
 exports.JSDocTypes = JSDocTypes;
 exports.axios = axios;
+exports.fs = fs;
 exports.utilFunctions = utilFunctions;
 exports.DiscordEmbedPagination = require('discord-paginationembed');
 
@@ -20,3 +22,4 @@ exports.roll_number = require('./roll_number').roll_number;
 exports.reverse = require('./reverse').reverse;
 exports.anime = require('./anime').anime;
 exports.corona = require('./corona').corona;
+exports.convertMoney = require('./convertMoney').convertMoney;
