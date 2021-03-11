@@ -15,8 +15,9 @@ async function number_functions (message, serverPrefix) {
 
 	if(command.startsWith('d'))
 		Controller.roll_number(message, serverPrefix, number);
-
 	if(command==serverPrefix+'2077')
 		audioController.cyberpunk_music(message);
+	if(command.startsWith('c'))
+		Controller.convertMoney(message, serverPrefix);
 
 }
