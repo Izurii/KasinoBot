@@ -29,14 +29,21 @@ async function convertMoney (message, serverPrefix) {
 	
 	var resultado = valor * valorDaMoeda;
 	
-	var formatter = new Intl.NumberFormat('pt-BR', {
+	var formatterOrigem = new Intl.NumberFormat('pt-BR', {
 		style: 'currency',
-		currency: moedaDestino,
+		currency: moedaOrigem,
 	  });
 
-	var resultadoFormatado = formatter.format(resultado);
+	var formatterDestino = new Intl.NumberFormat('pt-BR', {
+		style: 'currency',
+		currency: moedaDestino,
+	});
 
-	message.reply(`Isso fica **${resultadoFormatado}**`);
+
+	var resultadoOrigemFormatado = formatterOrigem.format(valor);
+	var resultadoDestinoFormatado = formatterDestino.format(resultado);
+
+	message.reply(`${resultadoOrigemFormatado} fica **${resultadoDestinoFormatado}**`);
 
 }
 
@@ -130,9 +137,6 @@ async function getMoedas (message, serverPrefix, listaMoedas) {
 		message.channel.send("<:cry:751921538462253077> 4band0n4 m3sm0 vai, pau pequeno~");
 	});
 	
-	console.log(moedaOrigem);
-	console.log(moedaDestino);
-
 	return { moedaOrigem:moedaOrigem, moedaDestino:moedaDestino};
 
 };
