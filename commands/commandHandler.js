@@ -91,10 +91,10 @@ async function commandHandler (message, prefix) {
 		miscController.libra(message);
 	} else if (command == 'iene') {
 		miscController.iene(message);
-	} else if (command[0].match('[0-9]')) {
-		miscController.number_functions(message, prefix);
 	} else if (command.match('[d][0-9]?[0-9]')) {
 		miscController.roll_number(message, prefix);
+	} else if (command.match('[\d]*')) {
+		miscController.number_functions(message, prefix);
 	} else if (command == 'corona') {
 		miscController.corona(message);
 	} else if (command == 'reverse') {
