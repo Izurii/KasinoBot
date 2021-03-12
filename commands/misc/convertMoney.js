@@ -17,7 +17,7 @@ async function convertMoney (message, serverPrefix) {
 	if(moedaOrigem==null||moedaDestino==null)
 		return;
 
-	const valor = message.content.substring(0 + serverPrefix.length, message.content.search(/[a-z]/));
+	const valor = message.content.substring(0 + serverPrefix.length, message.content.search(/c/)).trim();
 	const valorDaMoeda = await Controller.axios.get(`https://api.currconv.com/api/v7/convert?q=${moedaOrigem}_${moedaDestino}&compact=ultra&apiKey=${process.env.CURRCONV_API_KEY}`)
 	.then (response => {
 		return parseFloat(response.data[moedaOrigem+'_'+moedaDestino]).toFixed(3);
