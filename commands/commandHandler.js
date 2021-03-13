@@ -93,7 +93,7 @@ async function commandHandler (message, prefix) {
 		miscController.iene(message);
 	} else if (command.match('[d][0-9]?[0-9]')) {
 		miscController.roll_number(message, prefix);
-	} else if (command.match('[\d]*')) {
+	} else if (command.match('[\\d*]')) {
 		miscController.number_functions(message, prefix);
 	} else if (command == 'corona') {
 		miscController.corona(message);
