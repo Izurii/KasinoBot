@@ -91,7 +91,7 @@ async function commandHandler (message, prefix) {
 		miscController.libra(message);
 	} else if (command == 'iene') {
 		miscController.iene(message);
-	} else if (command.match('[d][0-9]?[0-9]')) {
+	} else if (command.match('(^[d][0-9]*)')) {
 		miscController.roll_number(message, prefix);
 	} else if (command.match('[\\d*]')) {
 		miscController.number_functions(message, prefix);

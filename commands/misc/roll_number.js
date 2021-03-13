@@ -18,6 +18,7 @@ async function roll_number (message, prefix, number=1) {
 
 	var modificador = false;
 	var endSearchString = message.content.substring(prefix.length).search(/[+\-*\/]\s*/);
+
 	if(endSearchString==-1||message.content==endSearchString) {
 		endSearchString = message.content.length;
 	} else {
@@ -26,9 +27,9 @@ async function roll_number (message, prefix, number=1) {
 
 	let numero_sorteado;
 	if(message.content.includes("dm")) {
-		numero_sorteado = message.content.substring(message.content.search(/[a-z]/)+2, endSearchString);
+		numero_sorteado = message.content.substring(message.content.search(/[a-z]/)+2, endSearchString+1);
 	} else {
-		numero_sorteado = message.content.substring(message.content.search(/[a-z]/)+1, endSearchString);
+		numero_sorteado = message.content.substring(message.content.search(/[a-z]/)+1, endSearchString+1);
 	}
 
 	let regex_block = new RegExp(/[a-z]/);
