@@ -16,7 +16,7 @@ async function berserk(message, serverPrefix) {
 		return message.reply("Você não pode d1git4r ma15 N4D4!")
 
 	if(!message.channel.nsfw)
-		return;
+		return message.reply("Somente em canal NSFW carai");
 
 	Controller.rule34(message);
 	Controller.nhentai(message, serverPrefix);
