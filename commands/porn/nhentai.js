@@ -10,7 +10,7 @@ exports.nhentai = nhentai;
 async function nhentai (message, serverPrefix) {
 
 	if(!message.channel.nsfw) 
-		return;
+		return message.reply("Somente em canal NSFW carai");
 
 	const split = message.content.split(" "); split.shift();
 	const args = split.join(" ").trim();
