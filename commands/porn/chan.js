@@ -9,7 +9,7 @@ exports.chan = chan;
 async function chan(message) {
 
 	if(!message.channel.nsfw)
-		return;
+		return message.reply("Somente em canal NSFW carai");
 
 	let tags = await Controller.formatTagsForBooru(message.content);
 	if(tags.length==0)
