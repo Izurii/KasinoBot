@@ -9,7 +9,7 @@ exports.rule34 = rule34;
 async function rule34 (message, system=false, process_message=false) {
 
 	if(!message.channel.nsfw) 
-		return;
+		return message.reply("Somente em canal NSFW carai");
 
 	let tags = await Controller.formatTagsForBooru(message.content);
 	let url_request = 'https://rule34.xxx/index.php?page=dapi&s=post&q=index&tags='+tags;
