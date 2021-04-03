@@ -21,7 +21,7 @@ async function magik(message) {
 		return message.channel.send("O máximo é 10 carai, vai com calma.");
 
 	let lastMessages = await Controller.utilFunctions.fetchMessages(message.channel, 20);
-	lastMessages.forEach(function (item, index) {
+	lastMessages.some((item) => {
 		if (item[1].embeds.length > 0 || item[1].attachments.size > 0) {
 			if (item[1].embeds.length > 0)
 				image = item[1].embeds;

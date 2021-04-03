@@ -48,7 +48,7 @@ exports.formatTextLimitCharacters = async (text, length=1024) => {
  * @param { string } [order=DESC] - Order that array is going to return (ASC||DESC)
  * @returns Returns an array that contains in the given order (ASC or DESC) the N number of messages.
  */
-exports.fetchMessages = async (channel, n_messages, order = "DESC") => {
+exports.fetchMessages = async (channel, n_messages, order = "ASC") => {
 	let messages = await channel.messages.fetch({ limit: n_messages });
 	if (order == "DESC")
 		return Array.from(messages).reverse();
