@@ -2,6 +2,7 @@ const badWords = ['cp', 'chilld', 'loli', 'lolicon', 'lolita', 'shotacon', 'shot
 exports.badWords = badWords;
 
 const JSDocTypes = require('../JSDocTypes');
+const DiscordMessageType = JSDocTypes.DiscordMessageType;
 
 //Importing commands controllers
 const audioController = require('./audio/audioController');
@@ -13,7 +14,7 @@ const chan = require('./porn/chan'); //Temp
 
 /**
  * @description Function that handle commands send through messages
- * @param  { JSDocTypes.DiscordMessageType } message - Message that user sent to bot
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  * @param  { string } prefix - Server bot prefix
  */
 async function commandHandler (message, prefix) {
