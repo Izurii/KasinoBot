@@ -37,6 +37,7 @@ exports.wiisports = require('./wiisports.js').wiisports;
 exports.deadman = require('./deadman.js').deadman;
 exports.oxii = require('./oxii.js').oxii;
 exports.tsunami = require('./tsunami.js').tsunami;
+exports.pizza = require('./pizza.js').pizza;
 
 //Last play array shared between all filesz
 var last_play = [];
