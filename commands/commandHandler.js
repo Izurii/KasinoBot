@@ -69,6 +69,8 @@ async function commandHandler (message, prefix) {
 		audioController.oxii(message);	
 	} else if (command == 'tsunami') {
 		audioController.tsunami(message);	
+	} else if (command == 'pizza') { 
+		audioController.pizza(message);
 	} else if (command == 'magik') {
 		memeController.magik(message);
 	} else if (command == 'rule34') {
