@@ -37,16 +37,21 @@ exports.nhentai = nhentai;
  */
 async function nhentai (message, serverPrefix) {
 
+	if(!message.channel.nsfw) 
+		return message.reply("Somente em canal NSFW carai");
+
 	const split = message.content.split(" "); split.shift();
 	const args = split.join(" ").trim();
 
 	let doujin = [];
 	let searchState = false;
+	let func = 0;
 
 	if(args.length > 1) {
 		if(args.match('[0-9]+')) {
 			if(!Controller.nHentai.exists(args))
 				return message.channel.send("We3ab0o escr0t0, 3ss4 parad4 n4o exi1ste não.");
+			func = 1;
 			doujin = await Controller.nHentai.getDoujin(args);
 		} else {
 			searchState = true;
@@ -61,7 +66,7 @@ async function nhentai (message, serverPrefix) {
 	}
 
 	if(!searchState)
-		sendDoujinEmbedMessage(message, doujin);
+		sendDoujinEmbedMessage(message, doujin, func);
 
 }
 
@@ -80,6 +85,11 @@ async function getRandomDoujin () {
 	});
 }
 
+// Func types
+// 0 - Random nHentai - just search for another one
+// 1 - Doujin by ID - check tags and in case has any bad tags return a error message
+// 2 - Choosen Doujin - check tags and in case has any bad tags return a error message
+
 /**
  * @description Function that prepare an embed message with description, title, links etc from a doujin and send it
  * @param { DiscordMessageType } message - Message that user sent to bot
@@ -91,13 +101,29 @@ async function getRandomDoujin () {
  * @param  { object } doujin.details.artists - Artists
  * @param  { object } doujin.details.pages - Number of pages
  */
-async function sendDoujinEmbedMessage (message, doujin) {
-
+async function sendDoujinEmbedMessage (message, doujin, func) {
+	
+	let badTagsCheck = false;
 	let tagsEmbedField = '';
 	let tags = await prepareTagsAuthorsForEmbed(doujin.details.tags);
-	tags.forEach(tag => {
-		tagsEmbedField += '``'+tag+'`` ';
-	});
+
+	if(tags!==undefined) {
+		tags.forEach(tag => {
+			tagsEmbedField += '``'+tag+'`` ';
+			if(Controller.badWords.some(x => tag.includes(x))) {
+				badTagsCheck = true;	
+			}
+		});
+	} 
+
+	if(badTagsCheck&amp;&amp;func!==0)
+		return message.reply("Est3 d0uj1n contém tags proibidas amigo, deixa para lá pedo");
+	else if(badTagsCheck&amp;&amp;func===0) {
+		let doujin = await getRandomDoujin();
+		sendDoujinEmbedMessage(message, doujin, func);
+		return;
+	}
+
 
 	let artistsEmbedField = '';
 	let artists = await prepareTagsAuthorsForEmbed(doujin.details.artists);
@@ -160,7 +186,7 @@ async function sendEmbedChooseDoujin (message, doujins, serverPrefix) {
 		let doujin = [];
 		doujin = await Controller.nHentai.getDoujin(doujinId);
 
-		sendDoujinEmbedMessage(message, doujin);
+		sendDoujinEmbedMessage(message, doujin, 2);
 
 	}).catch((err) => {
 		message.channel.send("&lt;:cry:751921538462253077> 4band0n4 m3sm0 vai, ばか~");
@@ -179,7 +205,8 @@ async function prepareTagsAuthorsForEmbed (tags) {
 		fTags.push(tagSplit[1].split("").reverse().join(""));
 	});
 	return fTags;
-}</code></pre>
+}
+</code></pre>
         </article>
     </section>
 
@@ -189,13 +216,13 @@ async function prepareTagsAuthorsForEmbed (tags) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#adm_message">adm_message</a></li><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#bilada">bilada</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#chan">chan</a></li><li><a href="global.html#changePrefix">changePrefix</a></li><li><a href="global.html#cholamais">cholamais</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#cyberpunk_music">cyberpunk_music</a></li><li><a href="global.html#deadman">deadman</a></li><li><a href="global.html#deleteMessage">deleteMessage</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#donate">donate</a></li><li><a href="global.html#editMessage">editMessage</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#felipao">felipao</a></li><li><a href="global.html#fetchMessages">fetchMessages</a></li><li><a href="global.html#formatTagsForBooru">formatTagsForBooru</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#getAllGuilds">getAllGuilds</a></li><li><a href="global.html#getRandomDoujin">getRandomDoujin</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#help_with_args">help_with_args</a></li><li><a href="global.html#help_without_args">help_without_args</a></li><li><a href="global.html#idol">idol</a></li><li><a href="global.html#iene">iene</a></li><li><a href="global.html#kubo">kubo</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#magik">magik</a></li><li><a href="global.html#mongol">mongol</a></li><li><a href="global.html#nhentai">nhentai</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#oxii">oxii</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#playlist">playlist</a></li><li><a href="global.html#prepareTagsAuthorsForEmbed">prepareTagsAuthorsForEmbed</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#reactionHandler">reactionHandler</a></li><li><a href="global.html#readXmlString">readXmlString</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#rule34">rule34</a></li><li><a href="global.html#sendDoujinEmbedMessage">sendDoujinEmbedMessage</a></li><li><a href="global.html#sendEmbedChooseDoujin">sendEmbedChooseDoujin</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayMP3">stopAllPlayMP3</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#urss">urss</a></li><li><a href="global.html#volume">volume</a></li><li><a href="global.html#wiisports">wiisports</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#adm_message">adm_message</a></li><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#berserk">berserk</a></li><li><a href="global.html#bilada">bilada</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#chan">chan</a></li><li><a href="global.html#changePrefix">changePrefix</a></li><li><a href="global.html#cholamais">cholamais</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#convertMoney">convertMoney</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#cyberpunk_music">cyberpunk_music</a></li><li><a href="global.html#deadman">deadman</a></li><li><a href="global.html#deleteMessage">deleteMessage</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#donate">donate</a></li><li><a href="global.html#editMessage">editMessage</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#felipao">felipao</a></li><li><a href="global.html#fetchMessages">fetchMessages</a></li><li><a href="global.html#formatTagsForBooru">formatTagsForBooru</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#getAllGuilds">getAllGuilds</a></li><li><a href="global.html#getMoedas">getMoedas</a></li><li><a href="global.html#getRandomDoujin">getRandomDoujin</a></li><li><a href="global.html#getValueCurrency">getValueCurrency</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#help_with_args">help_with_args</a></li><li><a href="global.html#help_without_args">help_without_args</a></li><li><a href="global.html#idol">idol</a></li><li><a href="global.html#iene">iene</a></li><li><a href="global.html#kubo">kubo</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#magik">magik</a></li><li><a href="global.html#mongol">mongol</a></li><li><a href="global.html#nhentai">nhentai</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#oxii">oxii</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#pizza">pizza</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#playlist">playlist</a></li><li><a href="global.html#prepareTagsAuthorsForEmbed">prepareTagsAuthorsForEmbed</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#reactionHandler">reactionHandler</a></li><li><a href="global.html#readXmlString">readXmlString</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#rule34">rule34</a></li><li><a href="global.html#sendDoujinEmbedMessage">sendDoujinEmbedMessage</a></li><li><a href="global.html#sendEmbedChooseDoujin">sendEmbedChooseDoujin</a></li><li><a href="global.html#sendTodasMoedas">sendTodasMoedas</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayMP3">stopAllPlayMP3</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#tsunami">tsunami</a></li><li><a href="global.html#urss">urss</a></li><li><a href="global.html#volume">volume</a></li><li><a href="global.html#wiisports">wiisports</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Feb 08 2021 21:12:13 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Apr 13 2021 02:48:39 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

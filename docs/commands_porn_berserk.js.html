@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: commands/porn/rule34.js</title>
+    <title>JSDoc: Source: commands/porn/berserk.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: commands/porn/rule34.js</h1>
+    <h1 class="page-title">Source: commands/porn/berserk.js</h1>
 
     
 
@@ -28,57 +28,28 @@
         <article>
             <pre class="prettyprint source linenums"><code>const Controller = require('./pornController');
 const DiscordMessageType = Controller.JSDocTypes.DiscordMessageType;
-exports.rule34 = rule34;
+exports.berserk = berserk;
 
 /**
- * @description Function that makes a GET request to rule34
- * @param { DiscordMessageType } message - Message that user sent to bot
+ * @description Function that executes all NSFW commands (rule34, nhentai, chan and idol)
+ * @param  { DiscordMessageType } message - Message that user sent to bot
+ * @param { string } serverPrefix - Server bot prefix
  */
-async function rule34 (message, system=false, process_message=false) {
+async function berserk(message, serverPrefix) {
 
-	if(!message.channel.nsfw) 
+	const split = message.content.split(" "); split.shift();
+	const args = split.join("").trim();
+
+	if(args.length > 1) 
+		return message.reply("Você não pode d1git4r ma15 N4D4!")
+
+	if(!message.channel.nsfw)
 		return message.reply("Somente em canal NSFW carai");
 
-	let tags = await Controller.formatTagsForBooru(message.content);
-	let url_request = 'https://rule34.xxx/index.php?page=dapi&amp;s=post&amp;q=index&amp;tags='+tags;
-
-	if(!process_message&amp;&amp;!system) {
-		process_message = await message.channel.send("Pr0c3554nd0...");
-	}
-	
-	let request_rule34 = await Controller.axios.get(url_request)
-	.then(response => {
-		return response.data;
-	})
-	.catch(rej => {
-		message.channel.send("tU d3rrub0u o 5erv1d0r c4c3t3");
-	});
-
-	if(request_rule34==undefined)
-		return;
-
-	xmlParse = Controller.utilFunctions.readXmlString(request_rule34)
-	.then(async function (result) {
-		let post_result = result.posts.post;
-
-		if(post_result==undefined)
-			return process_message.edit("N4o 4ch4m0s n4d4 c0l3g4.");
-
-		let randomIndex = await Controller.utilFunctions.randomInt(0, (post_result.length+1));
-		post_result = post_result[randomIndex];
-
-		if(post_result['$'].has_children==true) {
-			rule34(message, true, process_message);
-			return;
-		}
-
-		let image_url = post_result['$'].file_url;
-		let score = post_result['$'].score;
-		process_message.edit("``Rule34``\n``Score: " + score + "``\n"+image_url)
-	}).catch(function(e){
-		console.log(e);
-		return process_message.edit("Ihhh d3u p4u no 515t3m4.");
-	});
+	Controller.rule34(message);
+	Controller.nhentai(message, serverPrefix);
+	Controller.idol(message);
+	Controller.chan(message);
 
 }
 </code></pre>

@@ -26,7 +26,11 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const JSDocTypes = require('../JSDocTypes');
+            <pre class="prettyprint source linenums"><code>const badWords = ['cp', 'chilld', 'loli', 'lolicon', 'lolita', 'shotacon', 'shota', 'kid', 'kiddo', 'kids', 'lolis', 'kiddy', 'children', 'baby', 'babies', 'jb', 'jailbait', 'lollipop', 'cub', 'toddlercon', 'toddler'];
+exports.badWords = badWords;
+
+const JSDocTypes = require('../JSDocTypes');
+const DiscordMessageType = JSDocTypes.DiscordMessageType;
 
 //Importing commands controllers
 const audioController = require('./audio/audioController');
@@ -38,13 +42,16 @@ const chan = require('./porn/chan'); //Temp
 
 /**
  * @description Function that handle commands send through messages
- * @param  { JSDocTypes.DiscordMessageType } message - Message that user sent to bot
+ * @param  { DiscordMessageType } message - Message that user sent to bot
  * @param  { string } prefix - Server bot prefix
  */
 async function commandHandler (message, prefix) {
 
+	if(badWords.some(x => message.content.includes(x)))
+		return message.reply("0ps você naum p0d3 m4nd4r 1ss0 n40, p3d0");
+
 	let command = message.content.substring(1).split(" ");
-	command = command[0];
+	command = command[0].toLowerCase();
 	
 	if ((command == 'play') || (command == 'loop')) {
 		audioController.execute(message, prefix);
@@ -88,6 +95,10 @@ async function commandHandler (message, prefix) {
 		audioController.deadman(message);	
 	} else if (command == 'oxii') {
 		audioController.oxii(message);	
+	} else if (command == 'tsunami') {
+		audioController.tsunami(message);	
+	} else if (command == 'pizza') { 
+		audioController.pizza(message);
 	} else if (command == 'magik') {
 		memeController.magik(message);
 	} else if (command == 'rule34') {
@@ -99,6 +110,8 @@ async function commandHandler (message, prefix) {
 		//pornController.chan(message);
 	} else if (command == 'nhentai') {
 		pornController.nhentai(message, prefix);
+	} else if (command == 'berserk') {
+		pornController.berserk(message, prefix);
 	} else if (command == 'anime') {
 		miscController.anime(message);
 	} else if (command == 'dolar') {
@@ -109,10 +122,10 @@ async function commandHandler (message, prefix) {
 		miscController.libra(message);
 	} else if (command == 'iene') {
 		miscController.iene(message);
-	} else if (command[0].match('[0-9]')) {
+	} else if (command.match('(^[d][0-9]*)')) {
+		miscController.roll_number(message, prefix);
+	} else if (command.match('[\\d*]')) {
 		miscController.number_functions(message, prefix);
-	} else if (command.match('[d][0-9]?[0-9]')) {
-		miscController.roll_number(message);
 	} else if (command == 'corona') {
 		miscController.corona(message);
 	} else if (command == 'reverse') {
@@ -130,7 +143,8 @@ async function commandHandler (message, prefix) {
 	}
 }
 
-exports.commandHandler = commandHandler;</code></pre>
+exports.commandHandler = commandHandler;
+</code></pre>
         </article>
     </section>
 
@@ -140,13 +154,13 @@ exports.commandHandler = commandHandler;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#adm_message">adm_message</a></li><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#bilada">bilada</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#chan">chan</a></li><li><a href="global.html#changePrefix">changePrefix</a></li><li><a href="global.html#cholamais">cholamais</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#cyberpunk_music">cyberpunk_music</a></li><li><a href="global.html#deadman">deadman</a></li><li><a href="global.html#deleteMessage">deleteMessage</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#donate">donate</a></li><li><a href="global.html#editMessage">editMessage</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#felipao">felipao</a></li><li><a href="global.html#fetchMessages">fetchMessages</a></li><li><a href="global.html#formatTagsForBooru">formatTagsForBooru</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#getAllGuilds">getAllGuilds</a></li><li><a href="global.html#getRandomDoujin">getRandomDoujin</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#help_with_args">help_with_args</a></li><li><a href="global.html#help_without_args">help_without_args</a></li><li><a href="global.html#idol">idol</a></li><li><a href="global.html#iene">iene</a></li><li><a href="global.html#kubo">kubo</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#magik">magik</a></li><li><a href="global.html#mongol">mongol</a></li><li><a href="global.html#nhentai">nhentai</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#oxii">oxii</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#playlist">playlist</a></li><li><a href="global.html#prepareTagsAuthorsForEmbed">prepareTagsAuthorsForEmbed</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#reactionHandler">reactionHandler</a></li><li><a href="global.html#readXmlString">readXmlString</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#rule34">rule34</a></li><li><a href="global.html#sendDoujinEmbedMessage">sendDoujinEmbedMessage</a></li><li><a href="global.html#sendEmbedChooseDoujin">sendEmbedChooseDoujin</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayMP3">stopAllPlayMP3</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#urss">urss</a></li><li><a href="global.html#volume">volume</a></li><li><a href="global.html#wiisports">wiisports</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#adm_message">adm_message</a></li><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#berserk">berserk</a></li><li><a href="global.html#bilada">bilada</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#chan">chan</a></li><li><a href="global.html#changePrefix">changePrefix</a></li><li><a href="global.html#cholamais">cholamais</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#convertMoney">convertMoney</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#cyberpunk_music">cyberpunk_music</a></li><li><a href="global.html#deadman">deadman</a></li><li><a href="global.html#deleteMessage">deleteMessage</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#donate">donate</a></li><li><a href="global.html#editMessage">editMessage</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#felipao">felipao</a></li><li><a href="global.html#fetchMessages">fetchMessages</a></li><li><a href="global.html#formatTagsForBooru">formatTagsForBooru</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#getAllGuilds">getAllGuilds</a></li><li><a href="global.html#getMoedas">getMoedas</a></li><li><a href="global.html#getRandomDoujin">getRandomDoujin</a></li><li><a href="global.html#getValueCurrency">getValueCurrency</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#help_with_args">help_with_args</a></li><li><a href="global.html#help_without_args">help_without_args</a></li><li><a href="global.html#idol">idol</a></li><li><a href="global.html#iene">iene</a></li><li><a href="global.html#kubo">kubo</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#magik">magik</a></li><li><a href="global.html#mongol">mongol</a></li><li><a href="global.html#nhentai">nhentai</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#oxii">oxii</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#pizza">pizza</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#playlist">playlist</a></li><li><a href="global.html#prepareTagsAuthorsForEmbed">prepareTagsAuthorsForEmbed</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#reactionHandler">reactionHandler</a></li><li><a href="global.html#readXmlString">readXmlString</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#rule34">rule34</a></li><li><a href="global.html#sendDoujinEmbedMessage">sendDoujinEmbedMessage</a></li><li><a href="global.html#sendEmbedChooseDoujin">sendEmbedChooseDoujin</a></li><li><a href="global.html#sendTodasMoedas">sendTodasMoedas</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayMP3">stopAllPlayMP3</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#tsunami">tsunami</a></li><li><a href="global.html#urss">urss</a></li><li><a href="global.html#volume">volume</a></li><li><a href="global.html#wiisports">wiisports</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Feb 08 2021 21:12:13 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Apr 13 2021 02:48:39 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

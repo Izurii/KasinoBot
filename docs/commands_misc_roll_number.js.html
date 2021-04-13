@@ -33,21 +33,32 @@ exports.roll_number = roll_number;
 /**
  * @description Function that returns a discord message that contains n random values
  * @param  { DiscordMessageType } message - Message that user sent to bot
+ * @param { string } serverPrefix - Server bot prefix
  * @param  { Number } number=1 - N number of dices to roll
  * @returns Reply message to user that requested a dice roll
  */
-async function roll_number (message, number=1) {
+async function roll_number (message, prefix, number=1) {
 
 	if(number>10)
 		return message.channel.send("N40 p0d3 p4ss4r de 10 caralho");
 	else if(number===0)
 		return message.channel.send("Z3r0 n40 d4 pô");
 
+	var modificador = false;
+	var endSearchString = message.content.substring(prefix.length).search(/[+\-*\/]\s*/);
+
+	if(endSearchString==-1||message.content==endSearchString) {
+		endSearchString = message.content.length;
+	} else {
+		modificador = message.content.substring(endSearchString+1);
+	}
+
 	let numero_sorteado;
-	if(message.content.includes("dm"))
-		numero_sorteado = message.content.substring(message.content.search(/[a-z]/)+2);
-	else
-		numero_sorteado = message.content.substring(message.content.search(/[a-z]/)+1);
+	if(message.content.includes("dm")) {
+		numero_sorteado = message.content.substring(message.content.search(/[a-z]/)+2, endSearchString+1);
+	} else {
+		numero_sorteado = message.content.substring(message.content.search(/[a-z]/)+1, endSearchString+1);
+	}
 
 	let regex_block = new RegExp(/[a-z]/);
 	if(numero_sorteado.startsWith('0'))
@@ -63,8 +74,9 @@ async function roll_number (message, number=1) {
 	let numeros = [];
 	for(let i = 0; i &lt; number; i++) {
 		let dado_rolado = await Controller.utilFunctions.randomInt(1, numero_sorteado+1);
-		numeros.push(dado_rolado);
-		return_message += (':game_die: ``'+dado_rolado+'``   ');
+		let resultado_final = modificador ? eval(dado_rolado + modificador) : dado_rolado;
+		numeros.push(resultado_final);
+		return_message += (':game_die: ``' + resultado_final + (modificador ? ` (${modificador})` : '') +'``');
 	}
 
 	if(message.content.includes("dm"))
@@ -82,13 +94,13 @@ async function roll_number (message, number=1) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#adm_message">adm_message</a></li><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#bilada">bilada</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#chan">chan</a></li><li><a href="global.html#changePrefix">changePrefix</a></li><li><a href="global.html#cholamais">cholamais</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#cyberpunk_music">cyberpunk_music</a></li><li><a href="global.html#deadman">deadman</a></li><li><a href="global.html#deleteMessage">deleteMessage</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#donate">donate</a></li><li><a href="global.html#editMessage">editMessage</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#felipao">felipao</a></li><li><a href="global.html#fetchMessages">fetchMessages</a></li><li><a href="global.html#formatTagsForBooru">formatTagsForBooru</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#getAllGuilds">getAllGuilds</a></li><li><a href="global.html#getRandomDoujin">getRandomDoujin</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#help_with_args">help_with_args</a></li><li><a href="global.html#help_without_args">help_without_args</a></li><li><a href="global.html#idol">idol</a></li><li><a href="global.html#iene">iene</a></li><li><a href="global.html#kubo">kubo</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#magik">magik</a></li><li><a href="global.html#mongol">mongol</a></li><li><a href="global.html#nhentai">nhentai</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#oxii">oxii</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#playlist">playlist</a></li><li><a href="global.html#prepareTagsAuthorsForEmbed">prepareTagsAuthorsForEmbed</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#reactionHandler">reactionHandler</a></li><li><a href="global.html#readXmlString">readXmlString</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#rule34">rule34</a></li><li><a href="global.html#sendDoujinEmbedMessage">sendDoujinEmbedMessage</a></li><li><a href="global.html#sendEmbedChooseDoujin">sendEmbedChooseDoujin</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayMP3">stopAllPlayMP3</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#urss">urss</a></li><li><a href="global.html#volume">volume</a></li><li><a href="global.html#wiisports">wiisports</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#adm_message">adm_message</a></li><li><a href="global.html#anime">anime</a></li><li><a href="global.html#average">average</a></li><li><a href="global.html#berserk">berserk</a></li><li><a href="global.html#bilada">bilada</a></li><li><a href="global.html#boss">boss</a></li><li><a href="global.html#chan">chan</a></li><li><a href="global.html#changePrefix">changePrefix</a></li><li><a href="global.html#cholamais">cholamais</a></li><li><a href="global.html#commandHandler">commandHandler</a></li><li><a href="global.html#convertMoney">convertMoney</a></li><li><a href="global.html#corona">corona</a></li><li><a href="global.html#cyberpunk_music">cyberpunk_music</a></li><li><a href="global.html#deadman">deadman</a></li><li><a href="global.html#deleteMessage">deleteMessage</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#donate">donate</a></li><li><a href="global.html#editMessage">editMessage</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#felipao">felipao</a></li><li><a href="global.html#fetchMessages">fetchMessages</a></li><li><a href="global.html#formatTagsForBooru">formatTagsForBooru</a></li><li><a href="global.html#formatTextLimitCharacters">formatTextLimitCharacters</a></li><li><a href="global.html#get_countries">get_countries</a></li><li><a href="global.html#get_data_country">get_data_country</a></li><li><a href="global.html#getAllGuilds">getAllGuilds</a></li><li><a href="global.html#getMoedas">getMoedas</a></li><li><a href="global.html#getRandomDoujin">getRandomDoujin</a></li><li><a href="global.html#getValueCurrency">getValueCurrency</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#help_with_args">help_with_args</a></li><li><a href="global.html#help_without_args">help_without_args</a></li><li><a href="global.html#idol">idol</a></li><li><a href="global.html#iene">iene</a></li><li><a href="global.html#kubo">kubo</a></li><li><a href="global.html#libra">libra</a></li><li><a href="global.html#magik">magik</a></li><li><a href="global.html#mongol">mongol</a></li><li><a href="global.html#nhentai">nhentai</a></li><li><a href="global.html#number_functions">number_functions</a></li><li><a href="global.html#oxii">oxii</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#pizza">pizza</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#playlist">playlist</a></li><li><a href="global.html#prepareTagsAuthorsForEmbed">prepareTagsAuthorsForEmbed</a></li><li><a href="global.html#query">query</a></li><li><a href="global.html#randomInt">randomInt</a></li><li><a href="global.html#reactionHandler">reactionHandler</a></li><li><a href="global.html#readXmlString">readXmlString</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#resume">resume</a></li><li><a href="global.html#reverse">reverse</a></li><li><a href="global.html#roll_number">roll_number</a></li><li><a href="global.html#rule34">rule34</a></li><li><a href="global.html#sendDoujinEmbedMessage">sendDoujinEmbedMessage</a></li><li><a href="global.html#sendEmbedChooseDoujin">sendEmbedChooseDoujin</a></li><li><a href="global.html#sendTodasMoedas">sendTodasMoedas</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#skip">skip</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#stopAllPlayMP3">stopAllPlayMP3</a></li><li><a href="global.html#stopAllPlayUnique">stopAllPlayUnique</a></li><li><a href="global.html#tsunami">tsunami</a></li><li><a href="global.html#urss">urss</a></li><li><a href="global.html#volume">volume</a></li><li><a href="global.html#wiisports">wiisports</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Feb 08 2021 21:12:13 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Apr 13 2021 02:48:39 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
