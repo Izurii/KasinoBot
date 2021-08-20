@@ -1,42 +1,31 @@
 {
-  "name": "kasino",
+  "name": "kasinobot",
   "version": "1.0.0",
-  "description": "A discord bot made with Node.JS",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "doc": "jsdoc -d docs -r -c JSDocTypes/jsconf.json"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Izurii/KasinoBot.git"
-  },
-  "author": "Heitor Massarente",
+  "main": "src/index.js",
+  "repository": "git@github.com:Izurii/KasinoBot.git",
+  "author": "Izurii <heitor_massarente@msn.com>",
   "license": "GPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/Izurii/KasinoBot/issues"
+  "private": "false",
+  "scripts": {
+    "dev": "./node_modules/.bin/ts-node-dev src/index.ts",
+    "watch": "./node_modules/.bin/tsc -p tsconfig.json -w"
   },
-  "homepage": "https://github.com/Izurii/KasinoBot#readme",
   "dependencies": {
-    "@discordjs/opus": "0.3.2",
-    "@types/mysql": "2.15.15",
-    "axios": "^0.21.1",
-    "discord-paginationembed": "2.1.0",
-    "discord-ytdl-core": "^5.0.0",
-    "discord.js": "12.3.1",
-    "dotenv": "8.2.0",
-    "fs-extra": "9.0.1",
-    "install": "0.13.0",
-    "jikan-node": "1.2.1",
-    "mysql": "2.18.1",
-    "nhentai-js": "4.0.0",
-    "npm": "6.14.8",
-    "python-shell": "2.0.1",
-    "shuffle-array": "1.0.1",
-    "xml2js": "0.4.23",
-    "ytdl-core": "^4.4.4",
-    "ytpl": "^2.0.4",
-    "ytsr": "^3.2.1"
+    "@discordjs/voice": "^0.6.0",
+    "bufferutil": "^4.0.3",
+    "discord-api-types": "^0.22.0",
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0",
+    "glob": "^7.1.7",
+    "utf-8-validate": "^5.0.5"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.4",
+    "@types/node": "^16.6.2",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "eslint": "^7.32.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.5"
   }
 }
