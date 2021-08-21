@@ -67,16 +67,6 @@ class Controller {
 
 	}
 
-	public async formatTagsForBooru(text: string): Promise<string> {
-
-		const split = text.split(' '); split.shift();
-		const args = split.join(' ').trim();
-	
-		const tags = args.substr(args.indexOf(' ') + 1).replace(' ', '+');
-	
-		return tags;
-	}
-
 	public async readXmlString(data: string): Promise<any> {
 		const parser = new xml2js.Parser();
 		return parser.parseStringPromise(data);
