@@ -33,6 +33,15 @@ class KBGuild extends KBObject {
 		return this.loadWithData(data) as IKBGuild;
 	}
 	
+	public static async create(guildId: number, guildName: string): Promise<IKBGuild|boolean> {
+		if(!await KBDatabase.execute(`
+			INSERT INTO KBGuild
+			(KBGGuildID, KBGName)
+			VALUES (?,?)
+		`, [guildId, guildName])) return false;
+		return this.loadByGuildID(guildId);
+	}
+
 }
 
 export { KBGuild };
