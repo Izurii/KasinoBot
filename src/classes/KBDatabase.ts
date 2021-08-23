@@ -27,7 +27,7 @@ class KBDatabase {
 	public static async execute(query:string, values:Array<any>): Promise<Record<string, unknown>|boolean> {
 		try {
 			const result = await (await KBDatabase.dbObj()).execute(query, [...values]);
-			return JSON.parse(JSON.stringify(result[0]))[0];
+			return JSON.parse(JSON.stringify(result[0]));
 		}
 		catch (err) {
 			return false;
