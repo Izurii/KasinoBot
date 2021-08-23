@@ -133,7 +133,7 @@ class ControllerAudio extends Controller {
 
 	}
 
-	public async stopAllAndPlayMP3(message: Message, songMessage: string, MP3Path: string): Promise<Message|void> {
+	public async stopAllAndPlaySong(message: Message, songMessage: string, songUrlPath: string, Ogg = false): Promise<Message|void> {
 
 		if(!message || !message.guild) return;
 
@@ -159,8 +159,17 @@ class ControllerAudio extends Controller {
 			connection.subscribe(serverConfig.audioPlayer);
 
 		}
-
-		const pathToMp3 = require('path').join(__dirname, MP3Path);
+		
+		let audioResource;
+		if(Ogg) {
+			const pathToMp3 = require('path').join(__dirname, songUrlPath);
+			audioResource = createAudioResource(createReadStream(pathToMp3));
+		} else {
+			const readableStream = this.ytdl(songUrlPath, {
+				filter: 'audioonly'
+			});
+			audioResource = createAudioResource(readableStream);
+		}
 
 		serverConfig.audioPlayer.pause();
 		connection.subscribe(audioPlayer);
@@ -169,7 +178,6 @@ class ControllerAudio extends Controller {
 			clearTimeout(serverConfig.exitTimeout);
 		}
 
-		const audioResource = createAudioResource(createReadStream(pathToMp3));
 		audioPlayer.play(audioResource);
 
 		audioPlayer.on(AudioPlayerStatus.Idle, async () => {

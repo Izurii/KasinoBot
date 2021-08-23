@@ -4,6 +4,7 @@ import { ICommandFunction } from '../../interfaces/ICommand';
 
 class Kubo extends ControllerAudio implements Command {
 	
+	private songMessage = 'KUUBOOOOOOOOOO!!';
 	private MP3Path = '../../audios/kubo.ogg';
 
 	public commandDescription: string;
@@ -16,7 +17,7 @@ class Kubo extends ControllerAudio implements Command {
 	}
 
 	private commandFunction: ICommandFunction = async (client, message) => {
-		await this.stopAllAndPlayMP3(message, 'KUUBOOOOOOOOOO!!', this.MP3Path);
+		await this.stopAllAndPlaySong(message, this.songMessage, this.MP3Path, true);
 	}
 
 }

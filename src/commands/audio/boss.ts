@@ -2,10 +2,10 @@ import { Command } from '../../classes/Command';
 import { ControllerAudio } from '../../controller/ControllerAudio';
 import { ICommandFunction } from '../../interfaces/ICommand';
 
-class Felipao extends ControllerAudio implements Command {
+class Boss extends ControllerAudio implements Command {
 	
-	private songMessage = 'FELIPAOO!!!';
-	private MP3Path = '../../audios/felipao.ogg';
+	private songMessage = 'BOSS BUCETA, SENTA QUE LÁ VEM PICA';
+	private songUrl = 'https://www.youtube.com/watch?v=PBwMGiju0G4';
 
 	public commandDescription: string;
 	public commandRun: ICommandFunction;
@@ -17,9 +17,9 @@ class Felipao extends ControllerAudio implements Command {
 	}
 
 	private commandFunction: ICommandFunction = async (client, message) => {
-		await this.stopAllAndPlaySong(message, this.songMessage, this.MP3Path, true);
+		await this.stopAllAndPlaySong(message, this.songMessage, this.songUrl);
 	}
 
 }
 
-export { Felipao };
+export { Boss };
