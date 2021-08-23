@@ -1,7 +1,7 @@
 import ytdl from 'ytdl-core';
 import { Message, VoiceChannel } from 'discord.js';
 import { Controller } from './Controller';
-import { AudioPlayer, AudioPlayerStatus, createAudioPlayer, createAudioResource, getVoiceConnection, joinVoiceChannel, VoiceConnection } from '@discordjs/voice';
+import { AudioPlayer, AudioPlayerStatus, createAudioPlayer, createAudioResource, getVoiceConnection, joinVoiceChannel } from '@discordjs/voice';
 
 export interface IServerConfig {
 	audioPlayer: AudioPlayer,
@@ -88,7 +88,7 @@ class ControllerAudio extends Controller {
 					serverConfig.exitTimeout = setTimeout(() => {
 						getVoiceConnection(voiceChannel.guild.id)?.destroy();
 						ControllerAudio.serverConfig.delete(voiceChannel.guild.id);
-					}, 5000);
+					}, 60000);
 				}
 			});
 
