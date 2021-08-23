@@ -2,12 +2,12 @@ import { AxiosResponse } from 'axios';
 import { Message, TextChannel } from 'discord.js';
 import { Command } from '../../classes/Command';
 import { ControllerPorn } from '../../controller/ControllerPorn';
-import { IRunFunction } from '../../interfaces/IEvent';
+import { ICommandFunction } from '../../interfaces/ICommand';
 
 class Rule34 extends ControllerPorn implements Command {
 
 	public commandDescription: string;
-	public commandRun: IRunFunction;
+	public commandRun: ICommandFunction;
 
 	private constructor() {
 		super();
@@ -15,7 +15,7 @@ class Rule34 extends ControllerPorn implements Command {
 		this.commandRun = this.commandFunction;
 	}
 
-	private commandFunction: IRunFunction = async (client, message) => {
+	private commandFunction: ICommandFunction = async (client, message) => {
 	
 		const channel = await message.channel.fetch() as TextChannel;
 

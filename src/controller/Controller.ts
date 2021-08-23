@@ -4,7 +4,7 @@ import xml2js from 'xml2js';
 
 import { promisify } from 'util';
 import { Command } from '../classes/Command';
-import { IRunFunction } from '../interfaces/IEvent';
+import { ICommandFunction } from '../interfaces/ICommand';
 
 const globPromise = promisify(glob);
 
@@ -17,7 +17,7 @@ class Controller {
 	private commands: Array<{
 		commandName: string,
 		commandDescription: string,
-		commandRun: IRunFunction
+		commandRun: ICommandFunction
 	}> | never = [];
 
 	public async registerControllers(): Promise<void> {
@@ -41,7 +41,7 @@ class Controller {
 	public async getCommands(): Promise<Array<{
 		commandName: string,
 		commandDescription: string,
-		commandRun: IRunFunction
+		commandRun: ICommandFunction
 	}> | never> {
 		return this.commands;
 	}

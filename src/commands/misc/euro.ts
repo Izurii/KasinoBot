@@ -1,11 +1,11 @@
 import { Command } from '../../classes/Command';
 import { ControllerMisc } from '../../controller/ControllerMisc';
-import { IRunFunction } from '../../interfaces/IEvent';
+import { ICommandFunction } from '../../interfaces/ICommand';
 
 class Euro extends ControllerMisc implements Command {
 
 	public commandDescription: string;
-	public commandRun: IRunFunction;
+	public commandRun: ICommandFunction;
 
 	private constructor() {
 		super();
@@ -13,7 +13,7 @@ class Euro extends ControllerMisc implements Command {
 		this.commandRun = this.commandFunction;
 	}
 
-	private commandFunction: IRunFunction = async (client, message) => {
+	private commandFunction: ICommandFunction = async (client, message) => {
 		
 		const moeda = await this.getValueCurrency('EUR', 'BRL');
 	

@@ -1,11 +1,10 @@
-import { IRunFunction } from '../interfaces/IEvent';
-
+import { ICommandFunction } from '../interfaces/ICommand';
 class Command {
 
 	public commandDescription: string;
-	public commandRun: IRunFunction;
+	public commandRun: ICommandFunction;
 
-	public constructor(commandDescription: string, commandRun: IRunFunction) {
+	public constructor(commandDescription: string, commandRun: ICommandFunction) {
 		this.commandDescription = commandDescription;
 		this.commandRun = commandRun;
 	}

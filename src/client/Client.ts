@@ -3,7 +3,8 @@ import path from 'path/posix';
 
 import { Client, Collection, Intents } from 'discord.js';
 import { promisify } from 'util';
-import { IEvent, IRunFunction } from '../interfaces/IEvent';
+import { IEvent } from '../interfaces/IEvent';
+import { ICommandFunction } from '../interfaces/ICommand';
 import { Controller } from '../controller/Controller';
 
 const globPromise = promisify(glob);
@@ -17,7 +18,7 @@ class KasinoBot extends Client {
 	public static commands: Array<{
 		commandName: string,
 		commandDescription: string,
-		commandRun: IRunFunction
+		commandRun: ICommandFunction
 	}> = [];
 	
 	public constructor() {
@@ -38,9 +39,10 @@ class KasinoBot extends Client {
 		const events: string[] = await globPromise(`${__dirname}/../events/*.ts`);
 		events.map(async (value: string) => {
 			const file: IEvent = await import(value);
+			const fileName = path.basename(value, path.extname(value));
 
-			this.events.set(file.name, file);
-			this.on(path.basename(value, path.extname(value)), file.run.bind(null, this));
+			this.events.set(fileName, file);
+			this.on(fileName, file.run.bind(null, this));
 		});
 
 		await this.Controller.registerControllers();
