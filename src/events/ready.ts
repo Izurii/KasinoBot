@@ -1,5 +1,5 @@
-import { IRunFunction } from '../interfaces/IEvent';
+import { IEventReady } from '../interfaces/IEventReady';
 
-export const run: IRunFunction = async (client,) => {
+export const run: IEventReady = async (client,) => {
 	console.log(`Ready! ${client.readyAt}`);
 };

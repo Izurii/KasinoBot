@@ -1,10 +1,10 @@
 import { KasinoBot } from '../client/Client';
 import { Message } from 'discord.js';
-import { IRunFunction } from '../interfaces/IEvent';
 import { KBGuild } from '../classes/KBGuild';
 import { KBObject } from '../classes/KBObject';
+import { IEventMessageCreate } from '../interfaces/IEventMessageCreate';
 
-export const run: IRunFunction = async (client, message: Message | undefined) => {
+export const run: IEventMessageCreate = async (client, message: Message | undefined) => {
 
 	if (message == undefined || message.author.bot || !message.guild) return;
 
