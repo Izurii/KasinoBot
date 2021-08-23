@@ -28,6 +28,8 @@ class KBDatabase {
 			return JSON.parse(JSON.stringify(result[0]));
 		}
 		catch (err) {
+			const error: mysql.QueryError = err;
+			console.log(error);
 			return false;
 		}
 	}
