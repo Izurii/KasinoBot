@@ -1,6 +1,4 @@
-require('dotenv').config();
 import mysql from 'mysql2/promise';
-import { KBObject } from './KBObject';
 
 class KBDatabase {
 
