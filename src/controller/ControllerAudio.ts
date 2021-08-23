@@ -76,16 +76,23 @@ class ControllerAudio extends Controller {
 			serverConfig = await this.createServerConfig(voiceChannel.guild.id);
 
 			serverConfig.audioPlayer.on(AudioPlayerStatus.Idle, async () => {
+
 				serverConfig.songs.shift();
+				
 				if(serverConfig.songs.length >= 1) {
 					this.execute(message, serverConfig.songs[0].url, true);
-				} else if(serverConfig.songs.length <= 0) {
+				}
+				
+				if(serverConfig.songs.length <= 0) {
+
 					serverConfig.audioPlayer.stop();
 					serverConfig.exitTimeout = setTimeout(() => {
 						getVoiceConnection(voiceChannel.guild.id)?.destroy();
 						ControllerAudio.serverConfig.delete(voiceChannel.guild.id);
 					}, 60000);
+
 				}
+
 			});
 
 			connection.subscribe(serverConfig.audioPlayer);
