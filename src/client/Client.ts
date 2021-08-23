@@ -34,8 +34,6 @@ class KasinoBot extends Client {
 
 	public async Start(): Promise<void> {
 
-		await this.login(process.env.DISCORD_TOKEN);
-
 		const events: string[] = await globPromise(`${__dirname}/../events/*.ts`);
 		events.map(async (value: string) => {
 			const file: IEvent = await import(value);
@@ -47,6 +45,8 @@ class KasinoBot extends Client {
 
 		await this.Controller.registerControllers();
 		KasinoBot.commands = await this.Controller.getCommands();
+
+		await this.login(process.env.DISCORD_TOKEN);
 
 	}
 
