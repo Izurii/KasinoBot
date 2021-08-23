@@ -12,26 +12,29 @@ class KBGuild extends KBObject {
 		super();
 	}
 
-	public static async loadByID(id: number, fields = '*'): Promise<KBGuild> {
-		let data;
-		if(!(data = await KBDatabase.execute(`
-		SELECT ${fields} FROM KBGuild
-		WHERE KBGuildID = ${id}
-		`, [id, fields]))) {
-			throw KBObject.ERROR_UNKNOW;
-		}
-		return this.loadWithData(data) as KBGuild;
+	public static async loadByID(id: number, fields = '*'): Promise<KBGuild|false> {
+
+		const sql = await KBDatabase.execute(`
+			SELECT ${fields} FROM KBGuild
+			WHERE KBGuildID = ${id}
+		`, [id, fields]);
+		
+		if (!sql) return false;
+
+		return this.loadWithData(sql) as KBGuild;
+		
 	}
 
-	public static async loadByGuildID(guildId: string, fields = '*'): Promise<KBGuild> {
-		let data;
-		if(!(data = await KBDatabase.execute(`
-		SELECT ${fields} FROM KBGuild
-		WHERE KBGGuildID = ${guildId}
-		`, [guildId, fields]))) {
-			throw KBObject.ERROR_UNKNOW;
-		}
-		return this.loadWithData(data) as KBGuild;
+	public static async loadByGuildID(guildId: string, fields = '*'): Promise<KBGuild|false> {
+		
+		const sql = await KBDatabase.execute(`
+			SELECT ${fields} FROM KBGuild
+			WHERE KBGGuildID = ${guildId}
+		`, [guildId, fields]);
+		
+		if(!sql) return false;
+		
+		return this.loadWithData(sql) as KBGuild;
 	}
 	
 	public static async create(guildId: string, guildName: string): Promise<KBGuild|false> {

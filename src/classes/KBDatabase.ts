@@ -26,8 +26,7 @@ class KBDatabase {
 		try {
 			const result = await (await KBDatabase.dbObj()).execute(query, [...values]);
 			return JSON.parse(JSON.stringify(result[0]));
-		}
-		catch (err) {
+		} catch (err) {
 			const error: mysql.QueryError = err;
 			console.log(error);
 			return false;
