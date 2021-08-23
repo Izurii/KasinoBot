@@ -6,25 +6,26 @@ export const run: IEventGuildCreate = async (client, guild) => {
 
 	if(!guild) return;
 	
-	let guildObj = await KBGuild.loadByGuildID(guild.id);
+	const guildObj = await KBGuild.loadByGuildID(guild.id);
 
 	try {
+		
 		await (await KBDatabase.dbObj()).beginTransaction();
 		if(!guildObj) {
-			if(!(guildObj = await KBGuild.create(guild.id, guild.name) as KBGuild)) {
-				return console.log('Error ocurred while creating a guild register.');
+			if(!await KBGuild.create(guild.id, guild.name)) {
+				throw 'Error ocurred while creating a guild register.';
 			}
-			return console.log('Guild register created with success.');
-		}
-		else if(!await guildObj.modify(guild.name)) {
-			return console.log('Error ocurred while update guild register');
+			console.log('Guild register created with success.');
+		} else if(guildObj instanceof KBGuild) {
+			if(!await guildObj.modify(guild.name)) {
+				throw 'Error ocurred while update guild register';
+			}
+			console.log('Guild register updated with success.');
 		}
 		
 		await (await KBDatabase.dbObj()).commit();
-		return console.log('Guild register updated with success.');
 
-	}
-	catch (err) {
+	} catch (err) {
 		await (await KBDatabase.dbObj()).rollback();
 		console.log(err);
 	}
