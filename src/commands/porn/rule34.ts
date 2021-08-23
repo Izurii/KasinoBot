@@ -23,7 +23,7 @@ class Rule34 extends ControllerPorn implements Command {
 			return message.reply('Somente em canal NSFW carai');
 		}
 
-		const tags = await this.formatTagsForBooru(message.content);
+		const tags = await this.formatTagsForBooru(await this.getCommandArgs(message));
 		const requestUrl = 'https://rule34.xxx/index.php?page=dapi&s=post&q=index&tags=' + tags;
 
 		const request = await this.axios.get(requestUrl).then((response: AxiosResponse) => {
