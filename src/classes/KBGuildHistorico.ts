@@ -6,6 +6,7 @@ class KBGuildHistorico extends KBObject {
 
 	public STATUS_ATIVO = 1;
 	public STATUS_INATIVO = 0;
+	public data!: IKBGuildHistorico['data'];
 
 	public constructor() {
 		super();

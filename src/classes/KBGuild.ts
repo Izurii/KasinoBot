@@ -6,12 +6,13 @@ class KBGuild extends KBObject {
 
 	public STATUS_ATIVO = 1;
 	public STATUS_INATIVO = 0;
+	public data!: IKBGuild['data'];
 
 	public constructor() {
 		super();
 	}
 
-	public static async loadByID(id: number, fields = '*'): Promise<IKBGuild> {
+	public static async loadByID(id: number, fields = '*'): Promise<KBGuild> {
 		let data;
 		if(!(data = await KBDatabase.execute(`
 		SELECT ${fields} FROM KBGuild
@@ -19,10 +20,10 @@ class KBGuild extends KBObject {
 		`, [id, fields]))) {
 			throw KBObject.ERROR_UNKNOW;
 		}
-		return this.loadWithData(data) as IKBGuild;
+		return this.loadWithData(data) as KBGuild;
 	}
 
-	public static async loadByGuildID(guildId: string, fields = '*'): Promise<IKBGuild> {
+	public static async loadByGuildID(guildId: string, fields = '*'): Promise<KBGuild> {
 		let data;
 		if(!(data = await KBDatabase.execute(`
 		SELECT ${fields} FROM KBGuild
@@ -30,16 +31,33 @@ class KBGuild extends KBObject {
 		`, [guildId, fields]))) {
 			throw KBObject.ERROR_UNKNOW;
 		}
-		return this.loadWithData(data) as IKBGuild;
+		return this.loadWithData(data) as KBGuild;
 	}
 	
-	public static async create(guildId: string, guildName: string): Promise<IKBGuild|false> {
-		if(!await KBDatabase.execute(`
+	public static async create(guildId: string, guildName: string): Promise<KBGuild|false> {
+
+		const sql = await KBDatabase.execute(`
 			INSERT INTO KBGuild
 			(KBGGuildID, KBGName)
 			VALUES (?,?)
-		`, [guildId, guildName])) return false;
+		`, [guildId, guildName]);
+
+		if(!sql) return false;
+
 		return this.loadByGuildID(guildId);
+	}
+
+	public async modify(guildName: string): Promise<KBGuild|false> {
+		
+		const sql = await KBDatabase.execute(`
+			UPDATE KBGuild 
+			SET KBGName = ?
+			WHERE KBGuildID = ?
+		`, [guildName, this.data?.KBGuildID]);
+		
+		if(!sql) return false;
+
+		return KBGuild.loadByGuildID(this.data.KBGGuildID);
 	}
 
 }

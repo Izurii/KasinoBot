@@ -8,10 +8,14 @@ class KBObject {
 	}
 
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-	public static loadWithData(data: any): KBObject {
+	public static loadWithData(data: any): KBObject | boolean {
+
+		if(!Object.keys(data).length) return false;
+		
 		const obj = new this();
 		obj.data = data[0];
 		return obj;
+		
 	}
 
 }
