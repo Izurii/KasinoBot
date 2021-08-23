@@ -10,7 +10,7 @@ class KBObject {
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	public static loadWithData(data: any): KBObject {
 		const obj = new this();
-		obj.data = data;
+		obj.data = data[0];
 		return obj;
 	}
 
