@@ -9,11 +9,8 @@ class ControllerPorn extends Controller {
 	}
 
 	public async formatTagsForBooru(text: string): Promise<string> {
-
-		const split = text.split(' '); split.shift();
-		const args = split.join(' ').trim();
 	
-		const tags = args.substr(args.indexOf(' ') + 1).replace(' ', '+');
+		const tags = text.substr(text.indexOf(' ') + 1).replace(' ', '+');
 	
 		return tags;
 	}

@@ -5,6 +5,7 @@ import xml2js from 'xml2js';
 import { promisify } from 'util';
 import { Command } from '../classes/Command';
 import { ICommandFunction } from '../interfaces/ICommand';
+import { Message } from 'discord.js';
 
 const globPromise = promisify(glob);
 
@@ -65,6 +66,13 @@ class Controller {
 			
 		});
 
+	}
+
+	public async getCommandArgs(message: Message): Promise<string> {
+		const split = message.content.split(' ');
+		split.shift();
+		const args = split.join(' ').trim();
+		return args;
 	}
 
 	public async readXmlString(data: string): Promise<any> {
