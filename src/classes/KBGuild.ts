@@ -22,7 +22,7 @@ class KBGuild extends KBObject {
 		return this.loadWithData(data) as IKBGuild;
 	}
 
-	public static async loadByGuildID(guildId: number, fields = '*'): Promise<IKBGuild> {
+	public static async loadByGuildID(guildId: string, fields = '*'): Promise<IKBGuild> {
 		let data;
 		if(!(data = await KBDatabase.execute(`
 		SELECT ${fields} FROM KBGuild
@@ -33,7 +33,7 @@ class KBGuild extends KBObject {
 		return this.loadWithData(data) as IKBGuild;
 	}
 	
-	public static async create(guildId: number, guildName: string): Promise<IKBGuild|false> {
+	public static async create(guildId: string, guildName: string): Promise<IKBGuild|false> {
 		if(!await KBDatabase.execute(`
 			INSERT INTO KBGuild
 			(KBGGuildID, KBGName)
