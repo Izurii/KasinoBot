@@ -20,14 +20,9 @@ export interface IServerConfig {
 class ControllerAudio extends Controller {
 
 	public commandsPath = `${__dirname}/../commands/audio/*.ts`;
-
 	public ytdl = ytdl;
 
 	public static serverConfig: Map<string, IServerConfig> = new Map(); 
-	
-	constructor() {
-		super();
-	}
 
 	public async createServerConfig(guildId: string, audioPlayer: AudioPlayer|false = false): Promise<IServerConfig> {
 

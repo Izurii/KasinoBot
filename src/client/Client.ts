@@ -12,15 +12,8 @@ const globPromise = promisify(glob);
 class KasinoBot extends Client {
 	
 	private Controller = new Controller();
+	private events: Collection<string, IEvent> = new Collection();
 
-	public events: Collection<string, IEvent> = new Collection();
-
-	public static commands: Array<{
-		commandName: string,
-		commandDescription: string,
-		commandRun: ICommandFunction
-	}> = [];
-	
 	public constructor() {
 		super({
 			intents: [
@@ -31,6 +24,12 @@ class KasinoBot extends Client {
 			]
 		});
 	}
+
+	public static commands: Array<{
+		commandName: string,
+		commandDescription: string,
+		commandRun: ICommandFunction
+	}> = [];
 
 	public async Start(): Promise<void> {
 

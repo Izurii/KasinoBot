@@ -14,7 +14,6 @@ class Controller {
 	public axios = require('axios').default;
 
 	private _controllers: string[] = [];
-
 	private commands: Array<{
 		commandName: string,
 		commandDescription: string,
@@ -47,7 +46,7 @@ class Controller {
 		return this.commands;
 	}
 
-	public async registerCommands(commandFolderPath: string): Promise<void> {
+	private async registerCommands(commandFolderPath: string): Promise<void> {
 
 		if(!this.commands) this.commands = [];
 		
