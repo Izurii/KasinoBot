@@ -2,6 +2,7 @@ import ytdl from 'ytdl-core';
 import { Message, VoiceChannel } from 'discord.js';
 import { Controller } from './Controller';
 import { AudioPlayer, AudioPlayerStatus, createAudioPlayer, createAudioResource, getVoiceConnection, joinVoiceChannel } from '@discordjs/voice';
+import { createReadStream } from 'fs';
 
 export interface IServerConfig {
 	audioPlayer: AudioPlayer,
@@ -28,15 +29,18 @@ class ControllerAudio extends Controller {
 		super();
 	}
 
-	public async createServerConfig(guildId: string, audioPlayer: AudioPlayer): Promise<IServerConfig> {
+	public async createServerConfig(guildId: string, audioPlayer: AudioPlayer|false = false): Promise<IServerConfig> {
+
 		ControllerAudio.serverConfig.set(guildId, {
-			audioPlayer: audioPlayer,
+			audioPlayer: audioPlayer ? audioPlayer : createAudioPlayer(),
 			songs: [],
 			volume: 0.5,
 			playing: true,
 			loop: false
 		});
+
 		return <IServerConfig> ControllerAudio.serverConfig.get(guildId);
+
 	}
 
 	public async getServerConfig(guildId: string): Promise<IServerConfig|false> {
@@ -54,16 +58,15 @@ class ControllerAudio extends Controller {
 
 	}
 
-	public async execute(clientMessage: Message, url: string, queue = false): Promise<void|Message> {
+	public async execute(message: Message, url: string, queue = false): Promise<void|Message> {
 
 		if(!url) return;
 
-		const voiceChannel = await this.getUserVoiceChannel(clientMessage);
-		if(!voiceChannel) return clientMessage.reply('Ow mano, v41 3scut4r uk3 se tu n40 t4 n3m num c4nal de v0z d3sgr4çad0');
+		const voiceChannel = await this.getUserVoiceChannel(message);
+		if(!voiceChannel) return message.reply('Ow mano, v41 3scut4r uk3 se tu n40 t4 n3m num c4nal de v0z d3sgr4çad0');
 
 		let connection = getVoiceConnection(voiceChannel.guild.id);
 		if(!connection) {
-			console.log(connection);
 			connection = joinVoiceChannel({
 				channelId: voiceChannel.id,
 				guildId: voiceChannel.guild.id,
@@ -72,17 +75,15 @@ class ControllerAudio extends Controller {
 		}
 
 		let serverConfig: IServerConfig;
-		let audioPlayer: AudioPlayer;
 
 		if(!(serverConfig = <IServerConfig> await this.getServerConfig(voiceChannel.guild.id))) {
 
-			audioPlayer = createAudioPlayer();
-			serverConfig = await this.createServerConfig(voiceChannel.guild.id, audioPlayer);
+			serverConfig = await this.createServerConfig(voiceChannel.guild.id);
 
 			serverConfig.audioPlayer.on(AudioPlayerStatus.Idle, async () => {
 				serverConfig.songs.shift();
 				if(serverConfig.songs.length >= 1) {
-					this.execute(clientMessage, serverConfig.songs[0].url, true);
+					this.execute(message, serverConfig.songs[0].url, true);
 				} else if(serverConfig.songs.length <= 0) {
 					serverConfig.audioPlayer.stop();
 					serverConfig.exitTimeout = setTimeout(() => {
@@ -92,15 +93,16 @@ class ControllerAudio extends Controller {
 				}
 			});
 
-			connection.subscribe(audioPlayer);
+			connection.subscribe(serverConfig.audioPlayer);
 
 		} else {
-			audioPlayer = serverConfig.audioPlayer;
 			if(serverConfig.exitTimeout) clearTimeout(serverConfig.exitTimeout);
 		}
 
+		const audioPlayer: AudioPlayer = serverConfig.audioPlayer;
+
 		const song = await ytdl.getBasicInfo(url);
-		const message = `Qu3 c0m3c3 4 f35t4: **${song.videoDetails.title}**`;
+		const messagePlay = `Qu3 c0m3c3 4 f35t4: **${song.videoDetails.title}**`;
 
 		if(!queue) {
 			serverConfig.songs.push({
@@ -119,10 +121,10 @@ class ControllerAudio extends Controller {
 		if(audioPlayer.state.status == AudioPlayerStatus.Idle) {
 
 			audioPlayer.play(audioResource);
-			clientMessage.reply(message);
+			message.reply(messagePlay);
 
 		} else if(audioPlayer.state.status == AudioPlayerStatus.Playing) {
-			clientMessage.reply(`${song.videoDetails.title} f01 4D10n4D4 N4 L15t4!`);
+			message.reply(`${song.videoDetails.title} f01 4D10n4D4 N4 L15t4!`);
 		}
 
 		serverConfig.audioPlayer.on('error', error => console.log(error));
@@ -131,6 +133,61 @@ class ControllerAudio extends Controller {
 
 	}
 
+	public async stopAllAndPlayMP3(message: Message, songMessage: string, MP3Path: string): Promise<Message|void> {
+
+		if(!message || !message.guild) return;
+
+		const voiceChannel = await this.getUserVoiceChannel(message);
+		if(!voiceChannel) return message.reply('Algu3m t3m que entr4r n4 v0z m3u');
+
+		const audioPlayer = createAudioPlayer();
+
+		let serverConfig = <IServerConfig> await this.getServerConfig(message.guild.id);
+		if(!serverConfig) {
+			serverConfig = await this.createServerConfig(message.guild.id, audioPlayer);
+		}
+
+		let connection = getVoiceConnection(voiceChannel.guild.id);
+		if(!connection) {
+			
+			connection = joinVoiceChannel({
+				channelId: voiceChannel.id,
+				guildId: voiceChannel.guild.id,
+				adapterCreator: voiceChannel.guild.voiceAdapterCreator
+			});
+
+			connection.subscribe(serverConfig.audioPlayer);
+
+		}
+
+		const pathToMp3 = require('path').join(__dirname, MP3Path);
+
+		serverConfig.audioPlayer.pause();
+		connection.subscribe(audioPlayer);
+
+		if(serverConfig.exitTimeout) {
+			clearTimeout(serverConfig.exitTimeout);
+		}
+
+		const audioResource = createAudioResource(createReadStream(pathToMp3));
+		audioPlayer.play(audioResource);
+
+		audioPlayer.on(AudioPlayerStatus.Idle, async () => {
+			if(serverConfig.songs.length <= 0) {
+				serverConfig.exitTimeout = setTimeout(() => {
+					getVoiceConnection(voiceChannel.guild.id)?.destroy();
+					ControllerAudio.serverConfig.delete(voiceChannel.guild.id);
+				}, 15000);
+			} else if (serverConfig.songs.length >= 1) {
+				connection?.subscribe(serverConfig.audioPlayer);
+				serverConfig.audioPlayer.unpause();
+			}
+		});
+
+		return message.reply(songMessage);
+
+	}
+	
 }
 
 export { ControllerAudio };
