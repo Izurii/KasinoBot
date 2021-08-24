@@ -15,7 +15,7 @@ class Play extends ControllerAudio implements Command {
 
 	private commandFunction: ICommandFunction = async (client, message) => {
 
-		const args = await this.getCommandArgs(message);
+		const args = this.getCommandArgs(message);
 
 		if (args.length <= 0) return message.reply('Tu pr3c1s4 dig1t4r alg0 né o c0rn0');
 
