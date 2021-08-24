@@ -5,10 +5,11 @@
   "repository": "git@github.com:Izurii/KasinoBot.git",
   "author": "Izurii <heitor_massarente@msn.com>",
   "license": "GPL-3.0-or-later",
-  "private": "false",
   "scripts": {
-    "dev": "./node_modules/.bin/ts-node-dev src/index.ts",
-    "watch": "./node_modules/.bin/tsc -p tsconfig.json -w"
+    "pm2": "$(yarn bin)/pm2 start src/index.ts",
+    "dev": "$(yarn bin)/ts-node-dev src/index.ts",
+    "watch": "$(yarn bin)/tsc -p tsconfig.json -w",
+    "setup": "yarn install && $(yarn bin)/pm2 install typescript"
   },
   "dependencies": {
     "@discordjs/opus": "^0.6.0",
@@ -18,10 +19,12 @@
     "discord-api-types": "^0.22.0",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
+    "file-type": "^16.5.3",
+    "fs": "^0.0.1-security",
     "glob": "^7.1.7",
+    "libsodium-wrappers": "^0.7.9",
     "mysql2": "^2.3.0",
-    "sodium": "^3.0.2",
-    "utf-8-validate": "^5.0.5",
+    "pm2": "^5.1.1",
     "xml2js": "^0.4.23",
     "ytdl-core": "^4.9.1"
   },
