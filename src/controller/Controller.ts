@@ -1,17 +1,23 @@
 import glob from 'glob';
 import path from 'path';
 import xml2js from 'xml2js';
+import fs from 'fs';
+import fileType from 'file-type';
 
 import { promisify } from 'util';
 import { Command } from '../classes/Command';
 import { ICommandFunction } from '../interfaces/ICommand';
 import { Message } from 'discord.js';
+import { AxiosInstance } from 'axios';
+import { ReadableStreamWithFileType } from 'file-type';
 
 const globPromise = promisify(glob);
 
 class Controller {
 
-	public axios = require('axios').default;
+	public axios: AxiosInstance = require('axios').default;
+	public fs = fs;
+	public fileType = fileType;
 
 	private _controllers: string[] = [];
 	private commands: Array<{
@@ -67,7 +73,7 @@ class Controller {
 
 	}
 
-	public async getCommandArgs(message: Message): Promise<string> {
+	public getCommandArgs(message: Message): string {
 		const split = message.content.split(' ');
 		split.shift();
 		const args = split.join(' ').trim();
@@ -79,7 +85,7 @@ class Controller {
 		return parser.parseStringPromise(data);
 	}
 
-	public async randomInt(min: number, max: number) : Promise<number> {
+	public randomInt(min: number, max: number) : number {
 		return min + Math.floor((max - min) * Math.random());
 	}
 
