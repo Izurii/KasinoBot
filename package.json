@@ -7,6 +7,8 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "pm2": "$(yarn bin)/pm2 start src/index.ts",
+    "build": "rm -rf ./build && $(yarn bin)/tsc",
+	"start": "node -r dotenv/config ./build/index.js",
     "dev": "$(yarn bin)/ts-node-dev src/index.ts",
     "watch": "$(yarn bin)/tsc -p tsconfig.json -w",
     "setup": "yarn install && $(yarn bin)/pm2 install typescript"
