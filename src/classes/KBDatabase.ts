@@ -5,18 +5,20 @@ class KBDatabase {
 	private static _SQLDB = 'KasinoBot';
 	private static _SQLPort = 3306;
 
-	private static SQLObj: mysql.Connection;
+	private static SQLObj: mysql.Pool;
 
 	private constructor() {return;}
 
-	public static async dbObj(): Promise<mysql.Connection> {
+	public static async dbObj(): Promise<mysql.Pool> {
 		if(!this.SQLObj) {
-			this.SQLObj = await mysql.createConnection({
+			this.SQLObj = await mysql.createPool({
 				host: 'localhost',
 				user: 'kasino',
 				database: this._SQLDB,
 				password: process.env.MYSQL_PASSWORD,
-				port: this._SQLPort
+				port: this._SQLPort,
+				connectionLimit: 0,
+				queueLimit: 0
 			});
 		}
 		return this.SQLObj;
