@@ -3,7 +3,7 @@ import { Controller } from './Controller';
 
 class ControllerMisc extends Controller {
 
-	public commandsPath = `${__dirname}/../commands/misc/*.ts`;
+	public commandsPath = `${__dirname}/../commands/misc/*.{ts,js}`;
 
 	public async getValueCurrency(moedaOrigem: string, moedaDestino: string): Promise<number|false> {
 		const result = await this.axios.get(`https://economia.awesomeapi.com.br/all/${moedaOrigem}-${moedaDestino}`).then ((response: AxiosResponse) => {

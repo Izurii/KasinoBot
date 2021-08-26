@@ -28,8 +28,8 @@ class Controller {
 
 	public async registerControllers(): Promise<void> {
 
-		this._controllers = await globPromise(`${__dirname}/*.ts`, {
-			'ignore' :[`${__dirname}/Controller.ts`]
+		this._controllers = await globPromise(`${__dirname}/*.{ts,js}`, {
+			'ignore' :[`${__dirname}/Controller.ts`, `${__dirname}/Controller.js`]
 		});
 
 		for (const value of this._controllers) {

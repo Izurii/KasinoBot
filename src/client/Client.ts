@@ -33,7 +33,7 @@ class KasinoBot extends Client {
 
 	public async Start(): Promise<void> {
 
-		const events: string[] = await globPromise(`${__dirname}/../events/*.ts`);
+		const events: string[] = await globPromise(`${__dirname}/../events/*.{ts,js}`);
 		events.map(async (value: string) => {
 			const file: IEvent = await import(value);
 			const fileName = path.basename(value, path.extname(value));

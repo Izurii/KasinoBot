@@ -19,7 +19,7 @@ export interface IServerConfig {
 
 class ControllerAudio extends Controller {
 
-	public commandsPath = `${__dirname}/../commands/audio/*.ts`;
+	public commandsPath = `${__dirname}/../commands/audio/*.{ts,js}`;
 	public ytdl = ytdl;
 
 	public static serverConfig: Map<string, IServerConfig> = new Map(); 
