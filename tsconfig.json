@@ -1,14 +1,15 @@
 {
 	"compilerOptions": {
-		"target": "ES6",
+		"target": "ES2017",
 		"module": "commonjs",
 		"moduleResolution": "node",
-		"esModuleInterop": true,
+		"rootDir": "./src",
+		"outDir": "./build",
 		"strict": true,
 		"strictNullChecks": true,
 		"noImplicitThis": true,
-		"noImplicitReturns": true, 
-		"inlineSourceMap": true, 
+		"noImplicitReturns": true,
+		"esModuleInterop": true,
 		"types": [
 			"node"
 		],
@@ -16,12 +17,7 @@
 			"node_modules/@types"
 		],
 		"experimentalDecorators": true,
-		"resolveJsonModule": true
-	},
-	"include": [
-		"**/*"
-	],
-	"exclude": [
-		"node_modules"
-	]
+		"resolveJsonModule": true,
+		"skipLibCheck": true
+	}
 }
