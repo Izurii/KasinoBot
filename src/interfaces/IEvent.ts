@@ -5,7 +5,7 @@ export interface IRunFunction {
 	(client: KasinoBot, guild?: Guild, message?: Message, ...args: any[]): Promise<any>
 }
 
-export interface IEvent extends Event {
+export interface IEvent {
 	name: string,
 	category: string;
 	run: IRunFunction;
