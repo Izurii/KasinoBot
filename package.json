@@ -9,7 +9,7 @@
     "pm2": "$(yarn bin)/pm2 start --node-args=\"-r dotenv/config\" src/index.ts",
     "build": "rm -rf ./build && $(yarn bin)/tsc",
 	"start": "node -r dotenv/config ./build/index.js",
-    "dev": "$(yarn bin)/ts-node-dev src/index.ts",
+    "dev": "$(yarn bin)/ts-node-dev -r dotenv/config src/index.ts",
     "watch": "$(yarn bin)/tsc -p tsconfig.json -w",
     "setup": "yarn install && $(yarn bin)/pm2 install typescript"
   },
