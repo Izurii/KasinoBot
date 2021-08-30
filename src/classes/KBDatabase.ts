@@ -11,7 +11,7 @@ class KBDatabase {
 
 	public static async dbObj(): Promise<mysql.Pool> {
 		if(!this.SQLObj) {
-			this.SQLObj = await mysql.createPool({
+			this.SQLObj = mysql.createPool({
 				host: 'localhost',
 				user: 'kasino',
 				database: this._SQLDB,
